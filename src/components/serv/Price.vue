@@ -1,0 +1,47 @@
+<template>
+  <section id="prices" class="py-20 bg-white">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-12 gap-6">
+        <div class="col-span-12">
+          <h2 class="text-dark text-[28px] font-bold mb-2">Стоимость услуг</h2>
+        </div>
+        <div v-for="(item, index) in prices" :key="index" class="col-span-4">
+          <div class="h-full bg-gray-2 rounded-lg p-6">
+            <img :src="types[item.type]" class="mb-8 h-8" alt="">
+            <p class="font-bold text-dark text-lg mb-2">{{ item.title }}</p>
+            <p class="text-gray-400 text-sm">
+              {{ item.descr }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script setup lang="ts">
+import petrol from '@/public/icons/petrol.svg'
+import turbo from '@/public/icons/turbo.svg'
+import diesel from '@/public/icons/diesel.svg'
+
+interface Props{
+  prices: {
+    title: string
+    descr: string
+    type: string
+  }[]
+}
+
+const types = {
+  petrol,
+  turbo,
+  diesel
+}
+
+const { prices } = defineProps<Props>()
+
+</script>
+
+<style scoped>
+
+</style>

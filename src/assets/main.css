@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inter:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #F03C3D;
+  --primary-hover: #FF4E4F;
+  --dark: #333333;
+  --gray-1: #F4F7FB;
+  --gray-2: #F6F8F9;
+  --gray-3: #F2F2F2;
+}
+
+body{
+  font-family: "Inter", sans-serif;
+}
+
+a, button {
+  transition: all .3s ease !important;
+}
+
+.p-dropdown-header{
+  background: var(--gray-1);
+  padding-bottom: 8px;
+}
+.p-dropdown-filter{
+  padding: 12px;
+  background-color: #fff;
+}
+
+.nuxt-descr h2{
+  font-size: 28px;
+  line-height: 2rem;
+  font-weight: 700;
+  margin-bottom: 32px;
+}
+.nuxt-descr h3{
+  font-size:1.125rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.nuxt-descr p{
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--dark);
+  margin-bottom: 24px;
+}
+
+.nuxt-descr.coop p{
+  color: #fff;
+}
+
+
+.nuxt-descr ol{
+  padding-left: 18px;
+  margin-bottom: 24px;
+}
+.nuxt-descr ul{
+  padding-left: 18px;
+  margin-bottom: 24px;
+}
+.nuxt-descr ol li {
+  list-style: decimal;
+  font-size: 18px;
+  line-height: 24px;
+  margin-bottom: 18px;
+  color: var(--dark);  
+}
+.nuxt-descr.coop ol li{
+  color: #fff;
+}
+.nuxt-descr ul li {
+  list-style: disc;
+  font-size: 18px;
+  line-height: 24px;
+  margin-bottom: 18px;
+  color: var(--dark);  
+}
+.nuxt-descr.coop ul li{
+  color: #fff;
+}
+
+
+.fade-out-enter-from,
+.fade-out-leave-to {
+  opacity: 0;
+}
+
+.fade-out-enter-active,
+.fade-out-leave-active {
+  transition: all .4s cubic-bezier(0.33, 0, 0.27, 1) !important;
+}
+
+.fade-out-enter-to,
+.fade-out-leave {
+  opacity: 1;
+}

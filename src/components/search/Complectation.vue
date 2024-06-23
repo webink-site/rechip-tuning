@@ -1,0 +1,157 @@
+<template>
+  <section class="py-6 pb-20">
+    <div class="container mx-auto">
+      <div class="grid gap-6 grid-cols-12">
+        <div class="col-span-4 h-full">
+          <img
+            v-if="imgUrl !== null"
+            class="w-full h-full object-cover rounded-xl"
+            :src="imgUrl"
+            @error="imgUrl = null"
+          >
+          <div v-else class="w-full h-full object-cover rounded-xl bg-gray-200 flex justify-center items-center">
+            <i class="pi pi-car text-gray-400 text-2xl" />
+          </div>
+        </div>
+        <div class="col-span-8">
+          <div class="p-6 bg-white rounded-xl">
+            <h1 class="font-bold text-dark text-2xl">
+              Чип-тюнинг {{ complectation.path['mark-id'] }} {{ complectation.path['model-id'] }} {{ complectation['group-name'] }}
+            </h1>
+            <p class="mt-1 mb-6 text-gray-400">Чип-тюнинг {{ complectation.path['mark-id'] }} {{ complectation.path['model-id'] }} с гарантией и тест-драйвом</p>
+            <p class="text-dark font-semibold">Характеристики</p>
+            <hr class="my-4">
+            <ul class="columns-2 space-y-3">
+              <li>
+                <div class="grid grid-cols-2">
+                  <div class="col-span-1 text-gray-400">Год</div>
+                  <div class="col-span-1">{{ years }}</div>
+                </div>
+              </li>
+              <li>
+                <div class="grid grid-cols-2">
+                  <div class="col-span-1 text-gray-400">Двигатель</div>
+                  <div class="col-span-1">
+                    {{ complectation.specifications['volume-litres'] }} л,
+                    {{ complectation.specifications['engine-type'] }},
+                    {{ complectation.specifications['horse-power'] }} л.с.
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="grid grid-cols-2">
+                  <div class="col-span-1 text-gray-400">Коробка</div>
+                  <div class="col-span-1">
+                    {{ complectation.specifications.transmission }}
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="grid grid-cols-2">
+                  <div class="col-span-1 text-gray-400">Привод</div>
+                  <div class="col-span-1">
+                    {{ complectation.specifications.drive }}
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="grid grid-cols-2">
+                  <div class="col-span-1 text-gray-400">Крутящий момент</div>
+                  <div class="col-span-1">{{ complectation.specifications.moment }} Н*м</div>
+                </div>
+              </li>
+              <li>
+                <div class="grid grid-cols-2">
+                  <div class="col-span-1 text-gray-400">Кузов</div>
+                  <div class="col-span-1">{{ bodytype }}</div>
+                </div>
+              </li>
+
+              <li>
+                <div class="grid grid-cols-2">
+                  <div class="col-span-1 text-gray-400">Поколение</div>
+                  <div class="col-span-1">{{ genName }}</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <UiCalcStage />
+        <div class="col-span-12">
+          <h2 class="font-bold text-dark text-2xl mb-2">Дополнительные услуги к заказу</h2>
+        </div>
+        <UiCalcAdditionalCard
+          v-for="(card, index) in additional"
+          :key="index"
+          v-model:active="card.active"
+          :card="card"
+        />
+        <!-- <pre>{{ additional }}</pre> -->
+      </div>
+    </div>
+  </section>
+</template>
+
+<script setup lang="ts">
+import type { Complectation } from '@/src/types/car'
+
+const route = useRoute()
+
+interface Props{
+  complectation: Complectation
+  bodytype: string
+  genName: string
+  years: string
+}
+
+const { complectation, bodytype, genName, years } = defineProps<Props>()
+
+interface Card {
+    title: string
+    text: string
+    price: number
+    img: string
+    active: boolean
+  }
+
+const imgUrl = ref<string | null>(null)
+const additional = ref<Card[]>([
+  {
+    title: 'Прошивка Евро 2',
+    text: 'Если удален катализатор - отключение заднего лямбда зонда и ошибок Check Engine по нему',
+    price: 1000,
+    img: 'https://chip-tyuning-spb-78.ru/app/options/prosivka-evro-2category-7.webp',
+    active: false
+  },
+  {
+    title: 'Отключение ЕГР',
+    text: 'Если неисправен Клапан EGR системы рециркуляции выхлопных газов',
+    price: 1000,
+    img: 'https://chip-tyuning-spb-78.ru/app/options/otkliucenie-egrcategory-7.webp',
+    active: false
+  },
+  {
+    title: 'Отстрелы',
+    text: '"Попкорн", прострелы выхлопной системы на сбросе газа',
+    price: 11800,
+    img: 'https://chip-tyuning-spb-78.ru/app/options/otstrelycategory-7.webp',
+    active: false
+  },
+  {
+    title: 'Чип тюнинг коробки DSG',
+    text: 'Прошивка коробки передач DSG, настройка точек переключение, снятие ограничений момента и т.д.',
+    price: 18000,
+    img: 'https://chip-tyuning-spb-78.ru/app/options/cip-tiuning-dsgcategory-7.webp',
+    active: false
+  }
+])
+
+onMounted(() => {
+  imgUrl.value = `https://expert.carfamily.online/photos/${route.params.modName}.jpg`
+})
+
+</script>
+
+<style scoped>
+
+</style>
