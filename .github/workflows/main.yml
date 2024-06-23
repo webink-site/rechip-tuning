@@ -54,5 +54,7 @@ jobs:
 
       - name: ⭐ Start site via forever
         run: |
+          ls
           forever stopall || true
-          forever start .output/server/index.mjs
+          forever start /var/www/new.rechip-tuning.ru/htdocs/.output/server/index.mjs
+          forever list
