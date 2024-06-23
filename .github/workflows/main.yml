@@ -17,9 +17,6 @@ jobs:
         with:
           node-version: '20'
 
-      - name: 💡 Install forever globally
-        run: npm install -g forever
-
       - name: 🔨 Build Project
         run: |
           npm cache clean --force
@@ -53,8 +50,12 @@ jobs:
           destination-path: /var/www/new.rechip-tuning.ru/htdocs/
 
       - name: ⭐ Start site via forever
-        run: |
-          ls
-          forever stopall || true
-          forever start /var/www/new.rechip-tuning.ru/htdocs/.output/server/index.mjs
-          forever list
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.PROD_FTP_HOST }}
+          username: ${{ secrets.PROD_FTP_USER }}
+          password: ${{ secrets.PROD_FTP_PASSWORD }}
+          port: 22
+          script: |
+            forever stopall || true
+            forever start /var/www/new.rechip-tuning.ru/htdocs/.output/server/index.mjs
