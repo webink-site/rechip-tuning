@@ -17,6 +17,9 @@ jobs:
         with:
           node-version: '20'
 
+      - name: 💡 Install forever globally
+        run: npm install -g forever
+
       - name: 🔨 Build Project
         run: |
           npm cache clean --force
@@ -51,5 +54,5 @@ jobs:
 
       - name: ⭐ Start site via forever
         run: |
-          forever stopall
+          forever stopall || true
           forever start .output/server/index.mjs
