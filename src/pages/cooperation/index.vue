@@ -24,7 +24,7 @@
         </div>
       </div>
     </section>
-    <section class="pt-20 bg-white">
+    <section class="pt-10 md:pt-20 bg-white">
       <div class="container mx-auto px-4 md:px-0">
         <div class="grid gap-6 grid-cols-12 mb-20">
           <div class="col-span-12 md:col-span-9">

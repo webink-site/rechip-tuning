@@ -1,7 +1,7 @@
 <template>
   <div v-if="data">
     <ServHero :title="data?.title" :description="data?.description" />
-    <section class="bg-gray-2 pt-20">
+    <section class="bg-gray-2 pt-10 md:pt-20">
       <div class="container mx-auto px-4 md:px-0">
         <UiFormsCarSearch full />
       </div>
