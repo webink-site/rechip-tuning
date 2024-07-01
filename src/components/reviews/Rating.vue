@@ -1,6 +1,6 @@
 <template>
   <div class="col-span-12">
-    <div class="flex gap-6 items-center rounded-xl bg-white px-8 py-5">
+    <div class="flex flex-wrap gap-6 items-center rounded-xl bg-white px-8 py-5">
       <div class="flex items-end gap-2">
         <img src="/icons/ya.svg" alt="">
         <div>

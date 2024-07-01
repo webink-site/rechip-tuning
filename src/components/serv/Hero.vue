@@ -1,16 +1,16 @@
 <template>
   <section
-    class="bg-center bg-no-repeat bg-cover py-12 px-10 h-[30rem]"
+    class="bg-center bg-no-repeat bg-cover py-12 px-10 md:h-[30rem]"
     :style="`background-image: url('${page?.img}');`"
   >
     <div class="container mx-auto flex flex-col justify-between h-full">
-      <div class="lg:w-1/2">
-        <h1 class="text-white text-4xl font-bold mb-4">{{ title }}</h1>
+      <div class="lg:w-1/2 mb-12 sm:mb-0">
+        <h1 class="text-white text-2xl md:text-4xl font-bold mb-4">{{ title }}</h1>
         <p class="text-white leading-7">
           {{ description }}
         </p>
       </div>
-      <div class="flex items-center gap-5">
+      <div class="flex items-center flex-wrap gap-5">
         <div class="h-12 w-12 bg-sky-500 rounded-lg bg-opacity-10 flex justify-center items-center">
           <img src="/public/icons/tg.svg" alt="Telegram" class="h-6">
         </div>

@@ -1,18 +1,6 @@
 <template>
   <section class="py-6">
-    <div class="container mx-auto">
-      <!-- <div class="grid gap-6 grid-cols-12">
-        <div class="col-span-9">
-          <h2 class="text-dark text-4xl font-bold">
-            Чип-тюнинг
-            <span class="capitalize">{{ $route.params.brandName }} </span> <span class="capitalize"> {{ $route.params.genName }}</span>
-          </h2>
-          <p class="text-lg font-semibold mt-1 text-gray-400">
-            Выберите поколение
-            <span class="capitalize">{{ $route.params.brandName }} </span> <span class="capitalize"> {{ $route.params.genName }}</span>:
-          </p>
-        </div>
-      </div> -->
+    <div class="container mx-auto px-4 md:px-0">
       <div class="grid grid-cols-12 gap-8">
         <div
           v-for="(row, rowIndex) in Object.keys(sortedMods(mods))"

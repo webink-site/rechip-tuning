@@ -38,7 +38,8 @@ export default defineNuxtConfig({
     'nuxt-primevue',
     '@nuxt/image',
     'nuxt-swiper',
-    '@nuxt/content'
+    '@nuxt/content',
+    'vue-yandex-maps/nuxt'
   ],
   image: {
     format: ['webp', 'png', 'jpeg', 'jpg']
@@ -49,5 +50,9 @@ export default defineNuxtConfig({
       ripple: true,
       inputStyle: 'filled'
     }
+  },
+  // @ts-ignore
+  yandexMaps: {
+    apikey: '8c4059db-3b8d-4535-a15e-569ee80fc827'
   }
 })

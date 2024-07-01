@@ -1,6 +1,6 @@
 <template>
   <section class="py-12">
-    <div class="container mx-auto">
+    <div class="container mx-auto px-4 md:px-0">
       <div class="grid grid-cols-12 gap-6">
         <div class="col-span-12">
           <h2 class="text-dark text-4xl font-bold mb-2">Наши работы</h2>
@@ -17,7 +17,7 @@
         <div
           v-for="(item, index) in projects.slice(0, homePage ? 3 : projects.length + 1)"
           :key="index"
-          class="col-span-4"
+          class="col-span-12 md:col-span-4"
           @click="() => showImg(index)"
         >
           <div class="relative">

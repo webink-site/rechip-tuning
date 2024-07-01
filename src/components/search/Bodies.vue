@@ -1,6 +1,6 @@
 <template>
   <section class="py-6">
-    <div class="container mx-auto">
+    <div class="container mx-auto px-4 md:px-0">
       <div class="grid gap-6 grid-cols-12">
         <div class="col-span-9">
           <h2 class="text-dark text-4xl font-bold">
@@ -15,7 +15,7 @@
       </div>
       <!-- <pre>{{ $route.params }}</pre> -->
       <div v-if="bodies.length" class="grid-cols-4 gap-6 grid mt-8">
-        <div v-for="(item, index) in bodies" :key="index" class="col-span-1">
+        <div v-for="(item, index) in bodies" :key="index" class="col-span-2 md:col-span-1">
           <nuxt-link :to="`/services/${$route.params.servName}/${$route.params.brandName.toLocaleLowerCase()}/${$route.params.genName.toLocaleLowerCase()}/${$route.params.gen}/${item.id}`">
             <div class="mb-2 bg-white overflow-hidden rounded-lg">
               <img class="h-36 w-full object-cover rounded-lg" :src="`https://expert.carfamily.online/photos/${item.id}.jpg`" alt="">

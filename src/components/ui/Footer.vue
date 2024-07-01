@@ -1,18 +1,18 @@
 <template>
   <footer class="py-12  bg-gray-2">
-    <div class="container mx-auto">
+    <div class="container mx-auto px-4 md:px-0">
       <div class="grid gap-6 grid-cols-12 items-center border-b pb-8">
-        <div class="col-span-1">
+        <div class="col-span-3 md:col-span-1 ">
           <img src="/img/logofooter.svg" alt="ReChip">
         </div>
-        <div class="col-span-2">
+        <div class="col-span-9 md:col-span-2">
           <p class="text-sm text-gray-400">
             Чип-тюнинг ателье <br>
             в Санкт-Петербурге
           </p>
         </div>
-        <div class="col-span-6 col-start-7">
-          <div class="flex items-center justify-end gap-6">
+        <div class="col-span-12 md:col-span-6 md:col-start-7">
+          <div class="flex items-center md:justify-end gap-6 flex-wrap">
             <a href="" class="text-dark font-semibold flex gap-1 items-center hover:opacity-50">
               <img src="/icons/telgreen.svg" alt="телефон">
               +7 (969) 217-98-98
@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <ul class="my-8 columns-4 space-y-4">
+      <ul class="my-8 columns-2 md:columns-4 space-y-4">
         <li
           v-for="(item, i) in links"
           :key="i"
@@ -40,7 +40,7 @@
       </ul>
 
       <div class="grid gap-6 grid-cols-12">
-        <div class="col-span-9">
+        <div class="col-span-12 md:col-span-9">
           <p class="text-xs text-gray-400 mb-2">
             2024 © ReChip — чип-тюнинг ателье. ООО «РЕЧИП», ИНН: 9726011190, ОГРН: 1227700203785, КПП: 772601001.
             Юр. адрес: 117405, Москва, вн. тер. Муниципальный округ Чертаново Южное, ш Варшавское, д. 158 к. 1,
@@ -51,8 +51,8 @@
             <nuxt-link to="/" class="text-xs text-gray-400 underline hover:no-underline">Публичная оферта</nuxt-link>
           </div>
         </div>
-        <div class="col-span-3">
-          <div class="flex justify-end gap-4">
+        <div class="col-span-12 md:col-span-3">
+          <div class="flex md:justify-end gap-4">
             <a href="#" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
               <img src="/public/icons/whats.svg" alt="">
             </a>

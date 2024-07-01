@@ -7,7 +7,7 @@
             <img v-if="homepage" src="/img/logo.svg" alt="ReChip">
             <img v-else src="/img/logofooter.svg" alt="ReChip">
           </nuxt-link>
-          <ul class="flex gap-7">
+          <ul class="hidden md:flex gap-7">
             <li v-for="(link, i) in links" :key="i">
               <nuxt-link
                 :to="link.link"
@@ -21,7 +21,7 @@
           </ul>
         </div>
         <div class="flex items-center gap-8">
-          <div class="flex gap-4">
+          <div class="hidden sm:flex gap-4">
             <a href="#" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
               <img src="/public/icons/whats.svg" alt="">
             </a>
@@ -29,7 +29,7 @@
               <img src="/public/icons/tg.svg" alt="">
             </a>
           </div>
-          <a href="" class="font-semibold flex gap-1 items-center hover:opacity-50" :class="{'text-white' : homepage}">
+          <a href="" class="font-semibold hidden sm:flex gap-1 items-center hover:opacity-50" :class="{'text-white' : homepage}">
             <img v-if="homepage" src="/public/icons/telwh.svg" alt="телефон">
             <img v-else src="/public/icons/tel.svg" alt="телефон">
             +7 (969) 217-98-98
@@ -44,13 +44,25 @@
           >
             <UiModalsRegion v-if="regionModal" @close="regionModal = false" />
           </transition>
+          <Bars3Icon
+            class="h-8 md:hidden"
+            :class="homepage ? 'text-white' : 'text-black'"
+            @click="showMenu = !showMenu"
+          />
         </div>
       </div>
     </div>
+    <transition
+      name="fade-out"
+      mode="out-in"
+    >
+      <UiMobileMenu v-if="showMenu" :links="links" @close="showMenu = false" />
+    </transition>
   </div>
 </template>
 
 <script setup lang="ts">
+import { Bars3Icon } from '@heroicons/vue/24/outline/index.js'
 import { useUiStore } from '@/src/stores/ui'
 
 const uiStore = useUiStore()
@@ -60,6 +72,8 @@ interface Props{
   homepage?: boolean
 }
 const { homepage } = defineProps<Props>()
+
+const showMenu = ref(false)
 
 const links = [
   {

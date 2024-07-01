@@ -1,22 +1,22 @@
 <template>
-  <section class="h-[900px] py-20 bg-cover bg-center bg-no-repeat flex items-end custom-transition" :style="`background-image: url(${sldes[active]});`">
-    <div class="container mx-auto">
+  <section class="md:h-[900px] py-20 bg-cover bg-center bg-no-repeat flex items-end custom-transition" :style="`background-image: url(${sldes[active]});`">
+    <div class="container mx-auto px-4 md:px-0">
       <div class="grid gap-6 grid-cols-12">
-        <div class="col-span-12 mb-16">
-          <h1 class="text-white font-bold text-5xl leading-tight">
+        <div class="col-span-12 md:mb-16">
+          <h1 class="text-center md:text-left text-white font-bold text-3xl md:text-5xl leading-tight">
             Чип-тюнинг <br>
             Stage 1/Stage 2 <br>
             в Санкт-Петербурге
           </h1>
         </div>
-        <div class="col-span-4">
-          <div class="space-y-6">
-            <h2 class="text-white text-4xl font-bold">Чип-тюнинг <br> ателье ReChip</h2>
-            <p class="text-white text-lg">Прошивка всех марок авто <br> от 2000 г.в. с гарантией</p>
+        <div class="col-span-12 md:col-span-4 text-center md:text-left">
+          <div class="md:space-y-6">
+            <h2 class="text-white text-2xl md:text-4xl font-bold hidden sm:block">Чип-тюнинг <br> ателье ReChip</h2>
+            <p class="text-white md:text-lg hidden sm:block">Прошивка всех марок авто <br> от 2000 г.в. с гарантией</p>
             <UiButton text="Связаться с нами" @click="submitModal = true" />
           </div>
         </div>
-        <div class="col-span-8">
+        <div class="col-span-12 md:col-span-8">
           <UiFormsCarSearch />
         </div>
       </div>

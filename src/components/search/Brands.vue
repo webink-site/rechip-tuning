@@ -1,11 +1,11 @@
 <template>
   <section class="py-20" :class="{'!py-6': gray}">
-    <div class="container mx-auto">
+    <div class="container mx-auto px-4 md:px-0">
       <div class="grid gap-6 grid-cols-12">
-        <div class="col-span-9">
+        <div class="col-span-12 md:col-span-9">
           <h2 class="text-dark text-4xl font-bold">Выберите марку для чип-тюнинга</h2>
         </div>
-        <div class="col-span-3">
+        <div class="col-span-12 md:col-span-3">
           <div class="relative">
             <MagnifyingGlassIcon class="absolute text-gray-500 h-6 top-3 right-3" />
             <input v-model="search" placeholder="Поиск по марке" type="text" class="w-full p-3 rounded-md bg-gray-2 border-none" :class="{'!bg-white': props.gray}">
@@ -13,8 +13,8 @@
         </div>
       </div>
       <!-- <pre>{{ brands }}</pre> -->
-      <div v-if="brands.length" class="grid-cols-6 gap-6 grid mt-8">
-        <div v-for="(item, index) in brands" v-show="constrolVis(item)" :key="index" class="col-span-1">
+      <div v-if="brands.length" class="grid grid-cols-6 gap-6 mt-8">
+        <div v-for="(item, index) in brands" v-show="constrolVis(item)" :key="index" class="col-span-3 md:col-span-1">
           <nuxt-link :to="`/services/chip/${item.id.toLocaleLowerCase()}`">
             <div class="h-full bg-gray-3 hover:bg-[#DADADA] transition-all rounded-lg p-2.5 text-center select-none">
               <img :src="`https://expert.carfamily.online/logos/${item.id}.png`" :alt="item.name" class="h-20 mx-auto">

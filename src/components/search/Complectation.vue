@@ -1,8 +1,8 @@
 <template>
   <section class="py-6 pb-20">
-    <div class="container mx-auto">
+    <div class="container mx-auto px-4 md:px-0">
       <div class="grid gap-6 grid-cols-12">
-        <div class="col-span-4 h-full">
+        <div class="col-span-12 md:col-span-4 h-full">
           <img
             v-if="imgUrl !== null"
             class="w-full h-full object-cover rounded-xl"
@@ -13,7 +13,7 @@
             <i class="pi pi-car text-gray-400 text-2xl" />
           </div>
         </div>
-        <div class="col-span-8">
+        <div class="col-span-12 md:col-span-8">
           <div class="p-6 bg-white rounded-xl">
             <h1 class="font-bold text-dark text-2xl">
               Чип-тюнинг {{ complectation.path['mark-id'] }} {{ complectation.path['model-id'] }} {{ complectation['group-name'] }}
@@ -21,7 +21,7 @@
             <p class="mt-1 mb-6 text-gray-400">Чип-тюнинг {{ complectation.path['mark-id'] }} {{ complectation.path['model-id'] }} с гарантией и тест-драйвом</p>
             <p class="text-dark font-semibold">Характеристики</p>
             <hr class="my-4">
-            <ul class="columns-2 space-y-3">
+            <ul class="md:columns-2 space-y-3">
               <li>
                 <div class="grid grid-cols-2">
                   <div class="col-span-1 text-gray-400">Год</div>
@@ -86,6 +86,12 @@
           v-model:active="card.active"
           :card="card"
         />
+        <div class="col-span-12">
+          <div class="flex flex-wrap gap-2 mt-8">
+            <UiButton green text="Итого: 14 000 ₽" />
+            <UiButton red text="Оставить заявку" />
+          </div>
+        </div>
         <!-- <pre>{{ additional }}</pre> -->
       </div>
     </div>

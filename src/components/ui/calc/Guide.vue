@@ -1,11 +1,11 @@
 <template>
   <section class="py-12">
-    <div class="container mx-auto">
+    <div class="container mx-auto px-4 md:px-0">
       <div class="grid grid-cols-12 gap-6">
         <div class="col-span-12">
           <h2 class="text-dark text-2xl font-bold mb-2">Как записаться?</h2>
         </div>
-        <div v-for="(item, index) in icons" :key="index" class="col-span-4">
+        <div v-for="(item, index) in icons" :key="index" class="col-span-12 md:col-span-4">
           <div class="h-full bg-gray-2 rounded-lg p-6">
             <img :src="item.img" class="mb-8" :alt="item.name">
             <p class="font-bold text-dark text-lg mb-2">{{ item.name }}</p>
@@ -13,8 +13,8 @@
           </div>
         </div>
         <div class="col-span-12">
-          <div class="bg-cover bg-[url('/img/freediagn.webp')] rounded-lg bg-center px-8 py-6 h-64 ">
-            <div class="flex flex-col justify-end h-full w-1/2">
+          <div class="bg-cover bg-[url('/img/freediagn.webp')] rounded-lg bg-center px-8 py-6 md:h-64 ">
+            <div class="flex flex-col justify-end h-full md:w-1/2">
               <div>
                 <h3 class="text-white text-3xl font-bold mb-1.5">
                   Бесплатная компьютерная

@@ -5,7 +5,7 @@
       :style="`background-image: url('${image}');`"
     >
       <!-- :style="`background-image: url('${page.img}');`" -->
-      <div class="container mx-auto ">
+      <div class="container mx-auto px-4 md:px-0">
         <div class="md:w-2/3">
           <h1 class="text-white text-4xl font-bold mb-4">{{ data.title }}</h1>
           <p class="text-white leading-7">
@@ -25,9 +25,9 @@
       </div>
     </section>
     <section class="pt-20 bg-white">
-      <div class="container mx-auto">
+      <div class="container mx-auto px-4 md:px-0">
         <div class="grid gap-6 grid-cols-12 mb-20">
-          <div class="col-span-9">
+          <div class="col-span-12 md:col-span-9">
             <div class="nuxt-descr mb-10">
               <h2>Имем представителей в разных регионах!</h2>
               <p>
@@ -48,7 +48,7 @@
               </p>
             </div>
           </div>
-          <div class="col-span-3 space-y-6 mt-16">
+          <div class="col-span-12 md:col-span-3 space-y-6 md:mt-16">
             <div class="bg-gray-2 rounded-lg p-4 flex gap-3 items-center">
               <img src="/icons/tg.svg" class="h-10" alt="Напишите в Telegram">
               <div>

@@ -54,4 +54,5 @@ export interface Complectation {
   specifications: any
   options: any
   'option-packages': any
+  path: any
 }

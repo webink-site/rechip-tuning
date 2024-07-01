@@ -13,27 +13,29 @@
             {{ item }}
           </button>
         </div>
-        <div class="flex gap-2">
+        <!-- <div class="flex gap-2">
           <UiButton green text="Итого: 14 000 ₽" />
           <UiButton red text="Оставить заявку" />
-        </div>
+        </div> -->
       </div>
-      <table class="w-full mt-2">
-        <tbody class="divide-y">
-          <tr>
-            <th class="text-start p-4 text-gray-400 font-medium">Параметр</th>
-            <th class="text-start p-4 text-gray-400 font-medium">Заводские</th>
-            <th class="text-start p-4 text-gray-400 font-medium">Тюнинг*</th>
-            <th class="text-start p-4 text-gray-400 font-medium">Прибавка</th>
-          </tr>
-          <tr v-for="(item, index) in table" :key="index">
-            <td class="text-dark font-semibold px-4 py-2">{{ item.param }}</td>
-            <td class="text-dark font-semibold px-4 py-2">{{ item.stock }}</td>
-            <td class="text-dark font-semibold px-4 py-2">{{ item.tuning }}</td>
-            <td class="text-dark font-semibold px-4 py-2">{{ item.addition }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="overflow-x-auto pb-3 md:pb-0">
+        <table class="w-full mt-2 whitespace-nowrap">
+          <tbody class="divide-y">
+            <tr>
+              <th class="text-start p-4 text-gray-400 font-medium">Параметр</th>
+              <th class="text-start p-4 text-gray-400 font-medium">Заводские</th>
+              <th class="text-start p-4 text-gray-400 font-medium">Тюнинг*</th>
+              <th class="text-start p-4 text-gray-400 font-medium">Прибавка</th>
+            </tr>
+            <tr v-for="(item, index) in table" :key="index">
+              <td class="text-dark font-semibold px-4 py-2">{{ item.param }}</td>
+              <td class="text-dark font-semibold px-4 py-2">{{ item.stock }}</td>
+              <td class="text-dark font-semibold px-4 py-2">{{ item.tuning }}</td>
+              <td class="text-dark font-semibold px-4 py-2">{{ item.addition }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>

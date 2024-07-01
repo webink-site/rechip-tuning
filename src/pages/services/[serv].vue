@@ -2,21 +2,21 @@
   <div v-if="data">
     <ServHero :title="data?.title" :description="data?.description" />
     <section class="bg-gray-2 pt-20">
-      <div class="container mx-auto">
+      <div class="container mx-auto px-4 md:px-0">
         <UiFormsCarSearch full />
       </div>
       <SearchBrands gray />
       <ServPrice :prices="data?.prices" />
-      <section class="pb-20 bg-white">
-        <div class="container mx-auto">
+      <section class="md:pb-20 bg-white">
+        <div class="container mx-auto px-4 md:px-0">
           <div class="grid gap-6 grid-cols-12 mb-20">
-            <div class="col-span-9">
+            <div class="col-span-12 md:col-span-9">
               <ContentDoc class="nuxt-descr mb-10" />
               <a href="#prices" @click.prevent="scrollIntoView('prices')">
                 <UiButton text="Посмотреть цены" red />
               </a>
             </div>
-            <div class="col-span-3 space-y-6 mt-16">
+            <div class="col-span-12 md:col-span-3 space-y-6 md:mt-16">
               <div class="bg-gray-2 rounded-lg p-4 flex gap-3 items-center">
                 <img src="/icons/tg.svg" class="h-10" alt="Напишите в Telegram">
                 <div>
@@ -35,7 +35,7 @@
           </div>
           <!-- <pre>{{ data }}</pre> -->
           <div v-if="data?.advant" class="grid gap-6 grid-cols-12">
-            <div v-for="(item, index) in data?.advant" :key="index" class="col-span-6">
+            <div v-for="(item, index) in data?.advant" :key="index" class="col-span-12 md:col-span-6">
               <div class="h-full bg-gray-2 rounded-lg p-6">
                 <img src="/icons/adv4.svg" class="mb-8 h-8" alt="">
                 <p class="font-bold text-dark text-lg mb-2">{{ item.text }}</p>

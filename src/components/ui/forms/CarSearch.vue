@@ -1,8 +1,8 @@
 <template>
   <ClientOnly>
     <div class="bg-white rounded-xl py-6 px-8">
-      <div class="grid grid-cols-12 gap-4" :class="{'!grid-cols-7': props.full}">
-        <div class="col-span-3" :class="{'!col-span-1': props.full}">
+      <div class="grid grid-cols-12 md:gap-4" :class="{'md:!grid-cols-7': props.full}">
+        <div class="col-span-12 md:col-span-3" :class="{'md:!col-span-1': props.full}">
           <label class="text-dark font-semibold">Услуга</label>
           <Dropdown
             v-model="search.serv"
@@ -14,7 +14,7 @@
             @change="carStore.SET_SERV(search.serv)"
           />
         </div>
-        <div class="col-span-3" :class="{'!col-span-1': props.full}">
+        <div class="col-span-12 md:col-span-3" :class="{'md:!col-span-1': props.full}">
           <label class="text-dark font-semibold">Марка</label>
           <Dropdown
             v-model="search.brand"
@@ -28,7 +28,7 @@
             @change="carStore.LOAD_MODELS(search.brand)"
           />
         </div>
-        <div class="col-span-3" :class="{'!col-span-1': props.full}">
+        <div class="col-span-12 md:col-span-3" :class="{'md:!col-span-1': props.full}">
           <label class="text-dark font-semibold">Модель</label>
           <Dropdown
             v-model="search.model"
@@ -42,7 +42,7 @@
             @change="carStore.LOAD_GENS(search.model)"
           />
         </div>
-        <div class="col-span-3" :class="{'!col-span-1': props.full}">
+        <div class="col-span-12 md:col-span-3" :class="{'md:!col-span-1': props.full}">
           <label class="text-dark font-semibold">Поколение</label>
           <Dropdown
             v-model="search.gen"
@@ -64,7 +64,7 @@
             </template>
           </Dropdown>
         </div>
-        <div class="col-span-4" :class="{'!col-span-1': props.full}">
+        <div class="col-span-12 md:col-span-4" :class="{'md:!col-span-1': props.full}">
           <label class="text-dark font-semibold">Кузов</label>
           <Dropdown
             v-model="search.body"
@@ -77,7 +77,7 @@
             @change="carStore.LOAD_MODS(search.body)"
           />
         </div>
-        <div class="col-span-4" :class="{'!col-span-1': props.full}">
+        <div class="col-span-12 md:col-span-4" :class="{'md:!col-span-1': props.full}">
           <label class="text-dark font-semibold">Модификация</label>
           <Dropdown
             v-model="search.mod"
@@ -90,7 +90,7 @@
             @change="carStore.SET_MOD(search.mod)"
           />
         </div>
-        <div class="col-span-4" :class="{'!col-span-1': props.full}">
+        <div class="col-span-12 md:col-span-4" :class="{'md:!col-span-1': props.full}">
           <UiButton text="Искать" class="w-full mt-7" @click="searchCar" />
         </div>
       </div>

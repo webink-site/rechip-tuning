@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="py-12 bg-gray-2">
-      <div class="container mx-auto">
+      <div class="container mx-auto px-4 md:px-0">
         <div class="grid grid-cols-12 gap-6">
           <div class="col-span-12">
             <h2 class="text-dark text-4xl font-bold mb-2">Отзывы о нас</h2>
