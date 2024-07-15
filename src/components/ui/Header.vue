@@ -36,7 +36,7 @@
           </a>
           <a href="#" class="text-primary font-semibold flex gap-1 items-center hover:opacity-80" @click.prevent="regionModal = true">
             <img src="/public/icons/marker.svg" alt="маркер">
-            {{ uiStore.activeRegion }}
+            {{ uiStore.regions[uiStore.activeRegion].name }}
           </a>
           <transition
             name="fade-out"

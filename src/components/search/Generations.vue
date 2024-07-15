@@ -4,12 +4,10 @@
       <div class="grid gap-6 grid-cols-12">
         <div class="col-span-9">
           <h2 class="text-dark text-4xl font-bold">
-            Чип-тюнинг
-            <span class="capitalize">{{ $route.params.brandName }} </span> <span class="capitalize"> {{ $route.params.model }}</span>
+            Чип-тюнинг {{ title }}
           </h2>
           <p class="text-lg font-semibold mt-1 text-gray-400">
-            Выберите поколение
-            <span class="capitalize">{{ $route.params.brandName }} </span> <span class="capitalize"> {{ $route.params.model }}</span>:
+            Выберите поколение {{ title }}:
           </p>
         </div>
       </div>
@@ -20,7 +18,6 @@
               <p class="font-bold">{{ item.name }}</p>
               <p>{{ item['year-start'] }} <span v-if="item['year-stop']">- {{ item['year-stop'] }}</span> </p>
             </div>
-            <!-- <img class="h-52 mb-2 w-full object-cover rounded-lg" src="https://cars-base.ru/20794725.jpg" alt=""> -->
           </nuxt-link>
         </div>
       </div>
@@ -33,9 +30,10 @@ import type { Model } from '@/src/types/car'
 
 interface Props{
   gens: Model[]
+  title: string
 }
 // const route = useRoute()
-const { gens } = defineProps<Props>()
+const { gens, title } = defineProps<Props>()
 
 </script>
 

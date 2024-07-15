@@ -57,7 +57,6 @@
           >
             <template #option="slotProps">
               <div>
-                <!-- <img :src="`https://expert.carfamily.online/photos/${slotProps.option.id}.jpg`" alt=""> -->
                 <p>{{ slotProps.option.gen_name }}</p>
                 <!-- {{ slotProps.option }} -->
               </div>

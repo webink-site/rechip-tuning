@@ -3,15 +3,16 @@
     <div class="container mx-auto px-4 md:px-0">
       <UiFormsCarSearch full />
     </div>
-    <SearchModels :models="data" />
+    <SearchModels v-if="data" :models="data" :title="marks?.find((i) => i.id === $route.params.brand.toString().toUpperCase())?.name ?? ''" />
   </section>
 </template>
 
 <script setup lang="ts">
-import type { Model } from '@/src/types/car'
+import type { Model, Brand } from '@/src/types/car'
 
 const route = useRoute()
-const { data } = await useAsyncData<Model[]>('models', () => $fetch(`https://cars-base.ru/api/cars/${route.params.brand.toString().toUpperCase()}?key=d1e353ef7`))
+const { data } = await useAsyncData<Model[]>('models', () => $fetch(`http://api.rechip-tuning.ru/wp-json/custom/v1/base?mark_id=${route.params.brand.toString().toUpperCase()}`))
+const { data: marks } = await useAsyncData<Brand[]>('marks', () => $fetch('http://api.rechip-tuning.ru/wp-json/custom/v1/base'))
 
 </script>
 

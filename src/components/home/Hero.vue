@@ -6,7 +6,7 @@
           <h1 class="text-center md:text-left text-white font-bold text-3xl md:text-5xl leading-tight">
             Чип-тюнинг <br>
             Stage 1/Stage 2 <br>
-            в Санкт-Петербурге
+            в {{ uiStore.regions[uiStore.activeRegion].place }}
           </h1>
         </div>
         <div class="col-span-12 md:col-span-4 text-center md:text-left">
@@ -34,7 +34,9 @@
 import hero from '@/public/img/hero.webp'
 import hero2 from '@/public/img/hero2.webp'
 import hero3 from '@/public/img/hero3.webp'
+import { useUiStore } from '@/src/stores/ui'
 
+const uiStore = useUiStore()
 const sldes = ref([hero, hero2, hero3])
 const active = ref(0)
 const interval = ref()

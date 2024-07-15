@@ -153,7 +153,7 @@ const additional = ref<Card[]>([
 ])
 
 onMounted(() => {
-  imgUrl.value = `https://expert.carfamily.online/photos/${route.params.modName}.jpg`
+  imgUrl.value = `http://api.rechip-tuning.ru/wp-content/themes/rechip-tuning/assets/photos/${route.params.modName}.jpg`
 })
 
 </script>

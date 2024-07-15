@@ -8,10 +8,10 @@
           v-for="(item, index) in uiStore.regions"
           :key="index"
           class="font-semibold text-dark py-1.5 px-2.5 rounded bg-gray-3 cursor-pointer hover:bg-neutral-200 transition-all"
-          :class="uiStore.activeRegion === item ? '!bg-primary !text-white' : ''"
-          @click="uiStore.SET_REGION(item)"
+          :class="uiStore.activeRegion === uiStore.regions.indexOf(item) ? '!bg-primary !text-white' : ''"
+          @click="[uiStore.SET_REGION(index), emit('close')]"
         >
-          {{ item }}
+          {{ item.name }}
         </div>
       </div>
     </div>

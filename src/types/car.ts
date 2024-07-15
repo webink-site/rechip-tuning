@@ -1,10 +1,3 @@
-export interface Brand {
-  id: string
-  name: string
-  'cyrillic-name': string
-  popular: boolean
-  country: string
-}
 export interface Model {
   id: string
   name: string
@@ -13,6 +6,17 @@ export interface Model {
   'year-from': number
   'year-to': number | null
   generations: number
+  'year-start': number
+  'year-stop': number
+  'body-type': string
+}
+export interface Brand {
+  id: string
+  name: string
+  'cyrillic-name': string
+  popular: boolean
+  country: string
+  models: Model[]
 }
 
 export interface Generation {

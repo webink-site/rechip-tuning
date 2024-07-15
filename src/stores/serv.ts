@@ -16,21 +16,21 @@ export const useServStore = defineStore('serv', {
       {
         slug: 'chip',
         name: 'Чип-тюнинг',
-        sub: 'Сделаем из вашего ведра бандитскую повозку',
+        sub: 'Чип-тюнинг автомобилей любой марки',
         img: serv3,
         width: 6
       },
       {
         slug: 'soot-filter',
         name: 'Отключение сажевого фильтра',
-        sub: 'Сделаем из вашего ведра бандитскую повозку',
+        sub: 'Программное отключение сажевого фильтра',
         img: serv4,
         width: 6
       },
       {
         slug: 'egr',
         name: 'Отключение клапана ЕГР',
-        sub: 'Сделаем из вашего ведра бандитскую повозку',
+        sub: 'Альтернатива ремонта данной системы',
         img: serv1,
         width: 6,
         high: true
@@ -38,7 +38,7 @@ export const useServStore = defineStore('serv', {
       {
         slug: 'ad-blue',
         name: 'Отключение системы мочевины AdBlue',
-        sub: 'Сделаем из вашего ведра бандитскую повозку',
+        sub: 'Программное отключение системы SCR',
         img: serv2,
         width: 6,
         high: true
@@ -46,7 +46,7 @@ export const useServStore = defineStore('serv', {
       {
         slug: 'euro-2',
         name: 'Прошивка Евро-2 после удаления катализатора',
-        sub: 'Сделаем из вашего ведра бандитскую повозку',
+        sub: 'Отключение лямбда-зонда и прошивка автомобиля',
         img: serv5,
         width: 12
       }

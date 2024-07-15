@@ -8,7 +8,7 @@
         <div class="col-span-9 md:col-span-2">
           <p class="text-sm text-gray-400">
             Чип-тюнинг ателье <br>
-            в Санкт-Петербурге
+            в {{ uiStore.regions[uiStore.activeRegion].place }}
           </p>
         </div>
         <div class="col-span-12 md:col-span-6 md:col-start-7">
@@ -67,7 +67,9 @@
 </template>
 
 <script setup lang="ts">
+import { useUiStore } from '@/src/stores/ui'
 
+const uiStore = useUiStore()
 const links = [
   'Услуги',
   'Отзывы',
