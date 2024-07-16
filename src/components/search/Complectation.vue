@@ -16,9 +16,9 @@
         <div class="col-span-12 md:col-span-8">
           <div class="p-6 bg-white rounded-xl">
             <h1 class="font-bold text-dark text-2xl">
-              Чип-тюнинг {{ complectation.path['mark-id'] }} {{ complectation.path['model-id'] }} {{ complectation['group-name'] }}
+              Чип-тюнинг {{ title }} {{ years }} г.в.
             </h1>
-            <p class="mt-1 mb-6 text-gray-400">Чип-тюнинг {{ complectation.path['mark-id'] }} {{ complectation.path['model-id'] }} с гарантией и тест-драйвом</p>
+            <p class="mt-1 mb-6 text-gray-400">Чип-тюнинг {{ title }} с гарантией и тест-драйвом</p>
             <p class="text-dark font-semibold">Характеристики</p>
             <hr class="my-4">
             <ul class="md:columns-2 space-y-3">
@@ -99,9 +99,21 @@
 </template>
 
 <script setup lang="ts">
-import type { Complectation } from '@/src/types/car'
+import type { Complectation, Brand } from '@/src/types/car'
 
 const route = useRoute()
+
+const { data: brands } = await useAsyncData<Brand[]>('brands', () => $fetch('http://api.rechip-tuning.ru/wp-json/custom/v1/base?full=1'))
+
+const title = computed(() => {
+  const brand = brands.value?.find(i => i.id === route.params.brandName.toString().toUpperCase())
+  if (brand) {
+    const model = brand.models?.find(i => i.id === route.params.genName.toString().toUpperCase())
+    return `${brand.name} ${model?.name}`
+  } else {
+    return ''
+  }
+})
 
 interface Props{
   complectation: Complectation
@@ -154,6 +166,15 @@ const additional = ref<Card[]>([
 
 onMounted(() => {
   imgUrl.value = `http://api.rechip-tuning.ru/wp-content/themes/rechip-tuning/assets/photos/${route.params.modName}.jpg`
+})
+
+useSeoMeta({
+  title: () => `Чип-тюнинг ${title.value} ${years}`,
+  ogTitle: () => `Чип-тюнинг ${title.value} ${years}`,
+  description: () => `Чип-тюнинг ${title.value} ${years} с гарантией и тест-драйвом`,
+  ogDescription: () => `Чип-тюнинг ${title.value} ${years} с гарантией и тест-драйвом`,
+  ogType: 'website',
+  ogImage: () => imgUrl.value
 })
 
 </script>
