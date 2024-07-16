@@ -14,8 +14,8 @@
                     <img src="/icons/telred.svg" alt="Компас" class="h-6">
                   </div>
                   <p>
-                    +7 (969) 217-98-98 <br>
-                    <span class="text-gray-400">Ежедневно, 09:00 – 21:00</span>
+                    {{ uiStore.getCurrentRegion?.phone_number }} <br>
+                    <span class="text-gray-400">{{ uiStore.getCurrentRegion?.work_time }}</span>
                   </p>
                 </div>
                 <!--  -->
@@ -25,8 +25,8 @@
                     <img src="/icons/compas.svg" alt="Компас" class="h-6">
                   </div>
                   <p>
-                    Санкт-Петербург <br>
-                    <span class="text-gray-400">ш. Революции, 65</span>
+                    {{ uiStore.getCurrentRegion?.region_name }} <br>
+                    <span class="text-gray-400">{{ uiStore.getCurrentRegion?.address }}</span>
                   </p>
                 </div>
               </div>
@@ -40,9 +40,8 @@
                 <yandex-map-default-scheme-layer />
                 <yandex-map-default-features-layer />
                 <yandex-map-default-marker
-                  v-for="marker in markersGeoJsonSource"
-                  :key="marker.title"
-                  :settings="marker"
+                  :key="markersGeoJsonSource.title"
+                  :settings="markersGeoJsonSource"
                 />
               </yandex-map>
             </div>
@@ -54,37 +53,37 @@
                 <li>
                   <div class="grid grid-cols-3">
                     <div class="col-span-1 text-gray-400">ИНН</div>
-                    <div class="col-span-2">9726011190</div>
+                    <div class="col-span-2">{{ uiStore.getCurrentRegion?.legal_info.inn }}</div>
                   </div>
                 </li>
                 <li>
                   <div class="grid grid-cols-3">
                     <div class="col-span-1 text-gray-400">КПП</div>
-                    <div class="col-span-2">772601001</div>
+                    <div class="col-span-2">{{ uiStore.getCurrentRegion?.legal_info.kpp }}</div>
                   </div>
                 </li>
                 <li>
                   <div class="grid grid-cols-3">
                     <div class="col-span-1 text-gray-400">ОГРН</div>
-                    <div class="col-span-2">1187746343234 от 26 марта 2018 г.</div>
+                    <div class="col-span-2">{{ uiStore.getCurrentRegion?.legal_info.ogrn }}</div>
                   </div>
                 </li>
                 <li>
                   <div class="grid grid-cols-3">
                     <div class="col-span-1 text-gray-400">Юр. адрес</div>
-                    <div class="col-span-2">117405, Москва, вн.тер. Муниципальный Округ Чертаново Южное, ш Варшавское, д. 158, к. 1</div>
+                    <div class="col-span-2">{{ uiStore.getCurrentRegion?.legal_info.legal_address }}</div>
                   </div>
                 </li>
                 <li>
                   <div class="grid grid-cols-3">
                     <div class="col-span-1 text-gray-400">Физ. адрес</div>
-                    <div class="col-span-2">117405, Москва, Варшавское шоссе, д. 152А</div>
+                    <div class="col-span-2">{{ uiStore.getCurrentRegion?.legal_info.phisical_address }}</div>
                   </div>
                 </li>
                 <li>
                   <div class="grid grid-cols-3">
                     <div class="col-span-1 text-gray-400">Ген. директор</div>
-                    <div class="col-span-2">Абоба Зверь Максимович</div>
+                    <div class="col-span-2">{{ uiStore.getCurrentRegion?.legal_info.general_director }}</div>
                   </div>
                 </li>
               </ul>
@@ -110,21 +109,26 @@ import {
 } from 'vue-yandex-maps'
 import type { LngLat } from '@yandex/ymaps3-types'
 import type { YMapLocationRequest } from '@yandex/ymaps3-types/imperative/YMap'
+import { useUiStore } from '@/src/stores/ui'
+
+const uiStore = useUiStore()
+
+const coordinates = computed(() => {
+  return uiStore.getCurrentRegion?.coordinates.split(', ').reverse().map(i => Number(i)) ?? [30.459933, 59.960621]
+})
 
 const LOCATION: YMapLocationRequest = {
-  center: [30.459933, 59.960621], // starting position [lng, lat]
+  center: coordinates.value as LngLat,
   zoom: 16 // starting zoom
 }
 
 // Array containing GeoJSON data for markers
-const markersGeoJsonSource = [
-  {
-    coordinates: [30.459933, 59.960621] as LngLat,
-    title: 'ReChip',
-    subtitle: 'Чип-тюнинг ателье',
-    color: '#F03C3D'
-  }
-]
+const markersGeoJsonSource = {
+  coordinates: coordinates.value as LngLat,
+  title: 'ReChip',
+  subtitle: 'Чип-тюнинг ателье',
+  color: '#F03C3D'
+}
 </script>
 
 <style scoped>

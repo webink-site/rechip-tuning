@@ -11,22 +11,31 @@
         </nuxt-link>
       </li>
     </ul>
-    <a href="" class="font-semibold flex gap-1 items-center hover:opacity-50 text-2xl">
+    <a :href="`tel:${uiStore.getCurrentRegion?.phone_number}`" class="font-semibold flex gap-1 items-center hover:opacity-50 text-2xl">
       <img src="/public/icons/tel.svg" alt="телефон">
-      +7 (969) 217-98-98
+      {{ uiStore.getCurrentRegion?.phone_number }}
     </a>
     <div class="flex gap-4 mt-6">
-      <a href="#" class="h-12 w-12 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
+      <a :href="`${uiStore.getCurrentRegion?.social_links.whatsapp ?? '#'}`" class="h-12 w-12 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
         <img src="/public/icons/whats.svg" alt="" class="h-8">
       </a>
-      <a href="#" class="h-12 w-12 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
+      <a :href="`${uiStore.getCurrentRegion?.social_links.telegram ?? '#'}`" class="h-12 w-12 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
         <img src="/public/icons/tg.svg" alt="" class="h-8">
+      </a>
+      <a :href="`${uiStore.getCurrentRegion?.social_links.youtube ?? '#'}`" class="h-12 w-12 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
+        <img src="/public/icons/ytb.svg" alt="" class="h-10">
+      </a>
+      <a v-if="uiStore.getCurrentRegion?.social_links.drive2" :href="`${uiStore.getCurrentRegion?.social_links.drive2 ?? '#'}`" class="h-12 w-12 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
+        <img src="/public/icons/d2ru.svg" alt="" class="h-8">
       </a>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useUiStore } from '@/src/stores/ui'
+
+const uiStore = useUiStore()
 const emit = defineEmits(['close'])
 
 type Props = {

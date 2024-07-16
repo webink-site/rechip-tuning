@@ -14,7 +14,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      baseURL: process.env.BASE_URL
+      apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL,
+      activeCity: process.env.NUXT_PUBLIC_ACTIVE_CITY
     }
   },
   css: ['~/src/assets/main.css', 'primeicons/primeicons.css', 'primevue/resources/themes/aura-light-blue/theme.css'],

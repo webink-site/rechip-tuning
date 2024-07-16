@@ -22,17 +22,24 @@
         </div>
         <div class="flex items-center gap-8">
           <div class="hidden sm:flex gap-4">
-            <a href="#" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
+            <a :href="`${uiStore.getCurrentRegion?.social_links.whatsapp ?? '#'}`" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
               <img src="/public/icons/whats.svg" alt="">
             </a>
-            <a href="#" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
+            <a :href="`${uiStore.getCurrentRegion?.social_links.telegram ?? '#'}`" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
               <img src="/public/icons/tg.svg" alt="">
             </a>
+            <a v-if="uiStore.getCurrentRegion?.social_links.youtube" :href="`${uiStore.getCurrentRegion?.social_links.youtube ?? '#'}`" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
+              <img src="/public/icons/ytb.svg" alt="" class="h-6">
+            </a>
+            <a v-if="uiStore.getCurrentRegion?.social_links.drive2" :href="`${uiStore.getCurrentRegion?.social_links.drive2 ?? '#'}`" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
+              <img src="/public/icons/d2ru.svg" alt="" class="h-5">
+            </a>
           </div>
-          <a href="" class="font-semibold hidden sm:flex gap-1 items-center hover:opacity-50" :class="{'text-white' : homepage}">
+
+          <a :href="`tel:${uiStore.getCurrentRegion?.phone_number}`" class="font-semibold hidden sm:flex gap-1 items-center hover:opacity-50" :class="{'text-white' : homepage}">
             <img v-if="homepage" src="/public/icons/telwh.svg" alt="телефон">
             <img v-else src="/public/icons/tel.svg" alt="телефон">
-            +7 (969) 217-98-98
+            {{ uiStore.getCurrentRegion?.phone_number }}
           </a>
           <a href="#" class="text-primary font-semibold flex gap-1 items-center hover:opacity-80" @click.prevent="regionModal = true">
             <img src="/public/icons/marker.svg" alt="маркер">
@@ -67,6 +74,8 @@ import { useUiStore } from '@/src/stores/ui'
 
 const uiStore = useUiStore()
 const regionModal = ref(false)
+
+useAsyncData('contacts', () => uiStore.LOAD_CONTACTS())
 
 interface Props{
   homepage?: boolean
