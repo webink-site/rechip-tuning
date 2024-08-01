@@ -76,7 +76,7 @@
             </ul>
           </div>
         </div>
-        <UiCalcStage />
+        <UiCalcStage v-if="stageInfo.stage" :stage-info="stageInfo" />
         <div class="col-span-12">
           <h2 class="font-bold text-dark text-2xl mb-2">Дополнительные услуги к заказу</h2>
         </div>
@@ -104,6 +104,7 @@ import type { Complectation, Brand } from '@/src/types/car'
 const route = useRoute()
 
 const { data: brands } = await useAsyncData<Brand[]>('brands', () => $fetch('http://api.rechip-tuning.ru/wp-json/custom/v1/base?full=1'))
+const { data: stageInfo } = await useAsyncData<any>('stageInfo', () => $fetch(`https://api.rechip-tuning.ru/wp-json/custom/v1/get-product-data/?v=${route.params.mod}`))
 
 const title = computed(() => {
   const brand = brands.value?.find(i => i.id === route.params.brandName.toString().toUpperCase())

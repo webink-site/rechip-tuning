@@ -3,7 +3,7 @@
     <div class="container mx-auto px-4 md:px-0">
       <div class="grid gap-6 grid-cols-12">
         <div class="col-span-9">
-          <h2 class="text-dark text-4xl font-bold">
+          <h2 class="text-dark text-2xl font-bold">
             Чип-тюнинг {{ title }}
           </h2>
           <p class="text-lg font-semibold mt-1 text-gray-400">

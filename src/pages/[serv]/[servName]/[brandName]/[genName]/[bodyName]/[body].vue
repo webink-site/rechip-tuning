@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 const route = useRoute()
-const { data } = await useAsyncData<any>('models', () => $fetch(`http://api.rechip-tuning.ru/wp-json/custom/v1/base?mark_id=${route.params.brandName.toString().toUpperCase()}&model_id=${route.params.genName.toString().toUpperCase()}&generation_id=${route.params.bodyName}`))
+const { data } = await useAsyncData<any>('models', () => $fetch(`https://api.rechip-tuning.ru/wp-json/custom/v1/base?mark_id=${route.params.brandName.toString().toUpperCase()}&model_id=${route.params.genName.toString().toUpperCase()}&generation_id=${route.params.bodyName}`))
 
 const mods = computed(() => {
   return data.value.find((i: any) => i.id === route.params.body).modifications

@@ -46,10 +46,10 @@ export const useCarStore = defineStore('car', {
     }
   },
   actions: {
-    SET_SERV (serv: string) {
+    SET_SERV (serv: string | null) {
       this.search.serv = serv
     },
-    SET_MOD (mod: string) {
+    SET_MOD (mod: string | null) {
       this.search.mod = mod
     },
     async LOAD_BRANDS () {
@@ -58,28 +58,32 @@ export const useCarStore = defineStore('car', {
         this.brands = data.value
       }
     },
-    async LOAD_MODELS (brand: string) {
+    async LOAD_MODELS (brand: string | null) {
+      if (!brand) { return }
       this.search.brand = brand
       const models = await $fetch<any>(`http://api.rechip-tuning.ru/wp-json/custom/v1/base/${this.search.brand}`)
       if (models.length) {
         this.models = models
       }
     },
-    async LOAD_GENS (model: string) {
+    async LOAD_GENS (model: string | null) {
+      if (!model) { return }
       this.search.model = model
       const gens = await $fetch<any>(`http://api.rechip-tuning.ru/wp-json/custom/v1/base/${this.search.brand}/${this.search.model}`)
       if (gens.length) {
         this.gens = gens
       }
     },
-    async LOAD_BODY (gen: string) {
+    async LOAD_BODY (gen: string | null) {
+      if (!gen) { return }
       this.search.gen = gen
       const bodies = await $fetch<any>(`http://api.rechip-tuning.ru/wp-json/custom/v1/base/${this.search.brand}/${this.search.model}/${this.search.gen}`)
       if (bodies.length) {
         this.bodies = bodies
       }
     },
-    LOAD_MODS (body: string) {
+    LOAD_MODS (body: string | null) {
+      if (!body) { return }
       this.search.body = body
       const mods = this.bodies.find((i: any) => i.id === this.search.body)
       if (mods) {
