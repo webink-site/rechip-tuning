@@ -18,7 +18,7 @@ export default defineNuxtConfig({
       activeCity: process.env.NUXT_PUBLIC_ACTIVE_CITY
     }
   },
-  css: ['~/src/assets/main.css', 'primeicons/primeicons.css', 'primevue/resources/themes/aura-light-blue/theme.css'],
+  css: ['~/src/assets/main.css', 'primeicons/primeicons.css', 'primevue/resources/themes/aura-light-blue/theme.css', 'vue3-toastify/dist/index.css'],
   postcss: {
     plugins: {
       tailwindcss: {},

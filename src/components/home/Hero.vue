@@ -26,11 +26,12 @@
     name="fade-out"
     mode="out-in"
   >
-    <UiModalsSubmitForm v-if="submitModal" @close="submitModal = false" />
+    <UiModalsSubmitForm v-if="submitModal" @close="submitModal = false" @close-success="closeSuccess" />
   </transition>
 </template>
 
 <script setup lang="ts">
+import { toast } from 'vue3-toastify'
 import hero from '@/public/img/hero.webp'
 import hero2 from '@/public/img/hero2.webp'
 import hero3 from '@/public/img/hero3.webp'
@@ -50,6 +51,13 @@ onMounted(() => {
     active.value++
   }, 10000)
 })
+
+function closeSuccess () {
+  submitModal.value = false
+  toast('Заявка отправлена', {
+    type: 'success'
+  })
+}
 
 onUnmounted(() => {
   clearInterval(interval.value)

@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen w-screen fixed top-0 left-0 z-30 bg-black bg-opacity-50 backdrop-blur-[10px] flex justify-center items-center m-0" @click="emit('close')">
-    <UiFormsSubmit class="w-[40rem]">
+    <UiFormsSubmit class="w-[40rem]" @close-success="emit('closeSuccess')">
       <template #close>
         <UiCloseButton @click="emit('close')" />
       </template>
@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close', 'closeSuccess'])
 </script>
 
 <style scoped>

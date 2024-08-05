@@ -90,7 +90,7 @@
             </div>
           </div>
           <div class="col-span-12 md:col-span-6">
-            <UiFormsSubmit class="h-full" />
+            <UiFormsSubmit class="h-full" @close-success="closeSuccess" />
           </div>
         </div>
       </div>
@@ -101,6 +101,7 @@
 </template>
 
 <script setup lang="ts">
+import { toast } from 'vue3-toastify'
 import {
   YandexMap,
   YandexMapDefaultFeaturesLayer,
@@ -120,6 +121,12 @@ const coordinates = computed(() => {
 const LOCATION: YMapLocationRequest = {
   center: coordinates.value as LngLat,
   zoom: 16 // starting zoom
+}
+
+function closeSuccess () {
+  toast('Заявка отправлена', {
+    type: 'success'
+  })
 }
 
 // Array containing GeoJSON data for markers
