@@ -13,7 +13,6 @@ import type { Model } from '@/src/types/car'
 
 const route = useRoute()
 const { data } = await useAsyncData<Model[]>('models', () => $fetch(`https://api.rechip-tuning.ru/wp-json/custom/v1/base?mark_id=${route.params.brandName.toString().toUpperCase()}&model_id=${route.params.genName.toString().toUpperCase()}&generation_id=${route.params.gen}`))
-// const { data: models } = await useAsyncData<Brand[]>('models', () => $fetch('http://api.rechip-tuning.ru/wp-json/custom/v1/base?full=1'))
 
 // const title = computed(() => {
 //   const brand = models.value?.find(i => i.id === route.params.brandName.toString().toUpperCase())

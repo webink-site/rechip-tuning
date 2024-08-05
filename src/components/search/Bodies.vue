@@ -26,18 +26,21 @@
 </template>
 
 <script setup lang="ts">
-import type { Model, Brand } from '@/src/types/car'
+import type { Model } from '@/src/types/car'
+import { useCarStore } from '@/src/stores/car'
 
 interface Props{
   bodies: Model[]
 }
 const route = useRoute()
 const { bodies } = defineProps<Props>()
+const carStore = useCarStore()
 
-const { data } = await useAsyncData<Brand[]>('brands', () => $fetch('http://api.rechip-tuning.ru/wp-json/custom/v1/base?full=1'))
+useAsyncData('brands', () => carStore.LOAD_BRANDS())
+// const { data } = await useAsyncData<Brand[]>('brands', () => $fetch('http://api.rechip-tuning.ru/wp-json/custom/v1/base?full=1'))
 
 const title = computed(() => {
-  const brand = data.value?.find(i => i.id === route.params.brandName.toString().toUpperCase())
+  const brand = carStore.brands?.find(i => i.id === route.params.brandName.toString().toUpperCase())
   if (brand) {
     const model = brand.models?.find(i => i.id === route.params.genName.toString().toUpperCase())
     return `${brand.name} ${model?.name}`

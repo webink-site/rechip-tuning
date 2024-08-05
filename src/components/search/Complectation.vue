@@ -99,15 +99,18 @@
 </template>
 
 <script setup lang="ts">
-import type { Complectation, Brand } from '@/src/types/car'
+import type { Complectation } from '@/src/types/car'
+import { useCarStore } from '@/src/stores/car'
 
 const route = useRoute()
 
-const { data: brands } = await useAsyncData<Brand[]>('brands', () => $fetch('http://api.rechip-tuning.ru/wp-json/custom/v1/base?full=1'))
+const carStore = useCarStore()
+useAsyncData('brands', () => carStore.LOAD_BRANDS())
+// const { data: brands } = await useAsyncData<Brand[]>('brands', () => $fetch('http://api.rechip-tuning.ru/wp-json/custom/v1/base?full=1'))
 const { data: stageInfo } = await useAsyncData<any>('stageInfo', () => $fetch(`https://api.rechip-tuning.ru/wp-json/custom/v1/get-product-data/?v=${route.params.mod}`))
 
 const title = computed(() => {
-  const brand = brands.value?.find(i => i.id === route.params.brandName.toString().toUpperCase())
+  const brand = carStore.brands?.find(i => i.id === route.params.brandName.toString().toUpperCase())
   if (brand) {
     const model = brand.models?.find(i => i.id === route.params.genName.toString().toUpperCase())
     return `${brand.name} ${model?.name}`

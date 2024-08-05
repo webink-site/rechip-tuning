@@ -33,6 +33,7 @@
 <script setup lang="ts">
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/outline/index.js'
 import type { Brand } from '@/src/types/car'
+import { useCarStore } from '@/src/stores/car'
 
 const props = defineProps({
   gray: {
@@ -41,19 +42,22 @@ const props = defineProps({
   }
 })
 
-const { data } = await useAsyncData<Brand[]>('brands', () => $fetch('http://api.rechip-tuning.ru/wp-json/custom/v1/base?full=1'))
+// const { data } = await useAsyncData<Brand[]>('brands', () => $fetch('http://api.rechip-tuning.ru/wp-json/custom/v1/base?full=1'))
+const carStore = useCarStore()
+
+useAsyncData('brands', () => carStore.LOAD_BRANDS())
 
 const search = ref('')
 const showAll = ref(false)
 
 const brands = computed(() => {
-  if (!data.value) {
+  if (!carStore.brands) {
     return []
   }
   if (search.value) {
-    return data.value.filter(i => i.name.toLocaleLowerCase().includes(search.value.toLocaleLowerCase()))
+    return carStore.brands.filter(i => i.name.toLocaleLowerCase().includes(search.value.toLocaleLowerCase()))
   }
-  return data.value?.sort((a, b) => {
+  return carStore.brands?.sort((a, b) => {
     if (a.popular && !b.popular) {
       return -1
     } else if (!a.popular && b.popular) {

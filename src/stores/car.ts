@@ -53,6 +53,7 @@ export const useCarStore = defineStore('car', {
       this.search.mod = mod
     },
     async LOAD_BRANDS () {
+      if (this.brands.length) { return }
       const { data } = await useFetch<Brand[]>('http://api.rechip-tuning.ru/wp-json/custom/v1/base?full=1')
       if (data.value) {
         this.brands = data.value
@@ -61,7 +62,7 @@ export const useCarStore = defineStore('car', {
     async LOAD_MODELS (brand: string | null) {
       if (!brand) { return }
       this.search.brand = brand
-      const models = await $fetch<any>(`http://api.rechip-tuning.ru/wp-json/custom/v1/base/${this.search.brand}`)
+      const models = await $fetch<any>(`https://api.rechip-tuning.ru/wp-json/custom/v1/base?mark_id=${this.search.brand}`)
       if (models.length) {
         this.models = models
       }
@@ -69,7 +70,7 @@ export const useCarStore = defineStore('car', {
     async LOAD_GENS (model: string | null) {
       if (!model) { return }
       this.search.model = model
-      const gens = await $fetch<any>(`http://api.rechip-tuning.ru/wp-json/custom/v1/base/${this.search.brand}/${this.search.model}`)
+      const gens = await $fetch<any>(`https://api.rechip-tuning.ru/wp-json/custom/v1/base?mark_id=${this.search.brand}&model_id=${this.search.model}`)
       if (gens.length) {
         this.gens = gens
       }
@@ -77,7 +78,7 @@ export const useCarStore = defineStore('car', {
     async LOAD_BODY (gen: string | null) {
       if (!gen) { return }
       this.search.gen = gen
-      const bodies = await $fetch<any>(`http://api.rechip-tuning.ru/wp-json/custom/v1/base/${this.search.brand}/${this.search.model}/${this.search.gen}`)
+      const bodies = await $fetch<any>(`https://api.rechip-tuning.ru/wp-json/custom/v1/base?mark_id=${this.search.brand}&model_id=${this.search.model}&generation_id=${this.search.gen}`)
       if (bodies.length) {
         this.bodies = bodies
       }
