@@ -23,7 +23,7 @@
           </nuxt-link>
         </div>
         <div class="col-span-6 text-center">
-          <UiButton blue :text="!showAll ? 'Посмотреть все марки' : 'Скрыть'" @click="showAll = !showAll" />
+          <UiButton class="w-full" blue :text="!showAll ? 'Посмотреть все марки' : 'Скрыть'" @click="showAll = !showAll" />
         </div>
       </div>
     </div>

@@ -32,7 +32,7 @@
             <p class="text-gray-400">{{ item.hp }}</p>
           </div>
         </div>
-        <div v-if="homePage" class="col-span-12 text-center">
+        <div v-if="homePage" class="col-span-12 text-center mx-auto">
           <nuxt-link to="/gallery">
             <UiButton text="Перейти в галерею" />
           </nuxt-link>
