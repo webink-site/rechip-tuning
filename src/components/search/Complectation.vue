@@ -76,107 +76,103 @@
             </ul>
           </div>
         </div>
-        <UiCalcStage v-if="stageInfo.stage" :stage-info="stageInfo" />
+        <UiCalcStage v-if="stageInfo.stage" :stage-info="stageInfo" :active-stage-tab="activeStageTab" @change-tab="(e) => activeStageTab = e" />
         <div class="col-span-12">
           <h2 class="font-bold text-dark text-2xl mb-2">Дополнительные услуги к заказу</h2>
         </div>
         <UiCalcAdditionalCard
-          v-for="(card, index) in additional"
+          v-for="(card, index) in addCards"
           :key="index"
           v-model:active="card.active"
           :card="card"
         />
         <div class="col-span-12">
           <div class="flex flex-wrap gap-2 mt-8">
-            <UiButton green text="Итого: 14 000 ₽" />
-            <UiButton red text="Оставить заявку" />
+            <UiButton v-if="stageInfo.stage" green :text="`Итого: ${priceTotal} ₽`" />
+            <UiButton red text="Оставить заявку" @click="submitModal = true" />
+            <transition
+              name="fade-out"
+              mode="out-in"
+            >
+              <UiModalsSubmitForm
+                v-if="submitModal"
+                :title="`Чип-тюнинг ${title} ${years} г.в.`"
+                @close="submitModal = false"
+                @close-success="closeSuccess"
+              />
+            </transition>
           </div>
         </div>
-        <!-- <pre>{{ additional }}</pre> -->
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
+import { toast } from 'vue3-toastify'
 import type { Complectation } from '@/src/types/car'
-import { useCarStore } from '@/src/stores/car'
+// import { useCarStore } from '@/src/stores/car'
 
 const route = useRoute()
 
-const carStore = useCarStore()
-useAsyncData('brands', () => carStore.LOAD_BRANDS())
-// const { data: brands } = await useAsyncData<Brand[]>('brands', () => $fetch('http://api.rechip-tuning.ru/wp-json/custom/v1/base?full=1'))
+// const carStore = useCarStore()
 const { data: stageInfo } = await useAsyncData<any>('stageInfo', () => $fetch(`https://api.rechip-tuning.ru/wp-json/custom/v1/get-product-data/?v=${route.params.mod}`))
-
-const title = computed(() => {
-  const brand = carStore.brands?.find(i => i.id === route.params.brandName.toString().toUpperCase())
-  if (brand) {
-    const model = brand.models?.find(i => i.id === route.params.genName.toString().toUpperCase())
-    return `${brand.name} ${model?.name}`
-  } else {
-    return ''
-  }
-})
 
 interface Props{
   complectation: Complectation
   bodytype: string
   genName: string
   years: string
+  title: string
 }
 
-const { complectation, bodytype, genName, years } = defineProps<Props>()
-
-interface Card {
-    title: string
-    text: string
-    price: number
-    img: string
+type AddCard = {
+    ID: number
+    name: string
+    description: string
+    image: string
+    price: string
     active: boolean
   }
 
+const { complectation, bodytype, genName, years, title } = defineProps<Props>()
+
 const imgUrl = ref<string | null>(null)
-const additional = ref<Card[]>([
-  {
-    title: 'Прошивка Евро 2',
-    text: 'Если удален катализатор - отключение заднего лямбда зонда и ошибок Check Engine по нему',
-    price: 1000,
-    img: 'https://chip-tyuning-spb-78.ru/app/options/prosivka-evro-2category-7.webp',
-    active: false
-  },
-  {
-    title: 'Отключение ЕГР',
-    text: 'Если неисправен Клапан EGR системы рециркуляции выхлопных газов',
-    price: 1000,
-    img: 'https://chip-tyuning-spb-78.ru/app/options/otkliucenie-egrcategory-7.webp',
-    active: false
-  },
-  {
-    title: 'Отстрелы',
-    text: '"Попкорн", прострелы выхлопной системы на сбросе газа',
-    price: 11800,
-    img: 'https://chip-tyuning-spb-78.ru/app/options/otstrelycategory-7.webp',
-    active: false
-  },
-  {
-    title: 'Чип тюнинг коробки DSG',
-    text: 'Прошивка коробки передач DSG, настройка точек переключение, снятие ограничений момента и т.д.',
-    price: 18000,
-    img: 'https://chip-tyuning-spb-78.ru/app/options/cip-tiuning-dsgcategory-7.webp',
-    active: false
-  }
-])
+const activeStageTab = ref(0)
+const addCards = ref<AddCard[]>([])
+const submitModal = ref(false)
+
+if (stageInfo.value) {
+  addCards.value = stageInfo.value.additional_services.map((i: any) => {
+    return {
+      ...i,
+      active: false
+    }
+  })
+}
 
 onMounted(() => {
-  imgUrl.value = `http://api.rechip-tuning.ru/wp-content/themes/rechip-tuning/assets/photos/${route.params.modName}.jpg`
+  imgUrl.value = `https://api.rechip-tuning.ru/wp-content/themes/rechip-tuning/assets/photos/${route.params.modName}.jpg`
 })
 
+const priceTotal = computed(() => {
+  const addTotal = addCards.value.filter(i => i.active).map(i => Number(i.price.replaceAll(' ', ''))).reduce((a, b) => a + b, 0)
+  const priceNum = Number(stageInfo.value.stage[activeStageTab.value].price) ?? 0
+  return (priceNum + addTotal).toLocaleString()
+})
+
+function closeSuccess () {
+  submitModal.value = false
+  toast('Заявка отправлена', {
+    type: 'success'
+  })
+}
+
 useSeoMeta({
-  title: () => `Чип-тюнинг ${title.value} ${years}`,
-  ogTitle: () => `Чип-тюнинг ${title.value} ${years}`,
-  description: () => `Чип-тюнинг ${title.value} ${years} с гарантией и тест-драйвом`,
-  ogDescription: () => `Чип-тюнинг ${title.value} ${years} с гарантией и тест-драйвом`,
+  title: () => `Чип-тюнинг ${title} ${years}`,
+  ogTitle: () => `Чип-тюнинг ${title} ${years}`,
+  description: () => `Чип-тюнинг ${title} ${years} с гарантией и тест-драйвом`,
+  ogDescription: () => `Чип-тюнинг ${title} ${years} с гарантией и тест-драйвом`,
   ogType: 'website',
   ogImage: () => imgUrl.value
 })

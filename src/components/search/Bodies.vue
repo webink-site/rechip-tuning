@@ -37,12 +37,12 @@ const { bodies } = defineProps<Props>()
 const carStore = useCarStore()
 
 useAsyncData('brands', () => carStore.LOAD_BRANDS())
-// const { data } = await useAsyncData<Brand[]>('brands', () => $fetch('http://api.rechip-tuning.ru/wp-json/custom/v1/base?full=1'))
+const { data: models } = await useAsyncData<Model[]>('modelsForTitle', () => $fetch(`https://api.rechip-tuning.ru/wp-json/custom/v1/base?mark_id=${route.params.brandName.toString().toUpperCase()}`))
 
 const title = computed(() => {
   const brand = carStore.brands?.find(i => i.id === route.params.brandName.toString().toUpperCase())
   if (brand) {
-    const model = brand.models?.find(i => i.id === route.params.genName.toString().toUpperCase())
+    const model = models.value?.find(i => i.id === route.params.genName.toString().toUpperCase())
     return `${brand.name} ${model?.name}`
   } else {
     return ''

@@ -6,9 +6,9 @@
           <button
             v-for="(item, i) in stageInfo.stage"
             :key="i"
-            :class="{'border-primary': activeTab === i}"
+            :class="{'border-primary': activeStageTab === i}"
             class="border-b-[3px] py-4 px-5 text-dark"
-            @click="activeTab = i"
+            @click="emit('changeTab', i)"
           >
             {{ item.stage_title }}
           </button>
@@ -18,6 +18,7 @@
           <UiButton red text="Оставить заявку" />
         </div> -->
       </div>
+      <!-- <pre>{{ stageInfo }}</pre> -->
       <div class="overflow-x-auto pb-3 md:pb-0">
         <table class="w-full mt-2 whitespace-nowrap">
           <tbody class="divide-y">
@@ -27,7 +28,7 @@
               <th class="text-start p-4 text-gray-400 font-medium">Тюнинг*</th>
               <th class="text-start p-4 text-gray-400 font-medium">Прибавка</th>
             </tr>
-            <tr v-for="(item, index) in stageInfo.stage[activeTab].parameters" :key="index">
+            <tr v-for="(item, index) in stageInfo.stage[activeStageTab].parameters" :key="index">
               <td class="text-dark font-semibold px-4 py-2">{{ item.parameter ?? '' }}</td>
               <td class="text-dark font-semibold px-4 py-2">{{ item.factory_values ?? '' }}</td>
               <td class="text-dark font-semibold px-4 py-2">{{ item.tuned_values ?? '' }}</td>
@@ -42,12 +43,14 @@
 
 <script setup lang="ts">
 
-const activeTab = ref(0)
+const emit = defineEmits(['changeTab'])
+
 type Props = {
   stageInfo: any
+  activeStageTab: number
 }
 
-const { stageInfo } = defineProps<Props>()
+const { stageInfo, activeStageTab } = defineProps<Props>()
 
 </script>
 

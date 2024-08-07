@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { popular } from '../helpers/popular'
 import type { Brand } from '@/src/types/car'
 
 interface GoodsState {
@@ -54,9 +55,14 @@ export const useCarStore = defineStore('car', {
     },
     async LOAD_BRANDS () {
       if (this.brands.length) { return }
-      const { data } = await useFetch<Brand[]>('http://api.rechip-tuning.ru/wp-json/custom/v1/base?full=1')
+      const { data } = await useFetch<Brand[]>('https://api.rechip-tuning.ru/wp-json/custom/v1/base')
       if (data.value) {
-        this.brands = data.value
+        this.brands = data.value.map((i) => {
+          return {
+            ...i,
+            popular: popular.includes(i.id)
+          }
+        })
       }
     },
     async LOAD_MODELS (brand: string | null) {

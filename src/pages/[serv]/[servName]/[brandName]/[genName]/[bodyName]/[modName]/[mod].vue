@@ -3,9 +3,9 @@
     <div class="container mx-auto">
       <UiFormsCarSearch full />
     </div>
-    <SearchComplectation :complectation="complectation" :bodytype="bodytype" :gen-name="genName" :years="years" />
+    <SearchComplectation :title="title" :complectation="complectation" :bodytype="bodytype" :gen-name="genName" :years="years" />
     <div class="bg-white py-16">
-      <SearchMods :mods="mods" />
+      <SearchMods v-if="mods" :mods="mods" />
       <UiCalcGuide />
       <HomeAdvant />
     </div>
@@ -13,13 +13,28 @@
 </template>
 
 <script setup lang="ts">
+import type { Model } from '@/src/types/car'
+import { useCarStore } from '@/src/stores/car'
 
+const carStore = useCarStore()
 const route = useRoute()
 const { data } = await useAsyncData<any>('complectations', () => $fetch(`https://api.rechip-tuning.ru/wp-json/custom/v1/base?mark_id=${route.params.brandName.toString().toUpperCase()}&model_id=${route.params.genName.toString().toUpperCase()}&generation_id=${route.params.bodyName}`))
+const { data: models } = await useAsyncData<Model[]>('modelsForTitle', () => $fetch(`https://api.rechip-tuning.ru/wp-json/custom/v1/base?mark_id=${route.params.brandName.toString().toUpperCase()}`))
+
 const { data: generations } = await useAsyncData<any>('generations', () => $fetch(`https://api.rechip-tuning.ru/wp-json/custom/v1/base?mark_id=${route.params.brandName.toString().toUpperCase()}&model_id=${route.params.genName.toString().toUpperCase()}`))
 
 const mods = computed(() => {
   return data.value.find((i: any) => i.id === route.params.modName).modifications
+})
+
+const title = computed(() => {
+  const brand = carStore.brands?.find(i => i.id === route.params.brandName.toString().toUpperCase())
+  if (brand) {
+    const model = models.value?.find(i => i.id === route.params.genName.toString().toUpperCase())
+    return `${brand.name} ${model?.name}`
+  } else {
+    return ''
+  }
 })
 
 const complectation = computed(() => {

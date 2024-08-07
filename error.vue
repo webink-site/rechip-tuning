@@ -18,7 +18,9 @@
 </template>
 
 <script setup lang="ts">
-
+definePageMeta({
+  layout: 'default'
+})
 useSeoMeta({
   title: 'Ошибка 404, страница не найдена!'
 })

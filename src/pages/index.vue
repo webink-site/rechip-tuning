@@ -23,7 +23,7 @@ useSeoMeta({
   description: 'Чип-тюнинг ателье ReChip Прошивка всех марок авто от 2000 г.в. с гарантией',
   ogDescription: 'Чип-тюнинг ателье ReChip Прошивка всех марок авто от 2000 г.в. с гарантией',
   ogType: 'website',
-  ogImage: 'http://new.rechip-tuning.ru/img/hero.webp'
+  ogImage: 'https://new.rechip-tuning.ru/img/hero.webp'
 })
 </script>
 

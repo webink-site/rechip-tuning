@@ -51,7 +51,12 @@ import { useVuelidate } from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
 import { toast } from 'vue3-toastify'
 
+type Props ={
+  title?: string
+}
+
 const emit = defineEmits(['closeSuccess'])
+const { title } = defineProps<Props>()
 
 const data = reactive({
   product: '',
@@ -59,6 +64,10 @@ const data = reactive({
   phone: ''
 })
 const load = ref(false)
+
+if (title) {
+  data.product = title
+}
 
 const rules = computed(() => ({
   product: {
@@ -85,7 +94,7 @@ const submitForm = async () => {
       request_data: 'Чип-тюнинг'
     }
     try {
-      await $fetch<any>('http://api.rechip-tuning.ru/wp-json/telegram-requests/v1/submit', {
+      await $fetch<any>('https://api.rechip-tuning.ru/wp-json/telegram-requests/v1/submit', {
         method: 'POST',
         body: payload
       })

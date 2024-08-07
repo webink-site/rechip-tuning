@@ -31,7 +31,7 @@ export const useUiStore = defineStore('ui', {
       this.activeRegion = region
     },
     async LOAD_CONTACTS () {
-      const { data } = await useFetch<Contact[]>('http://api.rechip-tuning.ru/wp-json/custom/v1/page?slug=contacts')
+      const { data } = await useFetch<Contact[]>('https://api.rechip-tuning.ru/wp-json/custom/v1/page?slug=contacts')
       if (data.value) {
         this.contacts = data.value
       }

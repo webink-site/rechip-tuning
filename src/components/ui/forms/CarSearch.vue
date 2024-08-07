@@ -1,6 +1,14 @@
 <template>
   <ClientOnly>
-    <div class="bg-white rounded-xl py-6 px-8">
+    <div class="relative bg-white rounded-xl py-6 px-8">
+      <span
+        v-if="Object.values(search).some(value => value)"
+        class="absolute top-2 right-4 text-primary cursor-pointer text-sm"
+        @click="clearFilter"
+      >
+        <XMarkIcon class="h-4 inline" />
+        Очистить
+      </span>
       <div class="grid grid-cols-12 md:gap-4" :class="{'md:!grid-cols-7': props.full}">
         <div class="col-span-12 md:col-span-3" :class="{'md:!col-span-1': props.full}">
           <label class="text-dark font-semibold">Услуга</label>
@@ -98,6 +106,7 @@
 </template>
 
 <script setup lang="ts">
+import { XMarkIcon } from '@heroicons/vue/24/outline/index.js'
 import { useVuelidate } from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
 import { useCarStore } from '@/src/stores/car'
@@ -150,6 +159,12 @@ const searchCar = () => {
   if (!v$.value.$error) {
     router.replace(`/services/${search.serv}/${search.brand}/${search.model}/${search.gen?.toString()}/${search.body?.toString()}/${search.mod?.toString()}`)
   }
+}
+
+const clearFilter = () => {
+  Object.keys(search).forEach((key) => {
+    search[key as keyof SearchField] = ''
+  })
 }
 
 onMounted(() => {
