@@ -117,6 +117,6 @@ const submitForm = async () => {
 
 <style scoped>
 .error {
-    box-shadow: 0 0 0 1px red;
+  box-shadow: 0 0 0 1px red;
 }
 </style>
