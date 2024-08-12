@@ -64,6 +64,14 @@ onUnmounted(() => {
 })
 
 // import { ArrowRightIcon } from '@heroicons/vue/24/outline/index.js'
+
+// const getRegion = computed(() => {
+//   const host = window?.location?.hostname
+//   console.log(host)
+//   // const index = uiStore.regions.findIndex(i => host.includes(i.code)) ?? 0
+//   // return uiStore.regions[index].place ?? ''
+//   return 'sdfkjhsdakfk'
+// })
 const submitModal = ref(false)
 </script>
 

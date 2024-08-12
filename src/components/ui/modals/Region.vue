@@ -4,15 +4,16 @@
       <UiCloseButton @click="emit('close')" />
       <h3 class="font-bold text-dark text-2xl mb-4">Выбор региона:</h3>
       <div class="flex flex-wrap gap-2">
-        <div
+        <a
           v-for="(item, index) in uiStore.regions"
           :key="index"
+          :href="item.web"
           class="font-semibold text-dark py-1.5 px-2.5 rounded bg-gray-3 cursor-pointer hover:bg-neutral-200 transition-all"
           :class="uiStore.activeRegion === uiStore.regions.indexOf(item) ? '!bg-primary !text-white' : ''"
           @click="[uiStore.SET_REGION(index), emit('close')]"
         >
           {{ item.name }}
-        </div>
+        </a>
       </div>
     </div>
   </div>

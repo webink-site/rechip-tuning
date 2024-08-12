@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
 import type { Contact } from '@/src/types/ui'
-import { useRuntimeConfig } from '#imports'
+// import { useRuntimeConfig } from '#imports'
 interface GoodsState {
   lang: 'ru' | 'en',
-  regions: {name: string, place: string, code: string}[]
+  regions: {name: string, place: string, code: string, web: string}[]
   activeRegion: number
   contacts: Contact[]
 }
@@ -12,13 +12,14 @@ export const useUiStore = defineStore('ui', {
   state: (): GoodsState => ({
     lang: 'ru',
     regions: [
-      { name: 'Санкт-Петербург', place: 'Санкт-Петербурге', code: 'spb' },
-      { name: 'Москва', place: 'Москве', code: 'msk' },
-      { name: 'Гатчина', place: 'Гатчине', code: 'gtn' },
-      { name: 'Нижний Новгород', place: 'Нижнем Новгороде', code: 'nng' },
-      { name: 'Ейск', place: 'Ейске', code: 'ysk' }
+      { name: 'Санкт-Петербург', place: 'Санкт-Петербурге', code: 'spb', web: 'https://spb.rechip-tuning.ru/' },
+      { name: 'Москва', place: 'Москве', code: 'msk', web: 'https://msk.rechip-tuning.ru/' }
+      // { name: 'Гатчина', place: 'Гатчине', code: 'gtn' },
+      // { name: 'Нижний Новгород', place: 'Нижнем Новгороде', code: 'nng' },
+      // { name: 'Ейск', place: 'Ейске', code: 'ysk' }
     ],
-    activeRegion: Number(useRuntimeConfig().public.activeCity),
+    activeRegion: 0,
+    // activeRegion: Number(useRuntimeConfig().public.activeCity),
     contacts: []
   }),
   getters: {

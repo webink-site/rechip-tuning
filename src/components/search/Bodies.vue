@@ -15,7 +15,7 @@
         <div v-for="(item, index) in bodies" :key="index" class="col-span-2 md:col-span-1">
           <nuxt-link :to="`/services/${$route.params.servName}/${$route.params.brandName.toString().toLocaleLowerCase()}/${$route.params.genName.toString().toLocaleLowerCase()}/${$route.params.gen}/${item.id}`">
             <div class="mb-2 bg-white overflow-hidden rounded-lg">
-              <img class="h-36 w-full object-cover rounded-lg" :src="`http://api.rechip-tuning.ru/wp-content/themes/rechip-tuning/assets/photos/${item.id}.jpg`" alt="">
+              <img class="h-36 w-full object-cover rounded-lg" :src="`https://api.rechip-tuning.ru/wp-content/themes/rechip-tuning/assets/photos/${item.id}.jpg`" alt="">
             </div>
             <p class="font-bold ">{{ item['body-type'] }}</p>
           </nuxt-link>
