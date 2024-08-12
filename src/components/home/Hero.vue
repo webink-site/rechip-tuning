@@ -6,7 +6,7 @@
           <h1 class="text-center md:text-left text-white font-bold text-3xl md:text-5xl leading-tight">
             Чип-тюнинг <br>
             Stage 1/Stage 2 <br>
-            в {{ uiStore.regions[uiStore.activeRegion].place }}
+            в  {{ uiStore.regions[uiStore.activeRegion].place }}
           </h1>
         </div>
         <div class="col-span-12 md:col-span-4 text-center md:text-left">
