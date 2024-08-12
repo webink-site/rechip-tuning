@@ -1,9 +1,13 @@
 import { defineStore } from 'pinia'
 import type { Contact } from '@/src/types/ui'
-import { useRuntimeConfig } from '#imports'
+// import { useRuntimeConfig } from '#imports'
+
+// const host = window.location.hostname
+
+// console.log(host)
 interface GoodsState {
   lang: 'ru' | 'en',
-  regions: {name: string, place: string, code: string}[]
+  regions: {name: string, place: string, code: string, web: string}[]
   activeRegion: number
   contacts: Contact[]
 }
@@ -12,13 +16,14 @@ export const useUiStore = defineStore('ui', {
   state: (): GoodsState => ({
     lang: 'ru',
     regions: [
-      { name: 'Санкт-Петербург', place: 'Санкт-Петербурге', code: 'spb' },
-      { name: 'Москва', place: 'Москве', code: 'msk' },
-      { name: 'Гатчина', place: 'Гатчине', code: 'gtn' },
-      { name: 'Нижний Новгород', place: 'Нижнем Новгороде', code: 'nng' },
-      { name: 'Ейск', place: 'Ейске', code: 'ysk' }
+      { name: 'Санкт-Петербург', place: 'Санкт-Петербурге', code: 'spb', web: 'https://spb.rechip-tuning.ru' },
+      { name: 'Москва', place: 'Москве', code: 'msk', web: 'https://msk.rechip-tuning.ru/' }
+      // { name: 'Гатчина', place: 'Гатчине', code: 'gtn', web: 'https://spb.rechip-tuning.ru' },
+      // { name: 'Нижний Новгород', place: 'Нижнем Новгороде', code: 'nng', web: 'https://spb.rechip-tuning.ru' },
+      // { name: 'Ейск', place: 'Ейске', code: 'ysk', web: 'https://spb.rechip-tuning.ru' }
     ],
-    activeRegion: Number(useRuntimeConfig().public.activeCity),
+    activeRegion: 0,
+    // activeRegion: Number(useRuntimeConfig().public.activeCity),
     contacts: []
   }),
   getters: {
@@ -35,6 +40,10 @@ export const useUiStore = defineStore('ui', {
       if (data.value) {
         this.contacts = data.value
       }
+    },
+    initializeActiveRegionByHost (host: string) {
+      const index = this.regions.findIndex(i => host.includes(i.code))
+      this.activeRegion = index !== -1 ? index : 0
     }
   }
 })
