@@ -59,7 +59,6 @@
         </div>
       </div>
     </div>
-    <!-- <pre>{{ uiStore.contacts }}</pre> -->
     <transition
       name="fade-out"
       mode="out-in"
