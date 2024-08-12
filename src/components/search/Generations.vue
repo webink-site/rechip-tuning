@@ -3,8 +3,8 @@
     <div class="container mx-auto px-4 md:px-0">
       <div class="grid gap-6 grid-cols-12">
         <div class="col-span-9">
-          <h2 class="text-dark text-4xl font-bold">
-            Чип-тюнинг {{ title }}
+          <h2 class="text-dark text-2xl font-bold">
+            {{ servStore.services.find((i) => i.slug === $route.params.servName)?.name }} {{ title }}
           </h2>
           <p class="text-lg font-semibold mt-1 text-gray-400">
             Выберите поколение {{ title }}:
@@ -27,6 +27,7 @@
 
 <script setup lang="ts">
 import type { Model } from '@/src/types/car'
+import { useServStore } from '~/src/stores/serv'
 
 interface Props{
   gens: Model[]
@@ -34,6 +35,7 @@ interface Props{
 }
 // const route = useRoute()
 const { gens, title } = defineProps<Props>()
+const servStore = useServStore()
 
 </script>
 

@@ -4,7 +4,7 @@
       <div class="grid gap-6 grid-cols-12">
         <div class="col-span-9">
           <h2 class="text-dark text-2xl font-bold">
-            Чип-тюнинг {{ title }}
+            {{ servStore.services.find((i) => i.slug === $route.params.servName)?.name }} {{ title }}
           </h2>
           <p class="text-lg font-semibold mt-1 text-gray-400">
             Выберите кузов: {{ title }}
@@ -28,6 +28,7 @@
 <script setup lang="ts">
 import type { Model } from '@/src/types/car'
 import { useCarStore } from '@/src/stores/car'
+import { useServStore } from '~/src/stores/serv'
 
 interface Props{
   bodies: Model[]
@@ -38,6 +39,7 @@ const carStore = useCarStore()
 
 useAsyncData('brands', () => carStore.LOAD_BRANDS())
 const { data: models } = await useAsyncData<Model[]>('modelsForTitle', () => $fetch(`https://api.rechip-tuning.ru/wp-json/custom/v1/base?mark_id=${route.params.brandName.toString().toUpperCase()}`))
+const servStore = useServStore()
 
 const title = computed(() => {
   const brand = carStore.brands?.find(i => i.id === route.params.brandName.toString().toUpperCase())

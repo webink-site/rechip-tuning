@@ -14,6 +14,7 @@ export const useServStore = defineStore('serv', {
   state: (): GoodsState => ({
     services: [
       {
+        id: 6180,
         slug: 'chip',
         name: 'Чип-тюнинг',
         sub: 'Чип-тюнинг автомобилей любой марки',
@@ -21,6 +22,7 @@ export const useServStore = defineStore('serv', {
         width: 6
       },
       {
+        id: 6190,
         slug: 'soot-filter',
         name: 'Отключение сажевого фильтра',
         sub: 'Программное отключение сажевого фильтра',
@@ -28,6 +30,7 @@ export const useServStore = defineStore('serv', {
         width: 6
       },
       {
+        id: 6193,
         slug: 'egr',
         name: 'Отключение клапана ЕГР',
         sub: 'Альтернатива ремонта данной системы',
@@ -36,6 +39,7 @@ export const useServStore = defineStore('serv', {
         high: true
       },
       {
+        id: 6196,
         slug: 'ad-blue',
         name: 'Отключение системы мочевины AdBlue',
         sub: 'Программное отключение системы SCR',
@@ -44,6 +48,7 @@ export const useServStore = defineStore('serv', {
         high: true
       },
       {
+        id: 6199,
         slug: 'euro-2',
         name: 'Прошивка Евро-2 после удаления катализатора',
         sub: 'Отключение лямбда-зонда и прошивка автомобиля',

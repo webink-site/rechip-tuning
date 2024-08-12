@@ -16,9 +16,9 @@
         <div class="col-span-12 md:col-span-8">
           <div class="p-6 bg-white rounded-xl">
             <h1 class="font-bold text-dark text-2xl">
-              Чип-тюнинг {{ title }} {{ years }} г.в.
+              {{ servStore.services.find((i) => i.slug === $route.params.servName)?.name }} {{ title }} {{ years }} г.в.
             </h1>
-            <p class="mt-1 mb-6 text-gray-400">Чип-тюнинг {{ title }} с гарантией и тест-драйвом</p>
+            <p class="mt-1 mb-6 text-gray-400">{{ servStore.services.find((i) => i.slug === $route.params.servName)?.name }} {{ title }} с гарантией и тест-драйвом</p>
             <p class="text-dark font-semibold">Характеристики</p>
             <hr class="my-4">
             <ul class="md:columns-2 space-y-3">
@@ -76,7 +76,7 @@
             </ul>
           </div>
         </div>
-        <UiCalcStage v-if="stageInfo.stage" :stage-info="stageInfo" :active-stage-tab="activeStageTab" @change-tab="(e) => activeStageTab = e" />
+        <UiCalcStage v-if="stageInfo.stage && $route.params.servName === 'chip'" :stage-info="stageInfo" :active-stage-tab="activeStageTab" @change-tab="(e) => activeStageTab = e" />
         <div class="col-span-12">
           <h2 class="font-bold text-dark text-2xl mb-2">Дополнительные услуги к заказу</h2>
         </div>
@@ -88,7 +88,7 @@
         />
         <div class="col-span-12">
           <div class="flex flex-wrap gap-2 mt-8">
-            <UiButton v-if="stageInfo.stage" green :text="`Итого: ${priceTotal} ₽`" />
+            <UiButton v-if="stageInfo.stage || stageInfo.main_services.length" green :text="`Итого: ${priceTotal} ₽`" />
             <UiButton red text="Оставить заявку" @click="submitModal = true" />
             <transition
               name="fade-out"
@@ -111,12 +111,14 @@
 <script setup lang="ts">
 import { toast } from 'vue3-toastify'
 import type { Complectation } from '@/src/types/car'
+import { useServStore } from '~/src/stores/serv'
 // import { useCarStore } from '@/src/stores/car'
 
 const route = useRoute()
 
 // const carStore = useCarStore()
 const { data: stageInfo } = await useAsyncData<any>('stageInfo', () => $fetch(`https://api.rechip-tuning.ru/wp-json/custom/v1/get-product-data/?v=${route.params.mod}`))
+const servStore = useServStore()
 
 interface Props{
   complectation: Complectation
@@ -157,8 +159,15 @@ onMounted(() => {
 
 const priceTotal = computed(() => {
   const addTotal = addCards.value.filter(i => i.active).map(i => Number(i.price.replaceAll(' ', ''))).reduce((a, b) => a + b, 0)
-  const priceNum = Number(stageInfo.value.stage[activeStageTab.value].price) ?? 0
-  return (priceNum + addTotal).toLocaleString()
+  if (route.params.servName === 'chip') {
+    const priceNum = Number(stageInfo.value.stage[activeStageTab.value].price) ?? 0
+    return (priceNum + addTotal).toLocaleString()
+  } else {
+    const currentServId = servStore.services.find(i => i.slug === route.params.servName)?.id
+    const priceInServ = stageInfo.value.main_services.find((i: any) => i.service === currentServId)?.price
+    // const priceNum = Number(stageInfo.value.main_services.find) ?? 0
+    return (Number(priceInServ.replaceAll(' ', '')) + addTotal).toLocaleString()
+  }
 })
 
 function closeSuccess () {

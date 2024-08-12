@@ -24,7 +24,7 @@ const title = computed(() => {
 
   if (brand) {
     const model = models.value?.find(i => i.id === route.params.model.toString().toUpperCase())
-    return `${brand.name} ${model?.name}`
+    return `${brand.name} ${model?.name ?? ''}`
   } else {
     return ''
   }

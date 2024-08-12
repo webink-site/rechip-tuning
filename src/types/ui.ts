@@ -1,4 +1,5 @@
 export interface Service {
+  id: number
   slug: string
   name: string
   sub: string
