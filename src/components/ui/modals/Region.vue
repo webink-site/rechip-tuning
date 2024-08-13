@@ -9,7 +9,7 @@
           :key="index"
           :href="item.web"
           class="font-semibold text-dark py-1.5 px-2.5 rounded bg-gray-3 cursor-pointer hover:bg-neutral-200 transition-all"
-          :class="uiStore.activeRegion === uiStore.regions.indexOf(item) ? '!bg-primary !text-white' : ''"
+          :class="getCityIndex === uiStore.regions.indexOf(item) ? '!bg-primary !text-white' : ''"
           @click="[uiStore.SET_REGION(index), emit('close')]"
         >
           {{ item.name }}
@@ -21,7 +21,9 @@
 
 <script setup lang="ts">
 import { useUiStore } from '@/src/stores/ui'
+import { useCity } from '~/src/helpers/useCiity'
 
+const { getCityIndex } = useCity()
 const uiStore = useUiStore()
 const emit = defineEmits(['close'])
 </script>

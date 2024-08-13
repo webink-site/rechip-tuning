@@ -43,7 +43,7 @@
           </a>
           <a href="#" class="text-primary font-semibold flex gap-1 items-center hover:opacity-80" @click.prevent="regionModal = true">
             <img src="/public/icons/marker.svg" alt="маркер">
-            {{ uiStore.regions[uiStore.activeRegion].name }}
+            {{ uiStore.regions[getCityIndex].name }}
           </a>
           <transition
             name="fade-out"
@@ -71,7 +71,9 @@
 <script setup lang="ts">
 import { Bars3Icon } from '@heroicons/vue/24/outline/index.js'
 import { useUiStore } from '@/src/stores/ui'
+import { useCity } from '~/src/helpers/useCiity'
 
+const { getCityIndex } = useCity()
 const uiStore = useUiStore()
 const regionModal = ref(false)
 

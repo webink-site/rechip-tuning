@@ -8,7 +8,7 @@
         <div class="col-span-9 md:col-span-2">
           <p class="text-sm text-gray-400">
             Чип-тюнинг ателье <br>
-            в {{ uiStore.regions[uiStore.activeRegion].place }}
+            в {{ uiStore.regions[getCityIndex].place }}
           </p>
         </div>
         <div class="col-span-12 md:col-span-6 md:col-start-7">
@@ -72,6 +72,9 @@
 
 <script setup lang="ts">
 import { useUiStore } from '@/src/stores/ui'
+import { useCity } from '~/src/helpers/useCiity'
+
+const { getCityIndex } = useCity()
 
 const uiStore = useUiStore()
 const links = [

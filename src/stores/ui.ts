@@ -40,10 +40,6 @@ export const useUiStore = defineStore('ui', {
       if (data.value) {
         this.contacts = data.value
       }
-    },
-    initializeActiveRegionByHost (host: string) {
-      const index = this.regions.findIndex(i => host.includes(i.code))
-      this.activeRegion = index !== -1 ? index : 1
     }
   }
 })
