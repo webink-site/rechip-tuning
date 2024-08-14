@@ -17,7 +17,7 @@
               <img src="/icons/telgreen.svg" alt="телефон">
               {{ uiStore.contacts[getCityIndex]?.phone_number }}
             </a>
-            <nuxt-link to="/" class="text-dark font-semibold flex gap-4 items-center hover:opacity-50">
+            <nuxt-link to="/contacts" class="text-dark font-semibold flex gap-4 items-center hover:opacity-50">
               <div class="h-12 w-12 rounded bg-red-500 !bg-opacity-10 flex justify-center items-center">
                 <img src="/icons/compas.svg" alt="Компас" class="h-6">
               </div>

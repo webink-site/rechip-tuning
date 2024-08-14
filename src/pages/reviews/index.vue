@@ -16,13 +16,11 @@
             <div class="mt-12 mb-6">
               <ReviewsRating title="Авито" />
             </div>
-            <div class="md:columns-1 md:gap-6">
-              <ReviewsCard v-for="(item, i) in data.reviews" :key="i" :item="item" />
-            </div>
           </div>
-          <!-- <div class="col-span-12 text-center">
-            <UiButton text="Показать еще" class="w-full" blue />
-          </div> -->
+          <ReviewsCard v-for="(item, i) in reviews" :key="i" class="col-span-6" :item="item" />
+          <div class="col-span-12 text-center">
+            <UiButton :load="load" text="Показать еще" class="w-full" blue @click="showMore" />
+          </div>
         </div>
       </div>
     </section>
@@ -33,9 +31,28 @@
 </template>
 
 <script setup lang="ts">
-import type { ReviewsRes } from '@/src/types/ui'
+import type { ReviewsRes, ReviewItem } from '@/src/types/ui'
 
-const { data } = await useAsyncData<ReviewsRes>('reviews', () => $fetch('https://api.rechip-tuning.ru/wp-json/custom/v1/avito-reviews/'))
+const itemsPerPage = ref(20)
+const offset = ref(0)
+const reviews = ref<ReviewItem[]>([])
+const load = ref(false)
+
+const { data, refresh } = await useAsyncData<ReviewsRes>('reviews', () => $fetch(`https://api.rechip-tuning.ru/wp-json/custom/v1/avito-reviews?limit=${itemsPerPage.value}&offset=${offset.value}`))
+
+if (data.value) {
+  reviews.value = [...data.value.reviews]
+}
+
+async function showMore () {
+  offset.value += itemsPerPage.value
+  load.value = true
+  await refresh()
+  if (data.value) {
+    reviews.value = [...reviews.value, ...data.value.reviews]
+  }
+  load.value = false
+}
 
 // const reviews = ref([
 //   {
