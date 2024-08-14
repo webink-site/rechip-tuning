@@ -30,20 +30,22 @@
                   </p>
                 </div>
               </div>
-              <yandex-map
-                :settings="{
-                  location: LOCATION,
-                  showScaleInCopyrights: true,
-                }"
-                class="w-full h-full"
-              >
-                <yandex-map-default-scheme-layer />
-                <yandex-map-default-features-layer />
-                <yandex-map-default-marker
-                  :key="markersGeoJsonSource.title"
-                  :settings="markersGeoJsonSource"
-                />
-              </yandex-map>
+              <client-only>
+                <yandex-map
+                  :settings="{
+                    location: LOCATION,
+                    showScaleInCopyrights: true,
+                  }"
+                  class="w-full h-full"
+                >
+                  <yandex-map-default-scheme-layer />
+                  <yandex-map-default-features-layer />
+                  <yandex-map-default-marker
+                    :key="markersGeoJsonSource.title"
+                    :settings="markersGeoJsonSource"
+                  />
+                </yandex-map>
+              </client-only>
             </div>
           </div>
           <div class="col-span-12 md:col-span-6">

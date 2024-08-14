@@ -15,12 +15,7 @@
       <!-- <pre>{{ brands }}</pre> -->
       <div v-if="brands.length" class="grid grid-cols-6 gap-6 mt-8">
         <div v-for="(item, index) in brands" v-show="constrolVis(item)" :key="index" class="col-span-3 md:col-span-1">
-          <nuxt-link :to="`/services/${$route.params.serv}/${item.id.toLocaleLowerCase()}`">
-            <div class="h-full bg-gray-3 hover:bg-[#DADADA] transition-all rounded-lg p-2.5 text-center select-none">
-              <img :src="`https://api.rechip-tuning.ru/wp-content/themes/rechip-tuning/assets/logos/${item.id}.png`" :alt="item.name" class="h-20 mx-auto">
-              <p class="text-dark font-bold">{{ item.name }}</p>
-            </div>
-          </nuxt-link>
+          <UiCardsBrandCard :item="item" />
         </div>
         <div class="col-span-6 text-center">
           <UiButton class="w-full" blue :text="!showAll ? 'Посмотреть все марки' : 'Скрыть'" @click="showAll = !showAll" />
