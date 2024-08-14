@@ -1,13 +1,12 @@
 <template>
   <div class="bg-white rounded-xl px-8 py-6 break-inside-avoid mb-6">
     <div class="flex gap-4 items-center">
-      <img
-        src="https://img.freepik.com/free-photo/young-and-beautiful-woman-in-pink-warm-sweater-natural-look-smiling-portrait-on-isolated-long-hair_285396-896.jpg"
-        class="h-10 w-10 rounded-lg object-cover"
-      >
+      <div class="h-10 w-10 bg-neutral-300 rounded-lg text-xl text-white font-semibold justify-center items-center flex">
+        {{ item.sender.name[0] }}
+      </div>
       <div>
-        <p class="text-dark font-semibold leading-4">{{ item.name }}</p>
-        <p class="text-gray-400 text-sm">{{ item.date }}</p>
+        <p class="text-dark font-semibold leading-4">{{ item.sender.name }}</p>
+        <p class="text-gray-400 text-sm">{{ formatDate(item.createdAt) }}</p>
       </div>
     </div>
     <div class="my-4 flex">
@@ -19,13 +18,11 @@
 
 <script setup lang="ts">
 import { StarIcon } from '@heroicons/vue/24/solid/index.js'
+import { formatDate } from '@/src/helpers/date'
+import type { ReviewItem } from '~/src/types/ui'
 
 interface Props {
-  item: {
-    name: string
-    date: string
-    text: string
-  }
+  item: ReviewItem
 }
 const { item } = defineProps<Props>()
 </script>

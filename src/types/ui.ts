@@ -33,3 +33,25 @@ export interface Contact {
     footer_tiny_text: string | null
   }
 }
+
+export interface ReviewItem{
+  id: number
+  score: number
+  stage: string
+  text: string
+  item: {
+      id: number
+      title: string
+  },
+  usedInScore: boolean
+  sender: {
+      name: string
+  },
+  canAnswer: boolean
+  extraParams: any
+  createdAt: number
+}
+export interface ReviewsRes{
+  total: number
+  reviews: ReviewItem[]
+}

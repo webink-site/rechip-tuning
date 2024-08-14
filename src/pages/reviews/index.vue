@@ -1,20 +1,24 @@
 <template>
   <div>
     <section class="py-12 bg-gray-2">
-      <div class="container mx-auto px-4 md:px-0">
+      <div v-if="data" class="container mx-auto px-4 md:px-0">
         <div class="grid grid-cols-12 gap-6">
           <div class="col-span-12 text-center">
             <h2 class="text-dark text-4xl font-bold mb-2">Отзывы о нас</h2>
           </div>
-          <ReviewsRating />
+          <ReviewsRating title="Яндекс" />
           <div class="col-span-6 col-start-4">
             <div style="width:100%;height:1200px;overflow:hidden;position:relative;">
               <iframe style="width:100%;height:100%;border:1px solid #e6e6e6;border-radius:8px;box-sizing:border-box" src="https://yandex.ru/maps-reviews-widget/204587782481?comments" />
               <a href="https://yandex.ru/maps/org/chip_tyuning/204587782481/" target="_blank" style="box-sizing:border-box;text-decoration:none;color:#b3b3b3;font-size:10px;font-family:YS Text,sans-serif;padding:0 20px;position:absolute;bottom:8px;width:100%;text-align:center;left:0">reChip-tuning на карте Москвы — Яндекс.Карты</a>
             </div>
-            <!-- <div class="md:columns-2 md:gap-6">
-              <ReviewsCard v-for="(item, i) in reviews" :key="i" :item="item" />
-            </div> -->
+
+            <div class="mt-12 mb-6">
+              <ReviewsRating title="Авито" />
+            </div>
+            <div class="md:columns-1 md:gap-6">
+              <ReviewsCard v-for="(item, i) in data.reviews" :key="i" :item="item" />
+            </div>
           </div>
           <!-- <div class="col-span-12 text-center">
             <UiButton text="Показать еще" class="w-full" blue />
@@ -29,6 +33,9 @@
 </template>
 
 <script setup lang="ts">
+import type { ReviewsRes } from '@/src/types/ui'
+
+const { data } = await useAsyncData<ReviewsRes>('reviews', () => $fetch('https://api.rechip-tuning.ru/wp-json/custom/v1/avito-reviews/'))
 
 // const reviews = ref([
 //   {

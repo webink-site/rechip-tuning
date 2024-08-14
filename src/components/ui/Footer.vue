@@ -1,5 +1,5 @@
 <template>
-  <footer class="py-12  bg-gray-2">
+  <footer v-if="uiStore.contacts.length" class="py-12  bg-gray-2">
     <div class="container mx-auto px-4 md:px-0">
       <div class="grid gap-6 grid-cols-12 items-center border-b pb-8">
         <div class="col-span-3 md:col-span-1 ">
@@ -13,17 +13,17 @@
         </div>
         <div class="col-span-12 md:col-span-6 md:col-start-7">
           <div class="flex items-center md:justify-end gap-6 flex-wrap">
-            <a :href="`tel:${uiStore.getCurrentRegion?.phone_number}`" class="text-dark font-semibold flex gap-1 items-center hover:opacity-50">
+            <a :href="`tel:${uiStore.contacts[getCityIndex]?.phone_number}`" class="text-dark font-semibold flex gap-1 items-center hover:opacity-50">
               <img src="/icons/telgreen.svg" alt="телефон">
-              {{ uiStore.getCurrentRegion?.phone_number }}
+              {{ uiStore.contacts[getCityIndex]?.phone_number }}
             </a>
             <nuxt-link to="/" class="text-dark font-semibold flex gap-4 items-center hover:opacity-50">
               <div class="h-12 w-12 rounded bg-red-500 !bg-opacity-10 flex justify-center items-center">
                 <img src="/icons/compas.svg" alt="Компас" class="h-6">
               </div>
               <p>
-                {{ uiStore.getCurrentRegion?.region_name }} <br>
-                <span class="text-gray-400">{{ uiStore.getCurrentRegion?.address }}</span>
+                {{ uiStore.contacts[getCityIndex].region_name }} <br>
+                <span class="text-gray-400">{{ uiStore.contacts[getCityIndex]?.address }}</span>
               </p>
             </nuxt-link>
           </div>
@@ -42,7 +42,7 @@
       <div class="grid gap-6 grid-cols-12">
         <div class="col-span-12 md:col-span-9">
           <p class="text-xs text-gray-400 mb-2">
-            {{ uiStore.getCurrentRegion?.legal_info.footer_tiny_text }}
+            {{ uiStore.contacts[getCityIndex]?.legal_info.footer_tiny_text }}
           </p>
           <div class="flex gap-6">
             <nuxt-link to="/" class="text-xs text-gray-400 underline hover:no-underline">Пользовательское соглашение</nuxt-link>
