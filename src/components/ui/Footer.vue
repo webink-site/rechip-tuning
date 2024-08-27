@@ -22,7 +22,7 @@
                 <img src="/icons/compas.svg" alt="Компас" class="h-6">
               </div>
               <p>
-                {{ uiStore.contacts[getCityIndex].region_name }} <br>
+                {{ uiStore.contacts[getCityIndex]?.region_name }} <br>
                 <span class="text-gray-400">{{ uiStore.contacts[getCityIndex]?.address }}</span>
               </p>
             </nuxt-link>

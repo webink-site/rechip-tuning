@@ -1,21 +1,24 @@
 <template>
   <section class="py-12">
     <div class="container mx-auto px-4 md:px-0">
+      <!-- <pre>{{ data }}</pre> -->
       <div class="grid grid-cols-12 gap-6">
         <div class="col-span-12">
           <h2 class="text-dark text-4xl font-bold mb-2">Наши работы</h2>
         </div>
 
-        <vue-easy-lightbox
-          :visible="visibleRef"
-          :imgs="getImages"
-          :index="indexRef"
-          :move-disabled="true"
-          @hide="onHide"
-        />
+        <client-only>
+          <vue-easy-lightbox
+            :visible="visibleRef"
+            :imgs="getImages"
+            :index="indexRef"
+            :move-disabled="true"
+            @hide="onHide"
+          />
+        </client-only>
 
         <div
-          v-for="(item, index) in projects.slice(0, homePage ? 3 : projects.length + 1)"
+          v-for="(item, index) in data?.posts"
           :key="index"
           class="col-span-12 md:col-span-4"
           @click="() => showImg(index)"
@@ -23,13 +26,13 @@
           <div class="relative">
             <div class="absolute top-3 left-3 rounded bg-green-500 text-white text-sm font-semibold p-1 flex items-center gap-1">
               <BoltIcon class="h-4" />
-              Прирост мощности 10%
+              Прирост мощности {{ item.fields.tuning_profit }}
             </div>
 
-            <img :src="item.img" :alt="item.name" class="rounded-lg mb-2 h-[30rem] object-cover">
-            <p class="text-dark text-lg font-bold">{{ item.name }}</p>
-            <p class="text-dark">{{ item.sub }}</p>
-            <p class="text-gray-400">{{ item.hp }}</p>
+            <img :src="item.fields.gallery[0]" :alt="item.title" class="rounded-lg mb-2 h-[30rem] object-cover">
+            <p class="text-dark text-lg font-bold">{{ item.title }}</p>
+            <p class="text-dark">{{ item.content }}</p>
+            <p class="text-gray-400">{{ item.fields.power_points }}</p>
           </div>
         </div>
         <div v-if="homePage" class="col-span-12 text-center mx-auto">
@@ -51,6 +54,15 @@ import proj3 from '@/public/img/proj3.webp'
 interface Props{
   homePage?: boolean
 }
+
+type ResType = {
+  posts: any[]
+  count: string
+  page: number
+  size: number
+}
+
+const { data } = await useFetch<ResType>('https://api.rechip-tuning.ru/wp-json/custom/v1/page?slug=gallery')
 
 const { homePage } = defineProps<Props>()
 
