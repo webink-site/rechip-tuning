@@ -29,7 +29,11 @@ a, button {
   padding: 12px;
   background-color: #fff;
 }
-
+.nuxt-descr{
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--dark);
+}
 .nuxt-descr h2{
   font-size: 28px;
   line-height: 2rem;

@@ -7,10 +7,10 @@
         </div>
         <div v-for="(item, index) in prices" :key="index" class="col-span-12 md:col-span-4">
           <div class="h-full bg-gray-2 rounded-lg p-6">
-            <img :src="types[item.type]" class="mb-8 h-8" alt="">
-            <p class="font-bold text-dark text-lg mb-2">{{ item.title }}</p>
+            <img :src="item.icon" class="mb-8 h-8" alt="">
+            <p class="font-bold text-dark text-lg mb-2">{{ item.min_price }}</p>
             <p class="text-gray-400 text-sm">
-              {{ item.descr }}
+              {{ item.description }}
             </p>
           </div>
         </div>
@@ -20,23 +20,23 @@
 </template>
 
 <script setup lang="ts">
-import petrol from '@/public/icons/petrol.svg'
-import turbo from '@/public/icons/turbo.svg'
-import diesel from '@/public/icons/diesel.svg'
+// import petrol from '@/public/icons/petrol.svg'
+// import turbo from '@/public/icons/turbo.svg'
+// import diesel from '@/public/icons/diesel.svg'
 
 interface Props{
   prices: {
-    title: string
-    descr: string
-    type: string
+    min_price: string
+    description: string
+    icon: string
   }[]
 }
 
-const types = {
-  petrol,
-  turbo,
-  diesel
-}
+// const types = {
+//   petrol,
+//   turbo,
+//   diesel
+// }
 
 const { prices } = defineProps<Props>()
 

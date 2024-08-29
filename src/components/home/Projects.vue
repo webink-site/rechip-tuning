@@ -10,8 +10,7 @@
         <client-only>
           <vue-easy-lightbox
             :visible="visibleRef"
-            :imgs="getImages"
-            :index="indexRef"
+            :imgs="data?.posts[indexRef].fields.gallery"
             :move-disabled="true"
             @hide="onHide"
           />
@@ -23,13 +22,13 @@
           class="col-span-12 md:col-span-4"
           @click="() => showImg(index)"
         >
-          <div class="relative">
+          <div class="relative cursor-pointer group">
             <div class="absolute top-3 left-3 rounded bg-green-500 text-white text-sm font-semibold p-1 flex items-center gap-1">
               <BoltIcon class="h-4" />
               Прирост мощности {{ item.fields.tuning_profit }}
             </div>
 
-            <img :src="item.fields.gallery[0]" :alt="item.title" class="rounded-lg mb-2 h-[30rem] object-cover">
+            <img :src="item.fields.gallery[0]" :alt="item.title" class="rounded-lg mb-2 h-[30rem] object-cover group-hover:opacity-70 transition-all">
             <p class="text-dark text-lg font-bold">{{ item.title }}</p>
             <p class="text-dark">{{ item.content }}</p>
             <p class="text-gray-400">{{ item.fields.power_points }}</p>
@@ -47,9 +46,6 @@
 
 <script setup lang="ts">
 import { BoltIcon } from '@heroicons/vue/24/outline/index.js'
-import proj1 from '@/public/img/proj1.webp'
-import proj2 from '@/public/img/proj2.webp'
-import proj3 from '@/public/img/proj3.webp'
 
 interface Props{
   homePage?: boolean
@@ -65,49 +61,6 @@ type ResType = {
 const { data } = await useFetch<ResType>('https://api.rechip-tuning.ru/wp-json/custom/v1/page?slug=gallery')
 
 const { homePage } = defineProps<Props>()
-
-const projects = [
-  {
-    name: 'Mercedes G-classse AMG',
-    sub: 'Чип-тюнинг Stage 1',
-    hp: '490 л.с',
-    img: proj1
-  },
-  {
-    name: 'Mercedes G-classse AMG',
-    sub: 'Чип-тюнинг Stage 1',
-    hp: '490 л.с',
-    img: proj2
-  },
-  {
-    name: 'Mercedes G-classse AMG',
-    sub: 'Чип-тюнинг Stage 1',
-    hp: '490 л.с',
-    img: proj3
-  },
-  {
-    name: 'Mercedes G-classse AMG',
-    sub: 'Чип-тюнинг Stage 1',
-    hp: '490 л.с',
-    img: proj1
-  },
-  {
-    name: 'Mercedes G-classse AMG',
-    sub: 'Чип-тюнинг Stage 1',
-    hp: '490 л.с',
-    img: proj2
-  },
-  {
-    name: 'Mercedes G-classse AMG',
-    sub: 'Чип-тюнинг Stage 1',
-    hp: '490 л.с',
-    img: proj3
-  }
-]
-
-const getImages = computed(() => {
-  return projects.map(i => i.img)
-})
 
 const visibleRef = ref(false)
 const indexRef = ref(0)
