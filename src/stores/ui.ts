@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { Contact } from '@/src/types/ui'
+import type { Contact, Homepage } from '@/src/types/ui'
 // import { useRuntimeConfig } from '#imports'
 
 // const host = window.location.hostname
@@ -10,6 +10,7 @@ interface GoodsState {
   regions: {name: string, place: string, code: string, web: string}[]
   activeRegion: number
   contacts: Contact[]
+  homepage: null | Homepage
 }
 
 export const useUiStore = defineStore('ui', {
@@ -24,7 +25,8 @@ export const useUiStore = defineStore('ui', {
     ],
     activeRegion: 0,
     // activeRegion: Number(useRuntimeConfig().public.activeCity),
-    contacts: []
+    contacts: [],
+    homepage: null
   }),
   getters: {
     getCurrentRegion (state) {
@@ -39,6 +41,12 @@ export const useUiStore = defineStore('ui', {
       const { data } = await useFetch<Contact[]>('https://api.rechip-tuning.ru/wp-json/custom/v1/page?slug=contacts')
       if (data.value) {
         this.contacts = data.value
+      }
+    },
+    async LOAD_HOMEPAGE () {
+      const { data } = await useFetch<Homepage>('https://api.rechip-tuning.ru/wp-json/custom/v1/page?slug=main')
+      if (data.value) {
+        this.homepage = data.value
       }
     }
   }

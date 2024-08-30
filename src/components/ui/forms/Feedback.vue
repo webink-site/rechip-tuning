@@ -5,8 +5,8 @@
         <ClientOnly>
           <form class="grid gap-4 grid-cols-12" @submit.prevent="submitForm">
             <div class="col-span-12">
-              <h3 class="text-white text-3xl font-bold mb-1.5">Хотите так же?</h3>
-              <p class="text-white">Оставляйте заявку на чип тюнинг</p>
+              <h3 class="text-white text-3xl font-bold mb-1.5">{{ uiStore.homepage?.form_text.header }}</h3>
+              <p class="text-white">{{ uiStore.homepage?.form_text.subheader }}</p>
             </div>
             <div class="col-span-12 md:col-span-3">
               <label class="text-white font-semibold">ФИО</label>
@@ -32,7 +32,9 @@
               <UiButton :load="load" type="submit" text="Заказать звонок" class="w-full" />
             </div>
             <div class="col-span-12 md:col-span-3">
-              <p class="text-[13px] leading-5 text-white opacity-50">Нажимая кнопку «Оставить заявку», я подтверждаю наличие гражданства РФ и соглашаюсь на обработку личных данных</p>
+              <p class="text-[13px] leading-5 text-white opacity-50">
+                {{ uiStore.homepage?.form_text.near_button_text }}
+              </p>
             </div>
           </form>
         </ClientOnly>
@@ -45,6 +47,9 @@
 import { useVuelidate } from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
 import { toast } from 'vue3-toastify'
+import { useUiStore } from '@/src/stores/ui'
+
+const uiStore = useUiStore()
 
 const data = reactive({
   name: '',

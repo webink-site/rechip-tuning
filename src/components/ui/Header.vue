@@ -78,6 +78,7 @@ const uiStore = useUiStore()
 const regionModal = ref(false)
 
 useAsyncData('contacts', () => uiStore.LOAD_CONTACTS())
+useAsyncData('homepage', () => uiStore.LOAD_HOMEPAGE())
 
 interface Props{
   homepage?: boolean

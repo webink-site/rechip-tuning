@@ -34,6 +34,19 @@ export interface Contact {
   }
 }
 
+export interface Homepage {
+  advantages: {
+    icon: string
+    header: string
+    description: string
+  }[]
+  form_text: {
+    header: string
+    subheader: string
+    near_button_text: string
+  }
+}
+
 export interface ReviewItem{
   id: number
   score: number
