@@ -40,6 +40,9 @@ a, button {
   font-weight: 700;
   margin-bottom: 32px;
 }
+.nuxt-descr.coop h2{
+  color: #fff;
+}
 .nuxt-descr h3{
   font-size:1.125rem;
   line-height: 1.75rem;
