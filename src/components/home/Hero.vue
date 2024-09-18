@@ -1,37 +1,41 @@
 <template>
-  <section class="md:h-[900px] py-20 bg-cover bg-center bg-no-repeat flex items-end custom-transition" :style="`background-image: url(${sldes[active]});`">
+  <section
+    class="pb-20 md:pt-20 bg-cover bg-center bg-no-repeat flex items-end custom-transition rounded-b-2xl mb-20"
+    :style="`background-image: url(${sldes[active]});`"
+  >
     <div class="container mx-auto px-4 md:px-0">
-      <div class="grid gap-6 grid-cols-12">
-        <div class="col-span-12 md:mb-16">
-          <h1 class="text-center md:text-left text-white font-bold text-3xl md:text-5xl leading-tight">
-            Чип-тюнинг <br>
-            Stage 1/Stage 2 <br>
-            в  {{ uiStore.regions[getCityIndex].place }}
+      <div class="grid gap-6 grid-cols-12 translate-y-28 md:translate-y-32">
+        <div class="col-span-12 text-center">
+          <h1 class="text-white font-bold text-3xl md:text-4xl leading-tight text-center mb-2">
+            Чип-тюнинг ателье ReChip
           </h1>
+          <p class="text-white md:text-lg">
+            Прошивка всех марок авто от 2000 г.в. с гарантией в {{ uiStore.regions[getCityIndex].place }}
+          </p>
         </div>
-        <div class="col-span-12 md:col-span-4 text-center md:text-left">
+        <!-- <div class="col-span-12 md:col-span-4 text-center md:text-left">
           <div class="md:space-y-6">
             <h2 class="text-white text-2xl md:text-4xl font-bold hidden sm:block">Чип-тюнинг <br> ателье ReChip</h2>
-            <p class="text-white md:text-lg hidden sm:block">Прошивка всех марок авто <br> от 2000 г.в. с гарантией</p>
+            <p class="text-white md:text-lg hidden sm:block">Прошивка всех марок авто <br> от 2000 г.в. с гарантией в {{ uiStore.regions[getCityIndex].place }}</p>
             <UiButton text="Связаться с нами" @click="submitModal = true" />
           </div>
-        </div>
-        <div class="col-span-12 md:col-span-8">
-          <UiFormsCarSearch />
+        </div> -->
+        <div class="col-span-12">
+          <UiFormsCarSearch full />
         </div>
       </div>
     </div>
   </section>
-  <transition
+  <!-- <transition
     name="fade-out"
     mode="out-in"
   >
     <UiModalsSubmitForm v-if="submitModal" @close="submitModal = false" @close-success="closeSuccess" />
-  </transition>
+  </transition> -->
 </template>
 
 <script setup lang="ts">
-import { toast } from 'vue3-toastify'
+// import { toast } from 'vue3-toastify'
 import hero from '@/public/img/hero.webp'
 import hero2 from '@/public/img/hero2.webp'
 import hero3 from '@/public/img/hero3.webp'
@@ -55,12 +59,12 @@ onMounted(() => {
   }, 10000)
 })
 
-function closeSuccess () {
-  submitModal.value = false
-  toast('Заявка отправлена', {
-    type: 'success'
-  })
-}
+// function closeSuccess () {
+//   submitModal.value = false
+//   toast('Заявка отправлена', {
+//     type: 'success'
+//   })
+// }
 
 onUnmounted(() => {
   clearInterval(interval.value)
@@ -75,7 +79,7 @@ onUnmounted(() => {
 //   // return uiStore.regions[index].place ?? ''
 //   return 'sdfkjhsdakfk'
 // })
-const submitModal = ref(false)
+// const submitModal = ref(false)
 </script>
 
 <style scoped>

@@ -1,6 +1,6 @@
 <template>
   <ClientOnly>
-    <div class="relative bg-white rounded-xl py-6 px-8">
+    <div class="relative bg-white rounded-xl py-6 px-8 border-2 border-gray-3">
       <span
         v-if="Object.values(search).some(value => value)"
         class="absolute top-2 right-4 text-primary cursor-pointer text-sm"

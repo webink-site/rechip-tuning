@@ -14,7 +14,7 @@
               :class="{'md:!h-[30rem]' : item.high}"
             >
               <div>
-                <h3 class="text-white text-3xl mb-4 font-bold">{{ item.name }}</h3>
+                <h3 class="text-white text-2xl md:text-3xl mb-4 font-bold">{{ item.name }}</h3>
                 <p class="text-white md:w-1/2">{{ item.sub }}</p>
               </div>
               <UiButton white text="Узнать подробнее" />

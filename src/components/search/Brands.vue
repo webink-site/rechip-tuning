@@ -1,5 +1,5 @@
 <template>
-  <section class="py-20" :class="{'!py-6': gray}">
+  <section class="py-20" :class="{'!py-6': props.gray}">
     <div class="container mx-auto px-4 md:px-0">
       <div class="grid gap-6 grid-cols-12">
         <div class="col-span-12 md:col-span-9">

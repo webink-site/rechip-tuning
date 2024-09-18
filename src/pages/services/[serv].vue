@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ServHero :title="singleServ.post_title" :image="singleServ.image_wide" :description="singleServ.description" />
+    <ServHero :title="singleServ?.post_title" :image="singleServ.image_wide" :description="singleServ.description" />
     <section class="bg-gray-2 pt-10 md:pt-20">
       <div class="container mx-auto px-4 md:px-0">
         <UiFormsCarSearch full />
@@ -13,7 +13,7 @@
           <div class="grid gap-6 grid-cols-12 mb-20">
             <div class="col-span-12 md:col-span-9">
               <div class="nuxt-descr">
-                <h2>{{ singleServ.post_title }}</h2>
+                <h2>{{ singleServ?.post_title }}</h2>
               </div>
               <!-- <ContentDoc class="nuxt-descr mb-10" /> -->
               <div class="nuxt-descr mb-10" v-html="singleServ.page_content" />
