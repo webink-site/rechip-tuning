@@ -1,7 +1,7 @@
 <template>
   <div>
     <HomeHero />
-    <SearchBrands gray />
+    <SearchBrands />
     <HomeServ />
     <HomeProjects home-page />
     <HomeAdvant />
