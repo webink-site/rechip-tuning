@@ -9,6 +9,7 @@ export interface Model {
   'year-start': number
   'year-stop': number
   'body-type': string
+  configurations: number
 }
 export interface Brand {
   id: string

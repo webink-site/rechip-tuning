@@ -21,7 +21,6 @@
               <label class="text-white font-semibold">Телефон для связи</label>
               <InputText
                 v-model="data.phone"
-                v-mask="'+7 (###) ###-##-##'"
                 placeholder="+7"
                 :class="{ error: v$.phone.$error }"
                 class="w-full mt-3 py-2.5 px-3 rounded-md bg-gray-2 border-none mb-2"

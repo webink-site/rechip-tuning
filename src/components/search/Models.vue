@@ -9,7 +9,7 @@
       </div>
       <div v-if="models.length" class="grid-cols-6 gap-6 grid mt-8">
         <div v-for="(item, index) in models" :key="index" class="col-span-3 md:col-span-1">
-          <nuxt-link :to="`/services/${$route.params.servName}/${$route.params.brand.toString().toLocaleLowerCase()}/${item.id.toLocaleLowerCase()}`">
+          <nuxt-link :to="`/services/${$route.params.serv}/${$route.params.brand.toString().toLocaleLowerCase()}/${item.id.toLocaleLowerCase()}`">
             <div class="h-full bg-white hover:bg-[#DADADA] transition-all rounded-lg p-2.5 text-center select-none">
               <p class="text-dark font-bold">{{ item.name }}</p>
             </div>
