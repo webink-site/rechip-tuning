@@ -11,9 +11,6 @@
 const route = useRoute()
 const { data } = await useAsyncData('mods', () => $fetch(`http://api.rechip-tuning.ru/wp-json/custom/v1/base/test?mark_id=${route.params.brand}&model_id=${route.params.model}&generation_id=${route.params.gen}`))
 
-// const mods = computed(() => {
-//   return data.value.find((i: any) => i.id === route.params.body).modifications
-// })
 </script>
 
 <style lang="scss" scoped>
