@@ -61,6 +61,7 @@ useSeoMeta({
   // @ts-ignore
   ogDescription: () => `Услуги чип тюнинга автомобиля ${title.value} ${data.value?.modification.specifications['volume-litres']} ${data.value?.modification.specifications['horse-power']} л.с в ${uiStore.regions[getCityIndex.value].place}. Прострелы выхлопной системы на сбросе газа. Чип тюнинг коробки DSG. Наша компания ReChip предоставляет гарантию 1 год и 14 - дневный тест-драйв. Оплата после проверки.`,
   ogType: 'website',
+  // @ts-ignore
   ogImage: () => `https://api.rechip-tuning.ru/wp-content/themes/rechip-tuning/assets/photos/${data.value?.modification.path['configuration-id']}.jpg`
 })
 
