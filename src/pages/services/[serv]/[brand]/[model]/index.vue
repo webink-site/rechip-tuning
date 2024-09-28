@@ -1,7 +1,7 @@
 <template>
   <section class="bg-gray-2 pt-10 md:pt-20">
     <div class="container mx-auto">
-      <UiFormsCarSearch full />
+      <UiFormsCarSearch />
     </div>
     <SearchGenerations v-if="data" :gens="data" :title="title" />
   </section>
@@ -10,6 +10,13 @@
 <script setup lang="ts">
 import type { Model } from '@/src/types/car'
 import { useCarStore } from '@/src/stores/car'
+import { useServStore } from '~/src/stores/serv'
+import { useUiStore } from '@/src/stores/ui'
+import { useCity } from '~/src/helpers/useCiity'
+
+const { getCityIndex } = useCity()
+const uiStore = useUiStore()
+const servStore = useServStore()
 const carStore = useCarStore()
 
 const route = useRoute()
@@ -29,10 +36,10 @@ const title = computed(() => {
 })
 
 useSeoMeta({
-  title: () => `Чип-тюнинг Stage 1/Stage 2 ${title.value}`,
-  ogTitle: () => `Чип-тюнинг Stage 1/Stage 2 ${title.value}`,
-  description: 'Чип-тюнинг ателье ReChip Прошивка всех марок авто от 2000 г.в. с гарантией',
-  ogDescription: 'Чип-тюнинг ателье ReChip Прошивка всех марок авто от 2000 г.в. с гарантией',
+  title: () => `${servStore.services.find((i: any) => i.slug === route.params.serv)?.name} ${title.value} - прошивка Stage 1/Stage 2 в ${uiStore.regions[getCityIndex.value].place}`,
+  ogTitle: () => `${servStore.services.find((i: any) => i.slug === route.params.serv)?.name} ${title.value} - прошивка Stage 1/Stage 2 в ${uiStore.regions[getCityIndex.value].place}`,
+  description: `Услуги чип тюнинга автомобиля ${title.value} в ${uiStore.regions[getCityIndex.value].place}. Прострелы выхлопной системы на сбросе газа. Чип тюнинг коробки DSG. Наша компания ReChip предоставляет гарантию 1 год и 14 - дневный тест-драйв. Оплата после проверки.`,
+  ogDescription: `Услуги чип тюнинга автомобиля ${title.value} в ${uiStore.regions[getCityIndex.value].place}. Прострелы выхлопной системы на сбросе газа. Чип тюнинг коробки DSG. Наша компания ReChip предоставляет гарантию 1 год и 14 - дневный тест-драйв. Оплата после проверки.`,
   ogType: 'website'
 })
 

@@ -1,7 +1,7 @@
 <template>
   <section class="bg-gray-2 pt-10 md:pt-20">
     <div class="container mx-auto">
-      <UiFormsCarSearch full />
+      <UiFormsCarSearch />
     </div>
     <SearchMods :mods="mods" />
   </section>

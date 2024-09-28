@@ -47,7 +47,7 @@ export const useCarStore = defineStore('car', {
     },
     getBodies (state) {
       return Object.entries(state.bodies).flatMap(([bodyType, cars]) =>
-        cars.map(car => ({ bodyType, ...car }))
+        (cars as Array<{ [key: string]: any }>).map(car => ({ bodyType, ...car, search: `${car.name} (${bodyType})` }))
       )
     }
   },

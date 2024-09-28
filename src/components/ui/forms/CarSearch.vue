@@ -9,8 +9,8 @@
         <XMarkIcon class="h-4 inline" />
         Очистить
       </span>
-      <div class="grid grid-cols-12 md:gap-4" :class="{'md:!grid-cols-7': props.full}">
-        <div class="col-span-12 md:col-span-3" :class="{'md:!col-span-1': props.full}">
+      <div class="grid grid-cols-12 md:grid-cols-6 md:gap-4">
+        <div class="col-span-1" :class="{'md:!col-span-1': props.full}">
           <label class="text-dark font-semibold">Услуга</label>
           <Dropdown
             v-model="search.serv"
@@ -22,21 +22,21 @@
             @change="carStore.SET_SERV(search.serv)"
           />
         </div>
-        <div class="col-span-12 md:col-span-3" :class="{'md:!col-span-1': props.full}">
+        <div class="col-span-1">
           <label class="text-dark font-semibold">Марка</label>
           <Dropdown
             v-model="search.brand"
             :options="carStore.brands"
             option-value="id"
             option-label="name"
-            :filter="carStore.models.length ? true : false"
+            :filter="true"
             empty-message="Нет доступных опций"
             class="w-full mt-3 py-0.5 rounded-md bg-gray-2 border-none mb-2"
             :class="{ 'outline outline-2 outline-red-500': v$.brand.$error}"
             @change="carStore.LOAD_MODELS(search.brand)"
           />
         </div>
-        <div class="col-span-12 md:col-span-3" :class="{'md:!col-span-1': props.full}">
+        <div class="col-span-1">
           <label class="text-dark font-semibold">Модель</label>
           <Dropdown
             v-model="search.model"
@@ -50,7 +50,7 @@
             @change="carStore.LOAD_GENS(search.model)"
           />
         </div>
-        <div class="col-span-12 md:col-span-3" :class="{'md:!col-span-1': props.full}">
+        <div class="col-span-1">
           <label class="text-dark font-semibold">Поколение</label>
           <Dropdown
             v-model="search.gen"
@@ -70,34 +70,20 @@
             </template> -->
           </Dropdown>
         </div>
-        <div class="col-span-12 md:col-span-4" :class="{'md:!col-span-1': props.full}">
-          <label class="text-dark font-semibold">Кузов</label>
-          <pre>{{ carStore.getBodies }}</pre>
-          <Dropdown
-            v-model="search.body"
-            :options="carStore.bodies"
-            option-value="id"
-            option-label="body-type"
-            empty-message="Нет доступных опций"
-            class="w-full mt-3 py-0.5 rounded-md bg-gray-2 border-none mb-2"
-            :class="{ 'outline outline-2 outline-red-500': v$.body.$error}"
-            @change="carStore.LOAD_MODS(search.body)"
-          />
-        </div>
-        <div class="col-span-12 md:col-span-4" :class="{'md:!col-span-1': props.full}">
+        <div class="col-span-1">
           <label class="text-dark font-semibold">Модификация</label>
           <Dropdown
             v-model="search.mod"
-            :options="carStore.mods"
-            option-value="complectation-id"
-            option-label="title"
+            :options="carStore.getBodies"
+            option-value="id"
+            option-label="search"
             empty-message="Нет доступных опций"
             class="w-full mt-3 py-0.5 rounded-md bg-gray-2 border-none mb-2"
             :class="{ 'outline outline-2 outline-red-500': v$.mod.$error}"
             @change="carStore.SET_MOD(search.mod)"
           />
         </div>
-        <div class="col-span-12 md:col-span-4" :class="{'md:!col-span-1': props.full}">
+        <div class="col-span-1">
           <UiButton text="Искать" class="w-full mt-7" @click="searchCar" />
         </div>
       </div>
@@ -121,7 +107,6 @@ interface SearchField {
   brand: string | null,
   model: string | null
   gen: string | null
-  body: string | null
   mod: string | null
 }
 
@@ -130,7 +115,6 @@ const search = reactive<SearchField>({
   brand: '',
   model: '',
   gen: '',
-  body: '',
   mod: ''
 })
 
@@ -141,7 +125,6 @@ const rules = computed(() => ({
   brand: { required },
   model: { required },
   gen: { required },
-  body: { required },
   mod: { required }
 }))
 
@@ -157,7 +140,8 @@ const props = defineProps({
 const searchCar = () => {
   v$.value.$validate()
   if (!v$.value.$error) {
-    router.replace(`/services/${search.serv}/${search.brand}/${search.model}/${search.gen?.toString()}/${search.body?.toString()}/${search.mod?.toString()}`)
+    const newPath = `/services/${search.serv}/${search.brand}/${search.model}/${search.gen?.toString()}/${search.mod?.toString()}`.toLocaleLowerCase()
+    router.replace(newPath)
   }
 }
 

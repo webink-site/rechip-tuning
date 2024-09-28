@@ -155,7 +155,7 @@ const priceTotal = computed(() => {
     return (priceNum + addTotal).toLocaleString()
   } else {
     const currentServId = servStore.services.find(i => i.slug === route.params.serv)?.id
-    const priceInServ = complectation.services.main_services.find((i: any) => i.service === currentServId)?.price
+    const priceInServ = complectation.services.main_services.find((i: any) => i.service === currentServId)?.price.replace('₽', '')
     return (Number(priceInServ.replaceAll(' ', '')) + addTotal).toLocaleString()
   }
 })

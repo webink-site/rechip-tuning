@@ -21,7 +21,7 @@
           </div>
         </div> -->
         <div class="col-span-12">
-          <UiFormsCarSearch full />
+          <UiFormsCarSearch />
         </div>
       </div>
     </div>
