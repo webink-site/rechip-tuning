@@ -8,7 +8,6 @@
         <SearchComplectationNew :complectation="data" :title="title" :bodytype="bodytype" />
       </div>
     </section>
-    <pre>{{ data }}</pre>
     <div class="bg-white py-16">
       <!-- <SearchMods v-if="mods" :mods="mods" /> -->
       <UiCalcGuide />
@@ -53,9 +52,13 @@ const bodytype = computed(() => {
 })
 
 useSeoMeta({
+  // @ts-ignore
   title: () => `Чип тюнинг ${title.value} ${data.value?.modification.specifications['volume-litres']} ${data.value?.modification.specifications['horse-power']} л.с прошивка Stage 1/Stage 2 в ${uiStore.regions[getCityIndex.value].place}`,
+  // @ts-ignore
   ogTitle: () => `Чип тюнинг ${title.value} ${data.value?.modification.specifications['volume-litres']} ${data.value?.modification.specifications['horse-power']} л.с прошивка Stage 1/Stage 2 в ${uiStore.regions[getCityIndex.value].place}`,
+  // @ts-ignore
   description: () => `Услуги чип тюнинга автомобиля ${title.value} ${data.value?.modification.specifications['volume-litres']} ${data.value?.modification.specifications['horse-power']} л.с в ${uiStore.regions[getCityIndex.value].place}. Прострелы выхлопной системы на сбросе газа. Чип тюнинг коробки DSG. Наша компания ReChip предоставляет гарантию 1 год и 14 - дневный тест-драйв. Оплата после проверки.`,
+  // @ts-ignore
   ogDescription: () => `Услуги чип тюнинга автомобиля ${title.value} ${data.value?.modification.specifications['volume-litres']} ${data.value?.modification.specifications['horse-power']} л.с в ${uiStore.regions[getCityIndex.value].place}. Прострелы выхлопной системы на сбросе газа. Чип тюнинг коробки DSG. Наша компания ReChip предоставляет гарантию 1 год и 14 - дневный тест-драйв. Оплата после проверки.`,
   ogType: 'website',
   ogImage: () => `https://api.rechip-tuning.ru/wp-content/themes/rechip-tuning/assets/photos/${data.value?.modification.path['configuration-id']}.jpg`

@@ -9,7 +9,7 @@
         <XMarkIcon class="h-4 inline" />
         Очистить
       </span>
-      <div class="grid grid-cols-12 md:grid-cols-6 md:gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-6 md:gap-4">
         <div class="col-span-1" :class="{'md:!col-span-1': props.full}">
           <label class="text-dark font-semibold">Услуга</label>
           <Dropdown
