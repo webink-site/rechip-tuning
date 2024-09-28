@@ -44,6 +44,11 @@ export const useCarStore = defineStore('car', {
           gen_name: i['year-stop'] ? `${i.name ? i.name + ' ' : ''} ${i['year-start']} - ${i['year-stop']}` : `${i.name ? i.name + ' ' : ''}${i['year-start']}`
         }
       })
+    },
+    getBodies (state) {
+      return Object.entries(state.bodies).flatMap(([bodyType, cars]) =>
+        cars.map(car => ({ bodyType, ...car }))
+      )
     }
   },
   actions: {
@@ -85,7 +90,7 @@ export const useCarStore = defineStore('car', {
       if (!gen) { return }
       this.search.gen = gen
       const bodies = await $fetch<any>(`http://api.rechip-tuning.ru/wp-json/custom/v1/base/test?mark_id=${this.search.brand}&model_id=${this.search.model}&generation_id=${this.search.gen}`)
-      if (bodies.length) {
+      if (bodies) {
         this.bodies = bodies
       }
     },

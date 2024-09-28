@@ -56,23 +56,23 @@
             v-model="search.gen"
             :options="carStore.getGens"
             option-value="id"
-            option-label="gen_name"
+            option-label="name"
             :filter="carStore.models.length ? true : false"
             empty-message="Нет доступных опций"
             class="w-full mt-3 py-0.5 rounded-md bg-gray-2 border-none mb-2"
             :class="{ 'outline outline-2 outline-red-500': v$.gen.$error}"
             @change="carStore.LOAD_BODY(search.gen)"
           >
-            <template #option="slotProps">
+            <!-- <template #option="slotProps">
               <div>
                 <p>{{ slotProps.option.gen_name }}</p>
-                <!-- {{ slotProps.option }} -->
               </div>
-            </template>
+            </template> -->
           </Dropdown>
         </div>
         <div class="col-span-12 md:col-span-4" :class="{'md:!col-span-1': props.full}">
           <label class="text-dark font-semibold">Кузов</label>
+          <pre>{{ carStore.getBodies }}</pre>
           <Dropdown
             v-model="search.body"
             :options="carStore.bodies"
