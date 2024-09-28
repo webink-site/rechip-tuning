@@ -29,7 +29,7 @@
           <li>
             <div class="grid grid-cols-2">
               <div class="col-span-1 text-gray-400">Год</div>
-              <div class="col-span-1">{{ route.params.gen }}</div>
+              <div class="col-span-1">{{ route.params.gen.toString().substring(0, 9) }}</div>
             </div>
           </li>
           <li>
