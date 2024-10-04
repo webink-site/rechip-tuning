@@ -20,9 +20,9 @@ const servStore = useServStore()
 const carStore = useCarStore()
 
 const route = useRoute()
-const { data } = await useAsyncData<Model[]>('generations', () => $fetch(`http://api.rechip-tuning.ru/wp-json/custom/v1/base/test?mark_id=${route.params.brand.toString().toUpperCase()}&model_id=${route.params.model.toString().toUpperCase()}`))
+const { data } = await useAsyncData<Model[]>('generations', () => $fetch(`https://api.rechip-tuning.ru/wp-json/custom/v1/base/test?mark_id=${route.params.brand.toString().toUpperCase()}&model_id=${route.params.model.toString().toUpperCase()}`))
 useAsyncData('brands', () => carStore.LOAD_BRANDS())
-const { data: models } = await useAsyncData<Model[]>('models', () => $fetch(`http://api.rechip-tuning.ru/wp-json/custom/v1/base/test?mark_id=${route.params.brand.toString().toUpperCase()}`))
+const { data: models } = await useAsyncData<Model[]>('models', () => $fetch(`https://api.rechip-tuning.ru/wp-json/custom/v1/base/test?mark_id=${route.params.brand.toString().toUpperCase()}`))
 
 const title = computed(() => {
   const brand = carStore.brands?.find(i => i.id === route.params.brand.toString().toUpperCase())

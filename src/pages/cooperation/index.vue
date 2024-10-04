@@ -59,7 +59,7 @@
 <script setup lang="ts">
 import image from '@/public/img/coop.webp'
 
-const { data: coop } = await useAsyncData<any>('coop', () => $fetch('http://api.rechip-tuning.ru/wp-json/custom/v1/page?slug=cooperation'))
+const { data: coop } = await useAsyncData<any>('coop', () => $fetch('https://api.rechip-tuning.ru/wp-json/custom/v1/page?slug=cooperation'))
 definePageMeta({
   layout: 'custom'
 })

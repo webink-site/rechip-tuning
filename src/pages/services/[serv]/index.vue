@@ -62,7 +62,7 @@ const route = useRoute()
 const servStore = useServStore()
 
 // const { data } = await useAsyncData<any>('content', () => queryContent().where({ _path: `/services/${route.params.serv}` }).findOne())
-const { data: services } = await useAsyncData<any>('services', () => $fetch('http://api.rechip-tuning.ru/wp-json/custom/v1/page?slug=services'))
+const { data: services } = await useAsyncData<any>('services', () => $fetch('https://api.rechip-tuning.ru/wp-json/custom/v1/page?slug=services'))
 
 const scrollIntoView = (binding: string) => {
   const target = document.getElementById(binding)

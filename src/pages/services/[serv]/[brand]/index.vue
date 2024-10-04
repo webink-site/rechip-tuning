@@ -14,7 +14,7 @@ import { useCarStore } from '@/src/stores/car'
 const carStore = useCarStore()
 
 const route = useRoute()
-const { data } = await useAsyncData<Model[]>('models', () => $fetch(`http://api.rechip-tuning.ru/wp-json/custom/v1/base/test?mark_id=${route.params.brand.toString().toUpperCase()}`))
+const { data } = await useAsyncData<Model[]>('models', () => $fetch(`https://api.rechip-tuning.ru/wp-json/custom/v1/base/test?mark_id=${route.params.brand.toString().toUpperCase()}`))
 // const { data: marks } = await useAsyncData<Brand[]>('marks', () => $fetch('https://api.rechip-tuning.ru/wp-json/custom/v1/base'))
 useAsyncData('brands', () => carStore.LOAD_BRANDS())
 
