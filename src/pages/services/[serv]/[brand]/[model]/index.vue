@@ -10,13 +10,13 @@
 <script setup lang="ts">
 import type { Model } from '@/src/types/car'
 import { useCarStore } from '@/src/stores/car'
-import { useServStore } from '~/src/stores/serv'
+// import { useServStore } from '~/src/stores/serv'
 import { useUiStore } from '@/src/stores/ui'
 import { useCity } from '~/src/helpers/useCiity'
 
 const { getCityIndex } = useCity()
 const uiStore = useUiStore()
-const servStore = useServStore()
+// const servStore = useServStore()
 const carStore = useCarStore()
 
 const route = useRoute()
@@ -35,11 +35,32 @@ const title = computed(() => {
   }
 })
 
+function getMetaTags () {
+  const city = uiStore.regions[getCityIndex.value].place
+
+  if (route.params.serv === 'soot-filter') {
+    return {
+      title: `Отключение сажевого фильтра ${title.value} с гарантией 1 год в ${city}`,
+      descr: `Услуга отключения сажевого фильтра в автомобиле ${title.value}. Наша компания ReChip предоставляет гарантию 1 год и 14 - дневный тест-драйв. Оплата после проверки.`
+    }
+  } else if (route.params.serv === 'egr') {
+    return {
+      title: `Отключение клапана ЕГР на ${title.value}  в ${city}`,
+      descr: `Отключение ЕГР на Отключение клапана ЕГР на ${title.value}  в ${city}. Программное отключение и физическое удаление клапана EGR по лучшей цене.`
+    }
+  } else {
+    return {
+      title: `Чип тюнинг ${title.value} - прошивка Stage 1/Stage 2  в ${city}`,
+      descr: `Услуги чип тюнинга автомобиля ${title.value} в ${city}. Прострелы выхлопной системы на сбросе газа. Чип тюнинг коробки DSG. Наша компания ReChip предоставляет гарантию 1 год и 14 - дневный тест-драйв. Оплата после проверки.`
+    }
+  }
+}
+
 useSeoMeta({
-  title: () => `${servStore.services.find((i: any) => i.slug === route.params.serv)?.name} ${title.value} - прошивка Stage 1/Stage 2 в ${uiStore.regions[getCityIndex.value].place}`,
-  ogTitle: () => `${servStore.services.find((i: any) => i.slug === route.params.serv)?.name} ${title.value} - прошивка Stage 1/Stage 2 в ${uiStore.regions[getCityIndex.value].place}`,
-  description: `Услуги чип тюнинга автомобиля ${title.value} в ${uiStore.regions[getCityIndex.value].place}. Прострелы выхлопной системы на сбросе газа. Чип тюнинг коробки DSG. Наша компания ReChip предоставляет гарантию 1 год и 14 - дневный тест-драйв. Оплата после проверки.`,
-  ogDescription: `Услуги чип тюнинга автомобиля ${title.value} в ${uiStore.regions[getCityIndex.value].place}. Прострелы выхлопной системы на сбросе газа. Чип тюнинг коробки DSG. Наша компания ReChip предоставляет гарантию 1 год и 14 - дневный тест-драйв. Оплата после проверки.`,
+  title: () => getMetaTags().title,
+  ogTitle: () => getMetaTags().title,
+  description: () => getMetaTags().descr,
+  ogDescription: () => getMetaTags().descr,
   ogType: 'website'
 })
 

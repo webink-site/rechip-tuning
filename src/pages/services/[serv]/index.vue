@@ -7,7 +7,6 @@
       </div>
       <SearchBrands gray />
       <ServPrice :prices="singleServ?.minimal_prices" />
-
       <section class="md:pb-20 bg-white">
         <div class="container mx-auto px-4 md:px-0">
           <div class="grid gap-6 grid-cols-12 mb-20">
