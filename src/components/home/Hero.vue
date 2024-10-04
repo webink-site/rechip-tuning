@@ -1,6 +1,6 @@
 <template>
   <section
-    class="pb-20 md:pt-20 bg-cover bg-center bg-no-repeat flex items-end custom-transition rounded-b-2xl mb-20"
+    class="pb-20 md:pt-20 bg-cover bg-center bg-no-repeat flex items-end custom-transition rounded-b-[32px] mb-20"
     :style="`background-image: url(${sldes[active]});`"
   >
     <div class="container mx-auto px-4 md:px-0">

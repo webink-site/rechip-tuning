@@ -16,7 +16,7 @@
         <h1 class="font-bold text-dark text-2xl">
           {{ servStore.services.find((i) => i.slug === route.params.serv)?.name }}
           {{ title }}
-          {{ route.params.gen }} г.в.
+          {{ route.params.gen.toString().substring(0, 9) }} г.в.
         </h1>
         <p class="mt-1 mb-6 text-gray-400">
           {{ servStore.services.find((i) => i.slug === route.params.serv)?.name }}
@@ -92,7 +92,18 @@
     />
     <div class="col-span-12">
       <div class="flex flex-wrap gap-2 mt-8">
-        <UiButton v-if="complectation.services.stage || complectation.services.main_services.length" green :text="`Итого: ${priceTotal} ₽`" />
+        <Transition name="slide-up" mode="out-in">
+          <!-- <p :key="priceTotal">
+            Итого:  <span>{{ priceTotal }} </span>₽
+          </p> -->
+          <UiButton
+            v-if="complectation.services.stage || complectation.services.main_services.length"
+            :key="priceTotal"
+            green
+            :text="`Итого: ${priceTotal} ₽`"
+          />
+        </Transition>
+
         <UiButton red text="Оставить заявку" @click="submitModal = true" />
         <transition
           name="fade-out"
@@ -173,5 +184,18 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0.25s ease-out;
+}
 
+.slide-up-enter-from {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.slide-up-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
 </style>
