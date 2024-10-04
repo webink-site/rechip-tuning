@@ -4,7 +4,7 @@
       <UiFormsCarSearch full />
     </div>
     <section class="py-6 pb-20">
-      <div class="container mx-auto px-4 md:px-0">
+      <div v-if="data" class="container mx-auto px-4 md:px-0">
         <SearchComplectationNew :complectation="data" :title="title" :bodytype="bodytype" />
       </div>
     </section>
@@ -30,6 +30,14 @@ const route = useRoute()
 const { data } = await useAsyncData('complectations', () => $fetch(`https://api.rechip-tuning.ru/wp-json/custom/v1/base/test?mark_id=${route.params.brand}&model_id=${route.params.model}&generation_id=${route.params.gen}&product_id=${route.params.id}`))
 const { data: models } = await useAsyncData<Model[]>('modelsForTitle', () => $fetch(`https://api.rechip-tuning.ru/wp-json/custom/v1/base/test?mark_id=${route.params.brand}`))
 const { data: generations } = await useAsyncData<any>('generations', () => $fetch(`https://api.rechip-tuning.ru/wp-json/custom/v1/base/test?mark_id=${route.params.brand.toString().toUpperCase()}&model_id=${route.params.model.toString().toUpperCase()}&generation_id=${route.params.gen}`))
+
+if (!data.value) {
+  throw createError({
+    statusCode: 404,
+    message: 'Страница не найдена',
+    fatal: true
+  })
+}
 
 const title = computed(() => {
   const brand = carStore.brands?.find(i => i.id === route.params.brand.toString().toUpperCase())
