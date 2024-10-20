@@ -19,7 +19,7 @@
             option-value="slug"
             option-label="name"
             class="w-full mt-3 py-0.5 rounded-md bg-gray-2 border-none mb-2"
-            @change="carStore.SET_SERV(search.serv)"
+            @change="changeServ"
           />
         </div>
         <div class="col-span-1">
@@ -33,7 +33,7 @@
             empty-message="Нет доступных опций"
             class="w-full mt-3 py-0.5 rounded-md bg-gray-2 border-none mb-2"
             :class="{ 'outline outline-2 outline-red-500': v$.brand.$error}"
-            @change="carStore.LOAD_MODELS(search.brand)"
+            @change="changeBrand"
           />
         </div>
         <div class="col-span-1">
@@ -47,7 +47,7 @@
             :filter="carStore.models.length ? true : false"
             empty-message="Нет доступных опций"
             :class="{ 'outline outline-2 outline-red-500': v$.model.$error}"
-            @change="carStore.LOAD_GENS(search.model)"
+            @change="changeModel"
           />
         </div>
         <div class="col-span-1">
@@ -61,7 +61,7 @@
             empty-message="Нет доступных опций"
             class="w-full mt-3 py-0.5 rounded-md bg-gray-2 border-none mb-2"
             :class="{ 'outline outline-2 outline-red-500': v$.gen.$error}"
-            @change="carStore.LOAD_BODY(search.gen)"
+            @change="changeGen"
           >
             <!-- <template #option="slotProps">
               <div>
@@ -80,7 +80,7 @@
             empty-message="Нет доступных опций"
             class="w-full mt-3 py-0.5 rounded-md bg-gray-2 border-none mb-2"
             :class="{ 'outline outline-2 outline-red-500': v$.mod.$error}"
-            @change="carStore.SET_MOD(search.mod)"
+            @change="changeMod"
           />
         </div>
         <div class="col-span-1">
@@ -156,6 +156,29 @@ onMounted(() => {
     search[key as keyof SearchField] = carStore.search[key as keyof SearchField]
   }
 })
+
+async function changeServ () {
+  await carStore.SET_SERV(search.serv)
+  router.push(`/services/${search.serv}`)
+}
+
+async function changeBrand () {
+  await carStore.LOAD_MODELS(search.brand)
+  router.push(`/services/${search.serv}/${search.brand?.toLocaleLowerCase()}`)
+}
+async function changeModel () {
+  await carStore.LOAD_GENS(search.model)
+  router.push(`/services/${search.serv}/${search.brand?.toLocaleLowerCase()}/${search.model?.toLocaleLowerCase()}`)
+}
+
+async function changeGen () {
+  await carStore.LOAD_BODY(search.gen)
+  router.push(`/services/${search.serv}/${search.brand?.toLocaleLowerCase()}/${search.model?.toLocaleLowerCase()}/${search.gen}`)
+}
+async function changeMod () {
+  await carStore.SET_MOD(search.mod)
+  router.push(`/services/${search.serv}/${search.brand?.toLocaleLowerCase()}/${search.model?.toLocaleLowerCase()}/${search.gen}/${search.mod}`)
+}
 
 </script>
 
