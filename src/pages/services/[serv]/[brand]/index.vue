@@ -18,7 +18,7 @@ const uiStore = useUiStore()
 const carStore = useCarStore()
 
 const route = useRoute()
-const { data } = await useAsyncData<Model[]>('models', () => $fetch(`https://api.rechip-tuning.ru/wp-json/custom/v1/base/test?mark_id=${route.params.brand.toString().toUpperCase()}`))
+const { data } = await useAsyncData<Model[]>('models', () => $fetch(`https://api.rechip-tuning.ru/api/autos?mark_id=${route.params.brand.toString().toUpperCase()}`))
 useAsyncData('brands', () => carStore.LOAD_BRANDS())
 
 function getMetaTags () {

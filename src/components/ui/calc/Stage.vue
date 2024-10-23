@@ -10,7 +10,7 @@
             class="border-b-[3px] py-4 px-5 text-dark"
             @click="emit('changeTab', i)"
           >
-            {{ item.stage_title }}
+            {{ item.stage }}
           </button>
         </div>
       </div>
@@ -23,11 +23,11 @@
               <th class="text-start p-4 text-gray-400 font-medium">Тюнинг*</th>
               <th class="text-start p-4 text-gray-400 font-medium">Прибавка</th>
             </tr>
-            <tr v-for="(item, index) in stageInfo.services.stage[activeStageTab].parameters" :key="index">
-              <td class="text-dark font-semibold px-4 py-2">{{ item.parameter ?? '' }}</td>
-              <td class="text-dark font-semibold px-4 py-2">{{ item.factory_values ?? '' }}</td>
-              <td class="text-dark font-semibold px-4 py-2">{{ item.tuned_values ?? '' }}</td>
-              <td class="text-dark font-semibold px-4 py-2">{{ item.increase ?? '' }}</td>
+            <tr v-for="(item, index) in stageInfo.services.stage[activeStageTab].params" :key="index">
+              <td class="text-dark font-semibold px-4 py-2">{{ item.param_name ?? '' }}</td>
+              <td class="text-dark font-semibold px-4 py-2">{{ item.factory_value ?? '' }}</td>
+              <td class="text-dark font-semibold px-4 py-2">{{ item.tuned_value ?? '' }}</td>
+              <td class="text-dark font-semibold px-4 py-2">{{ item.increase_value ?? '' }}</td>
             </tr>
           </tbody>
         </table>

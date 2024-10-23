@@ -58,7 +58,7 @@ type ResType = {
   size: number
 }
 
-const { data } = await useFetch<ResType>('https://api.rechip-tuning.ru/wp-json/custom/v1/page?slug=gallery')
+const { data } = await useFetch<ResType>('https://api.rechip-tuning.ru/api/page?slug=gallery')
 
 const { homePage } = defineProps<Props>()
 

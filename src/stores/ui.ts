@@ -38,13 +38,13 @@ export const useUiStore = defineStore('ui', {
       this.activeRegion = region
     },
     async LOAD_CONTACTS () {
-      const { data } = await useFetch<Contact[]>('https://api.rechip-tuning.ru/wp-json/custom/v1/page?slug=contacts')
+      const { data } = await useFetch<Contact[]>('https://api.rechip-tuning.ru/api/page?slug=contacts')
       if (data.value) {
         this.contacts = data.value
       }
     },
     async LOAD_HOMEPAGE () {
-      const { data } = await useFetch<Homepage>('https://api.rechip-tuning.ru/wp-json/custom/v1/page?slug=main')
+      const { data } = await useFetch<Homepage>('https://api.rechip-tuning.ru/api/page?slug=main')
       if (data.value) {
         this.homepage = data.value
       }

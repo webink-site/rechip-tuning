@@ -179,7 +179,7 @@ function closeSuccess () {
 }
 
 onMounted(() => {
-  imgUrl.value = `https://api.rechip-tuning.ru/wp-content/themes/rechip-tuning/assets/photos/${complectation.modification.path['configuration-id']}.jpg`
+  imgUrl.value = `https://api.rechip-tuning.ru/storage/images/photos/${complectation.modification.path['configuration-id']}.jpg`
 })
 </script>
 

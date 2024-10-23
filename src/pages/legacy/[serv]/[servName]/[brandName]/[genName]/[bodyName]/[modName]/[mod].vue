@@ -18,10 +18,10 @@ import { useCarStore } from '@/src/stores/car'
 
 const carStore = useCarStore()
 const route = useRoute()
-const { data } = await useAsyncData<any>('complectations', () => $fetch(`https://api.rechip-tuning.ru/wp-json/custom/v1/base?mark_id=${route.params.brandName.toString().toUpperCase()}&model_id=${route.params.genName.toString().toUpperCase()}&generation_id=${route.params.bodyName}`))
-const { data: models } = await useAsyncData<Model[]>('modelsForTitle', () => $fetch(`https://api.rechip-tuning.ru/wp-json/custom/v1/base?mark_id=${route.params.brandName.toString().toUpperCase()}`))
+const { data } = await useAsyncData<any>('complectations', () => $fetch(`https://api.rechip-tuning.ru/api/autos?mark_id=${route.params.brandName.toString().toUpperCase()}&model_id=${route.params.genName.toString().toUpperCase()}&generation_id=${route.params.bodyName}`))
+const { data: models } = await useAsyncData<Model[]>('modelsForTitle', () => $fetch(`https://api.rechip-tuning.ru/api/autos?mark_id=${route.params.brandName.toString().toUpperCase()}`))
 
-const { data: generations } = await useAsyncData<any>('generations', () => $fetch(`https://api.rechip-tuning.ru/wp-json/custom/v1/base?mark_id=${route.params.brandName.toString().toUpperCase()}&model_id=${route.params.genName.toString().toUpperCase()}`))
+const { data: generations } = await useAsyncData<any>('generations', () => $fetch(`https://api.rechip-tuning.ru/api/autos?mark_id=${route.params.brandName.toString().toUpperCase()}&model_id=${route.params.genName.toString().toUpperCase()}`))
 
 const mods = computed(() => {
   return data.value.find((i: any) => i.id === route.params.modName).modifications

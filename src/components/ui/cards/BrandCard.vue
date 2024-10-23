@@ -27,7 +27,7 @@ const { item } = defineProps<Props>()
 const imgUrl = ref<string | null>(null)
 
 onMounted(() => {
-  imgUrl.value = `https://api.rechip-tuning.ru/wp-content/themes/rechip-tuning/assets/logos/${item.id}.png`
+  imgUrl.value = `https://api.rechip-tuning.ru/storage/images/logos/${item.id}.png`
 })
 </script>
 
