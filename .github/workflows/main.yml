@@ -33,7 +33,7 @@ jobs:
           username: ${{ secrets.PROD_FTP_USER }}
           port: 22
           key: ${{ secrets.PROD_SSH_PRIVATE_KEY }}
-          source: "dist"  # Путь к скомпилированным файлам
+          source: "./"  # Путь к скомпилированным файлам
           target: "/var/www/html/new.rechip-tuning.ru/"
 
       - name: ⭐ Start site via PM2
