@@ -12,10 +12,10 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v3
 
-      - name: Use Node.js 20
+      - name: Use Node.js 23
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '23'
 
       - name: 🔨 Build Project
         run: |
@@ -25,7 +25,7 @@ jobs:
           npm install
           npm run build
 
-      - name: 📂 Remove Files
+      - name: 📂 Remove Old Files
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.PROD_FTP_HOST }}
@@ -33,13 +33,13 @@ jobs:
           password: ${{ secrets.PROD_FTP_PASSWORD }}
           port: 22
           script: |
-            if [ -d "/var/www/new.rechip-tuning.ru/htdocs/" ]; then
-              find /var/www/new.rechip-tuning.ru/htdocs/ -mindepth 1 -delete
+            if [ -d "/var/www/html/new.rechip-tuning.ru/" ]; then
+              find /var/www/html/new.rechip-tuning.ru/ -mindepth 1 -delete
             else
               echo "Directory does not exist, nothing to remove"
             fi
 
-      - name: 📂 Sync Files
+      - name: 📂 Sync New Files
         uses: SamKirkland/web-deploy@v1
         with:
           target-server: ${{ secrets.PROD_FTP_HOST }}
@@ -47,9 +47,9 @@ jobs:
           private-ssh-key: ${{ secrets.PROD_SSH_PRIVATE_KEY }}
           ssh-port: 22
           source-path: ./
-          destination-path: /var/www/new.rechip-tuning.ru/htdocs/
+          destination-path: /var/www/html/new.rechip-tuning.ru/
 
-      - name: ⭐ Start site via forever
+      - name: ⭐ Start site via PM2
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.PROD_FTP_HOST }}
@@ -57,5 +57,6 @@ jobs:
           password: ${{ secrets.PROD_FTP_PASSWORD }}
           port: 22
           script: |
-            forever stopall || true
-            forever start /var/www/new.rechip-tuning.ru/htdocs/.output/server/index.mjs
+            pm2 stop rechip-tuning || true
+            pm2 start /var/www/html/new.rechip-tuning.ru/.output/server/index.mjs --name rechip-tuning
+            pm2 save
