@@ -7,7 +7,7 @@
       </div>
       <SearchBrands gray />
       <ServPrice :prices="singleServ?.minimal_prices" />
-      <!-- <section class="md:pb-20 bg-white">
+      <section class="md:pb-20 bg-white">
         <div class="container mx-auto px-4 md:px-0">
           <div class="grid gap-6 grid-cols-12 mb-20">
             <div class="col-span-12 md:col-span-9">
@@ -37,7 +37,7 @@
             </div>
           </div>
         </div>
-      </section> -->
+      </section>
     </section>
   </div>
 </template>
@@ -49,19 +49,19 @@ const route = useRoute()
 const servStore = useServStore()
 
 // const { data } = await useAsyncData<any>('content', () => queryContent().where({ _path: `/services/${route.params.serv}` }).findOne())
-const { data: services } = await useAsyncData<any>('services', () => $fetch('http://api.rechip-tuning.ru/wp-json/custom/v1/page?slug=services'))
+const { data: services } = await useAsyncData<any>('services', () => $fetch('https://api.rechip-tuning.ru/api/page?slug=services'))
 
-// const scrollIntoView = (binding: string) => {
-//   const target = document.getElementById(binding)
-//   target?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
-// }
+const scrollIntoView = (binding: string) => {
+  const target = document.getElementById(binding)
+  target?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+}
 
 const servId = computed(() => {
   return servStore.services.find((i: any) => i.slug === route.params.serv)?.id
 })
 
 const singleServ = computed(() => {
-  return services.value?.find((i: any) => i.ID === servId.value)
+  return services.value?.find((i: any) => i.id === servId.value)
 })
 
 </script>

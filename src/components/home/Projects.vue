@@ -1,7 +1,7 @@
 <template>
-  <section class="py-12">
+  <section v-if="data?.posts.length" class="py-12">
     <div class="container mx-auto px-4 md:px-0">
-      <!-- <pre>{{ data }}</pre> -->
+      <pre>{{ data }}</pre>
       <div class="grid grid-cols-12 gap-6">
         <div class="col-span-12">
           <h2 class="text-dark text-4xl font-bold mb-2">Наши работы</h2>
