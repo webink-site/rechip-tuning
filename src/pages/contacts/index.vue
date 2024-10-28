@@ -55,37 +55,37 @@
                 <li>
                   <div class="grid grid-cols-3">
                     <div class="col-span-1 text-gray-400">ИНН</div>
-                    <div class="col-span-2">{{ uiStore.getCurrentRegion?.legal_info.inn }}</div>
+                    <div class="col-span-2">{{ uiStore.getCurrentRegion?.legal_info[0].inn }}</div>
                   </div>
                 </li>
                 <li>
                   <div class="grid grid-cols-3">
                     <div class="col-span-1 text-gray-400">КПП</div>
-                    <div class="col-span-2">{{ uiStore.getCurrentRegion?.legal_info.kpp }}</div>
+                    <div class="col-span-2">{{ uiStore.getCurrentRegion?.legal_info[0].kpp }}</div>
                   </div>
                 </li>
                 <li>
                   <div class="grid grid-cols-3">
                     <div class="col-span-1 text-gray-400">ОГРН</div>
-                    <div class="col-span-2">{{ uiStore.getCurrentRegion?.legal_info.ogrn }}</div>
+                    <div class="col-span-2">{{ uiStore.getCurrentRegion?.legal_info[0].ogrn }}</div>
                   </div>
                 </li>
                 <li>
                   <div class="grid grid-cols-3">
                     <div class="col-span-1 text-gray-400">Юр. адрес</div>
-                    <div class="col-span-2">{{ uiStore.getCurrentRegion?.legal_info.legal_address }}</div>
+                    <div class="col-span-2">{{ uiStore.getCurrentRegion?.legal_info[0].legal_address }}</div>
                   </div>
                 </li>
                 <li>
                   <div class="grid grid-cols-3">
                     <div class="col-span-1 text-gray-400">Физ. адрес</div>
-                    <div class="col-span-2">{{ uiStore.getCurrentRegion?.legal_info.phisical_address }}</div>
+                    <div class="col-span-2">{{ uiStore.getCurrentRegion?.legal_info[0].phisical_address }}</div>
                   </div>
                 </li>
                 <li>
                   <div class="grid grid-cols-3">
                     <div class="col-span-1 text-gray-400">Ген. директор</div>
-                    <div class="col-span-2">{{ uiStore.getCurrentRegion?.legal_info.general_director }}</div>
+                    <div class="col-span-2">{{ uiStore.getCurrentRegion?.legal_info[0].general_director }}</div>
                   </div>
                 </li>
               </ul>

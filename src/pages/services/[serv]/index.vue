@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div v-if="servStore.services.length && singleServ">
+    <!-- <pre>{{ servStore.services }}</pre> -->
     <ServHero :title="singleServ?.post_title" :image="singleServ.image_wide" :description="singleServ.description" />
     <section class="bg-gray-2 pt-10 md:pt-20">
       <div class="container mx-auto px-4 md:px-0">
@@ -43,25 +44,22 @@
 </template>
 
 <script setup lang="ts">
+import { useCarStore } from '~/src/stores/car'
 import { useServStore } from '~/src/stores/serv'
 
 const route = useRoute()
 const servStore = useServStore()
+const carStore = useCarStore()
 
-// const { data } = await useAsyncData<any>('content', () => queryContent().where({ _path: `/services/${route.params.serv}` }).findOne())
-const { data: services } = await useAsyncData<any>('services', () => $fetch('https://api.rechip-tuning.ru/api/page?slug=services'))
+useAsyncData('brands', () => carStore.LOAD_BRANDS())
 
 const scrollIntoView = (binding: string) => {
   const target = document.getElementById(binding)
   target?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
 }
 
-const servId = computed(() => {
-  return servStore.services.find((i: any) => i.slug === route.params.serv)?.id
-})
-
 const singleServ = computed(() => {
-  return services.value?.find((i: any) => i.id === servId.value)
+  return servStore.services.find((i: any) => i.slug === route.params.serv)
 })
 
 </script>

@@ -1,11 +1,36 @@
 export interface Service {
-  id: number
-  slug: string
-  name: string
-  sub: string
-  img: string
-  width: number
-  high?: boolean
+  // id: number
+  // slug: string
+  // name: string
+  // sub: string
+  // img: string
+  // width: number
+  // high?: boolean
+    id: number
+    slug: string
+    service_name: string
+    short_description: string
+    description: string
+    post_title: string
+    page_content: string
+    image: string
+    image_wide: string
+    minimal_prices: {
+      icon: string
+      price: string
+      description: string
+    }[]
+    created_at: Date
+    updated_at: Date
+    seo_settings: {
+      id: 17,
+      service_id: 6199,
+      level: string
+      title: string
+      description: string
+      created_at: Date
+      updated_at: Date
+  }[]
 }
 
 export interface Contact {
@@ -31,7 +56,7 @@ export interface Contact {
     phisical_address: string | null
     general_director: string | null
     footer_tiny_text: string | null
-  }
+  }[]
 }
 
 export interface Homepage {

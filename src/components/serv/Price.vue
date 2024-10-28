@@ -8,7 +8,7 @@
         <div v-for="(item, index) in prices" :key="index" class="col-span-12 md:col-span-4">
           <div class="h-full bg-gray-2 rounded-lg p-6">
             <img :src="item.icon" class="mb-8 h-8" alt="">
-            <p class="font-bold text-dark text-lg mb-2">{{ item.min_price }}</p>
+            <p class="font-bold text-dark text-lg mb-2">{{ item.price }}</p>
             <p class="text-gray-400 text-sm">
               {{ item.description }}
             </p>
@@ -26,7 +26,7 @@
 
 interface Props{
   prices: {
-    min_price: string
+    price: string
     description: string
     icon: string
   }[]

@@ -72,13 +72,16 @@
 import { Bars3Icon } from '@heroicons/vue/24/outline/index.js'
 import { useUiStore } from '@/src/stores/ui'
 import { useCity } from '~/src/helpers/useCiity'
+import { useServStore } from '~/src/stores/serv'
 
 const { getCityIndex } = useCity()
 const uiStore = useUiStore()
+const servStore = useServStore()
 const regionModal = ref(false)
 
 useAsyncData('contacts', () => uiStore.LOAD_CONTACTS())
 useAsyncData('homepage', () => uiStore.LOAD_HOMEPAGE())
+useAsyncData('services', () => servStore.LOAD_SERVICES())
 
 interface Props{
   homepage?: boolean

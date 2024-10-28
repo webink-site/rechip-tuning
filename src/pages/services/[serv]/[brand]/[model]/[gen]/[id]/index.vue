@@ -20,11 +20,13 @@
 <script setup lang="ts">
 import type { Model } from '@/src/types/car'
 import { useCarStore } from '@/src/stores/car'
-// import { useUiStore } from '@/src/stores/ui'
-// import { useCity } from '~/src/helpers/useCiity'
+import { useUiStore } from '@/src/stores/ui'
+import { useCity } from '~/src/helpers/useCiity'
+import { useServStore } from '~/src/stores/serv'
 
-// const { getCityIndex } = useCity()
-// const uiStore = useUiStore()
+const servStore = useServStore()
+const { getCityIndex } = useCity()
+const uiStore = useUiStore()
 const carStore = useCarStore()
 const route = useRoute()
 
@@ -60,19 +62,23 @@ const bodytype = computed(() => {
   return result.find((i: any) => i.id === route.params.id).bodytype ?? ''
 })
 
-// useSeoMeta({
-//   // @ts-ignore
-//   title: () => `Чип тюнинг ${title.value} ${data.value?.modification.specifications['volume-litres']} ${data.value?.modification.specifications['horse-power']} л.с прошивка Stage 1/Stage 2 в ${uiStore.regions[getCityIndex.value].place}`,
-//   // @ts-ignore
-//   ogTitle: () => `Чип тюнинг ${title.value} ${data.value?.modification.specifications['volume-litres']} ${data.value?.modification.specifications['horse-power']} л.с прошивка Stage 1/Stage 2 в ${uiStore.regions[getCityIndex.value].place}`,
-//   // @ts-ignore
-//   description: () => `Услуги чип тюнинга автомобиля ${title.value} ${data.value?.modification.specifications['volume-litres']} ${data.value?.modification.specifications['horse-power']} л.с в ${uiStore.regions[getCityIndex.value].place}. Прострелы выхлопной системы на сбросе газа. Чип тюнинг коробки DSG. Наша компания ReChip предоставляет гарантию 1 год и 14 - дневный тест-драйв. Оплата после проверки.`,
-//   // @ts-ignore
-//   ogDescription: () => `Услуги чип тюнинга автомобиля ${title.value} ${data.value?.modification.specifications['volume-litres']} ${data.value?.modification.specifications['horse-power']} л.с в ${uiStore.regions[getCityIndex.value].place}. Прострелы выхлопной системы на сбросе газа. Чип тюнинг коробки DSG. Наша компания ReChip предоставляет гарантию 1 год и 14 - дневный тест-драйв. Оплата после проверки.`,
-//   ogType: 'website',
-//   // @ts-ignore
-//   ogImage: () => `https://api.rechip-tuning.ru/wp-content/themes/rechip-tuning/assets/photos/${data.value?.modification.path['configuration-id']}.jpg`
-// })
+const singleServ = computed(() => {
+  return servStore.services.find((i: any) => i.slug === route.params.serv)
+})
+
+function getMetaTags (): any {
+  const level = singleServ.value?.seo_settings.find(i => i.level === 'Модификация')
+  return level
+}
+
+useSeoMeta({
+  title: () => getMetaTags().title.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  ogTitle: () => getMetaTags().title.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  description: () => getMetaTags().description.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  ogDescription: () => getMetaTags().description.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  ogType: 'website',
+  ogImage: () => `https://api.rechip-tuning.ru/storage/images/photos/${data.value?.modification?.path['configuration-id']}.jpg`
+})
 
 </script>
 

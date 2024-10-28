@@ -5,17 +5,16 @@
         <div class="col-span-12">
           <h2 class="text-dark text-4xl font-bold mb-2">Наши услуги</h2>
         </div>
-
-        <div v-for="(item, index) in servStore.services" :key="index" :class="`col-span-12 md:col-span-${item.width}`">
+        <div v-for="(item, index) in servStore.services" :key="index" :class="`col-span-12 md:col-span-${index === 4 ? '12' : '6'}`">
           <nuxt-link :to="`/services/${item.slug}`">
             <div
               class="bg-center bg-no-repeat bg-cover rounded-lg py-8 px-10 h-[20rem] flex flex-col justify-between"
-              :style="`background-image: url('${item.img}');`"
-              :class="{'md:!h-[30rem]' : item.high}"
+              :style="`background-image: url('${item.image}');`"
+              :class="{'md:!h-[30rem]' : index === 2 || index=== 3}"
             >
               <div>
-                <h3 class="text-white text-2xl md:text-3xl mb-4 font-bold">{{ item.name }}</h3>
-                <p class="text-white md:w-1/2">{{ item.sub }}</p>
+                <h3 class="text-white text-2xl md:text-3xl mb-4 font-bold">{{ item.service_name }}</h3>
+                <p class="text-white md:w-1/2">{{ item.short_description }}</p>
               </div>
               <UiButton white text="Узнать подробнее" />
             </div>

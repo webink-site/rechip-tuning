@@ -42,7 +42,7 @@
       <div class="grid gap-6 grid-cols-12">
         <div class="col-span-12 md:col-span-9">
           <p class="text-xs text-gray-400 mb-2">
-            {{ uiStore.contacts[getCityIndex]?.legal_info.footer_tiny_text }}
+            {{ uiStore.contacts[getCityIndex]?.legal_info[0].footer_tiny_text }}
           </p>
           <div class="flex gap-6">
             <nuxt-link to="/" class="text-xs text-gray-400 underline hover:no-underline">Пользовательское соглашение</nuxt-link>

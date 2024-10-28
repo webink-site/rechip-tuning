@@ -34,11 +34,21 @@ const title = computed(() => {
     return ''
   }
 })
+
+const singleServ = computed(() => {
+  return servStore.services.find((i: any) => i.slug === route.params.serv)
+})
+
+function getMetaTags (): any {
+  const level = singleServ.value?.seo_settings.find(i => i.level === 'Поколение')
+  return level
+}
+
 useSeoMeta({
-  title: () => `${servStore.services.find(i => i.slug === route.params.serv)?.name} ${title.value} ${route.params.gen.toString().substring(0, 9)} прошивка Stage 1/Stage 2 в ${uiStore.regions[getCityIndex.value].place}`,
-  ogTitle: () => `${servStore.services.find(i => i.slug === route.params.serv)?.name} ${title.value} ${route.params.gen.toString().substring(0, 9)} прошивка Stage 1/Stage 2 в ${uiStore.regions[getCityIndex.value].place}`,
-  description: `Услуги чип тюнинга автомобиля ${title.value} ${route.params.gen.toString().substring(0, 9)} в ${uiStore.regions[getCityIndex.value].place}. Прострелы выхлопной системы на сбросе газа. Чип тюнинг коробки DSG. Наша компания ReChip предоставляет гарантию 1 год и 14 - дневный тест-драйв. Оплата после проверки.`,
-  ogDescription: `Услуги чип тюнинга автомобиля ${title.value} ${route.params.gen.toString().substring(0, 9)} в ${uiStore.regions[getCityIndex.value].place}. Прострелы выхлопной системы на сбросе газа. Чип тюнинг коробки DSG. Наша компания ReChip предоставляет гарантию 1 год и 14 - дневный тест-драйв. Оплата после проверки.`,
+  title: () => getMetaTags().title.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  ogTitle: () => getMetaTags().title.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  description: () => getMetaTags().description.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  ogDescription: () => getMetaTags().description.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
   ogType: 'website'
 })
 

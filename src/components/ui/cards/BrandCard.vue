@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link :to="`/services/${$route.params.serv ?? 'chip'}/${item.id.toLocaleLowerCase()}`">
+  <nuxt-link :to="`/services/${$route.params.serv ?? 'chip-tuning'}/${item.id.toLocaleLowerCase()}`.replaceAll('_', '-')">
     <div class="h-full bg-gray-3 hover:bg-[#DADADA] transition-all rounded-lg p-2.5 text-center select-none">
       <img
         v-if="imgUrl !== null"

@@ -39,8 +39,6 @@ const props = defineProps({
 
 const carStore = useCarStore()
 
-useAsyncData('brands', () => carStore.LOAD_BRANDS())
-
 const search = ref('')
 const showAll = ref(false)
 
