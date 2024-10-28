@@ -38,7 +38,7 @@ const offset = ref(0)
 const reviews = ref<ReviewItem[]>([])
 const load = ref(false)
 
-const { data, refresh, error } = await useAsyncData<ReviewsRes>('reviews', () => $fetch(`https://api.rechip-tuning.ru/wp-json/custom/v1/avito-reviews?limit=${itemsPerPage.value}&offset=${offset.value}`))
+const { data, refresh, error } = await useAsyncData<ReviewsRes>('reviews', () => $fetch(`https://api.rechip-tuning.ru/api/avito/reviews?limit=${itemsPerPage.value}&offset=${offset.value}`))
 
 if (error) {
   console.log('Ловимс ошибочку в запросе')
