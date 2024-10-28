@@ -17,7 +17,7 @@
             :options="servStore.services"
             :class="{ 'outline outline-2 outline-red-500': v$.serv.$error}"
             option-value="slug"
-            option-label="name"
+            option-label="service_name"
             class="w-full mt-3 py-0.5 rounded-md bg-gray-2 border-none mb-2"
             @change="changeServ"
           />
@@ -140,7 +140,7 @@ const props = defineProps({
 const searchCar = () => {
   v$.value.$validate()
   if (!v$.value.$error) {
-    const newPath = `/services/${search.serv}/${search.brand}/${search.model}/${search.gen?.toString()}/${search.mod?.toString()}`.toLocaleLowerCase()
+    const newPath = `/services/${search.serv}/${search.brand?.replaceAll('_', '-')}/${search.model?.replaceAll('_', '-')}/${search.gen?.toString()}/${search.mod?.toString().replaceAll('_', '-')}`.toLocaleLowerCase()
     router.replace(newPath)
   }
 }
@@ -164,20 +164,20 @@ async function changeServ () {
 
 async function changeBrand () {
   await carStore.LOAD_MODELS(search.brand)
-  router.push(`/services/${search.serv}/${search.brand?.toLocaleLowerCase()}`)
+  router.push(`/services/${search.serv}/${search.brand?.toLocaleLowerCase().replaceAll('_', '-')}`)
 }
 async function changeModel () {
   await carStore.LOAD_GENS(search.model)
-  router.push(`/services/${search.serv}/${search.brand?.toLocaleLowerCase()}/${search.model?.toLocaleLowerCase()}`)
+  router.push(`/services/${search.serv}/${search.brand?.toLocaleLowerCase().replaceAll('_', '-')}/${search.model?.toLocaleLowerCase().replaceAll('_', '-')}`)
 }
 
 async function changeGen () {
   await carStore.LOAD_BODY(search.gen)
-  router.push(`/services/${search.serv}/${search.brand?.toLocaleLowerCase()}/${search.model?.toLocaleLowerCase()}/${search.gen}`)
+  router.push(`/services/${search.serv}/${search.brand?.toLocaleLowerCase().replaceAll('_', '-')}/${search.model?.toLocaleLowerCase().replaceAll('_', '-')}/${search.gen}`)
 }
 async function changeMod () {
   await carStore.SET_MOD(search.mod)
-  router.push(`/services/${search.serv}/${search.brand?.toLocaleLowerCase()}/${search.model?.toLocaleLowerCase()}/${search.gen}/${search.mod}`)
+  router.push(`/services/${search.serv}/${search.brand?.toLocaleLowerCase().replaceAll('_', '-')}/${search.model?.toLocaleLowerCase().replaceAll('_', '-')}/${search.gen}/${search.mod?.replaceAll('_', '-')}`)
 }
 
 </script>

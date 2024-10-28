@@ -20,7 +20,7 @@ const servStore = useServStore()
 const carStore = useCarStore()
 
 const route = useRoute()
-const { data } = await useAsyncData<Model[]>('models', () => $fetch(`https://api.rechip-tuning.ru/api/autos?mark_id=${route.params.brand.toString().toUpperCase()}`))
+const { data } = await useAsyncData<Model[]>('models', () => $fetch(`https://api.rechip-tuning.ru/api/autos?mark_id=${route.params.brand.toString().toUpperCase().replaceAll('-', '_')}`))
 useAsyncData('brands', () => carStore.LOAD_BRANDS())
 
 const singleServ = computed(() => {

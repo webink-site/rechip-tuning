@@ -4,7 +4,7 @@
       <div class="grid gap-6 grid-cols-12">
         <div class="col-span-9">
           <h2 class="text-dark text-2xl font-bold">
-            {{ servStore.services.find((i) => i.slug === $route.params.servName)?.name }} {{ title }}
+            {{ servStore.services.find((i) => i.slug === $route.params.servName)?.service_name }} {{ title }}
           </h2>
           <p class="text-lg font-semibold mt-1 text-gray-400">
             Выберите поколение {{ title }}:
@@ -15,7 +15,7 @@
       <div v-if="gens.length" class="grid-cols-4 md:grid-cols-5 gap-6 grid mt-8">
         <div v-for="(item, index) in gens" :key="index" class="col-span-2 md:col-span-1">
           <nuxt-link
-            :to="`/services/${$route.params.serv}/${$route.params.brand.toLowerCase()}/${$route.params.model.toLowerCase()}/${item.id}`"
+            :to="`/services/${$route.params.serv}/${$route.params.brand.toString().toLowerCase().replaceAll('_', '-')}/${$route.params.model.toString().toLowerCase().replaceAll('_', '-')}/${item.id}`"
           >
             <div class="h-full bg-white hover:bg-[#DADADA] transition-all rounded-lg p-2.5 py-6 text-center select-none relative">
               <p class="font-bold">{{ item.name }}</p>

@@ -30,9 +30,9 @@ const uiStore = useUiStore()
 const carStore = useCarStore()
 const route = useRoute()
 
-const { data } = await useAsyncData('complectations', () => $fetch(`https://api.rechip-tuning.ru/api/autos?mark_id=${route.params.brand.toString().toUpperCase()}&model_id=${route.params.model.toString().toUpperCase()}&generation_id=${route.params.gen}&product_id=${route.params.id}`))
+const { data } = await useAsyncData('complectations', () => $fetch(`https://api.rechip-tuning.ru/api/autos?mark_id=${route.params.brand.toString().toUpperCase().replaceAll('-', '_')}&model_id=${route.params.model.toString().toUpperCase().replaceAll('-', '_')}&generation_id=${route.params.gen}&product_id=${route.params.id.toString().replaceAll('-', '_')}`))
 const { data: models } = await useAsyncData<Model[]>('modelsForTitle', () => $fetch(`https://api.rechip-tuning.ru/api/autos?mark_id=${route.params.brand.toString().toUpperCase()}`))
-const { data: generations } = await useAsyncData<any>('generations', () => $fetch(`https://api.rechip-tuning.ru/api/autos?mark_id=${route.params.brand.toString().toUpperCase()}&model_id=${route.params.model.toString().toUpperCase()}&generation_id=${route.params.gen}`))
+const { data: generations } = await useAsyncData<any>('generations', () => $fetch(`https://api.rechip-tuning.ru/api/autos?mark_id=${route.params.brand.toString().toUpperCase().replaceAll('-', '_')}&model_id=${route.params.model.toString().toUpperCase().replaceAll('-', '_')}&generation_id=${route.params.gen}`))
 
 if (!data.value) {
   throw createError({
@@ -43,9 +43,9 @@ if (!data.value) {
 }
 
 const title = computed(() => {
-  const brand = carStore.brands?.find(i => i.id === route.params.brand.toString().toUpperCase())
+  const brand = carStore.brands?.find(i => i.id === route.params.brand.toString().toUpperCase().replaceAll('-', '_'))
   if (brand) {
-    const model = models.value?.find(i => i.id === route.params.model.toString().toUpperCase())
+    const model = models.value?.find(i => i.id === route.params.model.toString().toUpperCase().replaceAll('-', '_'))
     return `${brand.name} ${model?.name}`
   } else {
     return ''
@@ -59,7 +59,7 @@ const bodytype = computed(() => {
       bodytype
     }))
   )
-  return result.find((i: any) => i.id === route.params.id).bodytype ?? ''
+  return result.find((i: any) => i.id === route.params.id.toString().replaceAll('-', '_')).bodytype ?? ''
 })
 
 const singleServ = computed(() => {
@@ -78,6 +78,7 @@ useSeoMeta({
   description: () => getMetaTags().description.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
   ogDescription: () => getMetaTags().description.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
   ogType: 'website',
+  // @ts-ignore
   ogImage: () => `https://api.rechip-tuning.ru/storage/images/photos/${data.value?.modification?.path['configuration-id']}.jpg`
 })
 

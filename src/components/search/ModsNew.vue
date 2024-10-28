@@ -16,7 +16,7 @@
             <nuxt-link
               v-for="(item, index) in mods[row]"
               :key="index"
-              :to="`${route.fullPath}/${item.id}`"
+              :to="`${route.fullPath}/${item.id.toString().replaceAll('_', '-')}`"
               class="px-2 py-1.5 text-sm h-full transition-all bg-gray-3 rounded cursor-pointer text-center hover:bg-[#DADADA] hover:text-black "
             >
               {{ item.name }}
