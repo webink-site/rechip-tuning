@@ -79,7 +79,7 @@ const submitForm = async () => {
       request_data: 'Связаться с клиентом'
     }
     try {
-      await $fetch<any>('https://api.rechip-tuning.ru/wp-json/telegram-requests/v1/submit', {
+      await $fetch<any>('https://api.rechip-tuning.ru/api/telegram-requests/submit', {
         method: 'POST',
         body: payload
       })

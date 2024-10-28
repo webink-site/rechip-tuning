@@ -1,7 +1,7 @@
 <template>
   <section v-if="data?.posts.length" class="py-12">
     <div class="container mx-auto px-4 md:px-0">
-      <pre>{{ data }}</pre>
+      <!-- <pre>{{ data }}</pre> -->
       <div class="grid grid-cols-12 gap-6">
         <div class="col-span-12">
           <h2 class="text-dark text-4xl font-bold mb-2">Наши работы</h2>
@@ -28,7 +28,7 @@
               Прирост мощности {{ item.fields.tuning_profit }}
             </div>
 
-            <img :src="item.fields.gallery[0]" :alt="item.title" class="rounded-lg mb-2 h-[30rem] object-cover group-hover:opacity-70 transition-all">
+            <img :src="item.fields.gallery[0]" :alt="item.title" class="rounded-lg mb-2 h-[30rem] object-cover group-hover:opacity-70 transition-all bg-gray-3">
             <p class="text-dark text-lg font-bold">{{ item.title }}</p>
             <p class="text-dark">{{ item.content }}</p>
             <p class="text-gray-400">{{ item.fields.power_points }}</p>

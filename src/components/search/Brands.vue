@@ -37,7 +37,6 @@ const props = defineProps({
   }
 })
 
-// const { data } = await useAsyncData<Brand[]>('brands', () => $fetch('https://api.rechip-tuning.ru/wp-json/custom/v1/base?full=1'))
 const carStore = useCarStore()
 
 useAsyncData('brands', () => carStore.LOAD_BRANDS())
