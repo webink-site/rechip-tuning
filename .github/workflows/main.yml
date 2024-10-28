@@ -12,10 +12,10 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v3
 
-      - name: Use Node.js 20
+      - name: Use Node.js 23
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '23'
 
       - name: 🔨 Build Project
         run: |
@@ -25,7 +25,18 @@ jobs:
           npm install
           npm run build
 
-      - name: 📂 Remove Files
+      # Загрузка файлов с помощью SCP
+      - name: 📂 Upload project files to server via SCP
+        uses: appleboy/scp-action@v0.1.5
+        with:
+          host: ${{ secrets.PROD_FTP_HOST }}
+          username: ${{ secrets.PROD_FTP_USER }}
+          port: 22
+          key: ${{ secrets.PROD_SSH_PRIVATE_KEY }}
+          source: "./"  # Путь к скомпилированным файлам
+          target: "/var/www/html/new.rechip-tuning.ru/"
+
+      - name: ⭐ Start site via PM2
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.PROD_FTP_HOST }}
@@ -33,29 +44,6 @@ jobs:
           password: ${{ secrets.PROD_FTP_PASSWORD }}
           port: 22
           script: |
-            if [ -d "/var/www/new.rechip-tuning.ru/htdocs/" ]; then
-              find /var/www/new.rechip-tuning.ru/htdocs/ -mindepth 1 -delete
-            else
-              echo "Directory does not exist, nothing to remove"
-            fi
-
-      - name: 📂 Sync Files
-        uses: SamKirkland/web-deploy@v1
-        with:
-          target-server: ${{ secrets.PROD_FTP_HOST }}
-          remote-user: ${{ secrets.PROD_FTP_USER }}
-          private-ssh-key: ${{ secrets.PROD_SSH_PRIVATE_KEY }}
-          ssh-port: 22
-          source-path: ./
-          destination-path: /var/www/new.rechip-tuning.ru/htdocs/
-
-      - name: ⭐ Start site via forever
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.PROD_FTP_HOST }}
-          username: ${{ secrets.PROD_FTP_USER }}
-          password: ${{ secrets.PROD_FTP_PASSWORD }}
-          port: 22
-          script: |
-            forever stopall || true
-            forever start /var/www/new.rechip-tuning.ru/htdocs/.output/server/index.mjs
+            pm2 stop rechip-tuning || true
+            pm2 start /var/www/html/new.rechip-tuning.ru/.output/server/index.mjs --name rechip-tuning
+            pm2 save
