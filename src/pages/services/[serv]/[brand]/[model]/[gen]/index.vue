@@ -44,6 +44,7 @@ function getMetaTags (): any {
   return level
 }
 
+/* eslint-disable no-template-curly-in-string */
 useSeoMeta({
   title: () => getMetaTags().title.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
   ogTitle: () => getMetaTags().title.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),

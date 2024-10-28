@@ -14,12 +14,12 @@
     <div class="col-span-12 md:col-span-8">
       <div class="p-6 bg-white rounded-xl border-2 border-gray-3">
         <h1 class="font-bold text-dark text-2xl">
-          {{ servStore.services.find((i) => i.slug === route.params.serv)?.name }}
+          {{ servStore.services.find((i) => i.slug === route.params.serv)?.service_name }}
           {{ title }}
           {{ route.params.gen.toString().substring(0, 9) }} г.в.
         </h1>
         <p class="mt-1 mb-6 text-gray-400">
-          {{ servStore.services.find((i) => i.slug === route.params.serv)?.name }}
+          {{ servStore.services.find((i) => i.slug === route.params.serv)?.service_name }}
           {{ title }}
           с гарантией и тест-драйвом
         </p>
