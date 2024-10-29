@@ -1,6 +1,6 @@
 <template>
   <section class="bg-gray-2 pt-10 md:pt-20">
-    <div class="container mx-auto">
+    <div class="container mx-auto px-4 md:px-0">
       <UiFormsCarSearch />
     </div>
     <SearchGenerations v-if="data" :gens="data" :title="title" />

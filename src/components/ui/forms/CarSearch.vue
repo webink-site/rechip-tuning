@@ -11,39 +11,42 @@
       </span>
       <div class="grid grid-cols-1 md:grid-cols-6 md:gap-4">
         <div class="col-span-1" :class="{'md:!col-span-1': props.full}">
-          <label class="text-dark font-semibold">Услуга</label>
+          <label class="text-dark font-semibold hidden md:block">Услуга</label>
           <Dropdown
             v-model="search.serv"
             :options="servStore.services"
+            placeholder="Услуга"
             :class="{ 'outline outline-2 outline-red-500': v$.serv.$error}"
             option-value="slug"
             option-label="service_name"
-            class="w-full mt-3 py-0.5 rounded-md bg-gray-2 border-none mb-2"
+            class="w-full md:mt-3 py-0.5 rounded-md bg-gray-2 border-none mb-2"
             @change="changeServ"
           />
         </div>
         <div class="col-span-1">
-          <label class="text-dark font-semibold">Марка</label>
+          <label class="text-dark font-semibold hidden md:block">Марка</label>
           <Dropdown
             v-model="search.brand"
             :options="carStore.brands"
+            placeholder="Марка"
             option-value="id"
             option-label="name"
             :filter="true"
             empty-message="Нет доступных опций"
-            class="w-full mt-3 py-0.5 rounded-md bg-gray-2 border-none mb-2"
+            class="w-full md:mt-3 py-0.5 rounded-md bg-gray-2 border-none mb-2"
             :class="{ 'outline outline-2 outline-red-500': v$.brand.$error}"
             @change="changeBrand"
           />
         </div>
         <div class="col-span-1">
-          <label class="text-dark font-semibold">Модель</label>
+          <label class="text-dark font-semibold hidden md:block">Модель</label>
           <Dropdown
             v-model="search.model"
             :options="carStore.models"
+            placeholder="Модель"
             option-value="id"
             option-label="name"
-            class="w-full mt-3 py-0.5 rounded-md bg-gray-2 border-none mb-2"
+            class="w-full md:mt-3 py-0.5 rounded-md bg-gray-2 border-none mb-2"
             :filter="carStore.models.length ? true : false"
             empty-message="Нет доступных опций"
             :class="{ 'outline outline-2 outline-red-500': v$.model.$error}"
@@ -51,15 +54,16 @@
           />
         </div>
         <div class="col-span-1">
-          <label class="text-dark font-semibold">Поколение</label>
+          <label class="text-dark font-semibold hidden md:block">Поколение</label>
           <Dropdown
             v-model="search.gen"
             :options="carStore.getGens"
+            placeholder="Поколение"
             option-value="id"
             option-label="name"
             :filter="carStore.models.length ? true : false"
             empty-message="Нет доступных опций"
-            class="w-full mt-3 py-0.5 rounded-md bg-gray-2 border-none mb-2"
+            class="w-full md:mt-3 py-0.5 rounded-md bg-gray-2 border-none mb-2"
             :class="{ 'outline outline-2 outline-red-500': v$.gen.$error}"
             @change="changeGen"
           >
@@ -71,20 +75,21 @@
           </Dropdown>
         </div>
         <div class="col-span-1">
-          <label class="text-dark font-semibold">Модификация</label>
+          <label class="text-dark font-semibold hidden md:block">Модификация</label>
           <Dropdown
             v-model="search.mod"
             :options="carStore.getBodies"
+            placeholder="Модификация"
             option-value="id"
             option-label="search"
             empty-message="Нет доступных опций"
-            class="w-full mt-3 py-0.5 rounded-md bg-gray-2 border-none mb-2"
+            class="w-full md:mt-3 py-0.5 rounded-md bg-gray-2 border-none mb-2"
             :class="{ 'outline outline-2 outline-red-500': v$.mod.$error}"
             @change="changeMod"
           />
         </div>
         <div class="col-span-1">
-          <UiButton text="Искать" class="w-full mt-7" @click="searchCar" />
+          <UiButton text="Искать" class="w-full md:mt-7" @click="searchCar" />
         </div>
       </div>
     </div>
