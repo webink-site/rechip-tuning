@@ -1,5 +1,5 @@
 <template>
-  <div class="col-span-6 col-start-4">
+  <div class="col-span-12 md:col-span-6 md:col-start-4">
     <div class="flex flex-wrap gap-6 items-center rounded-xl bg-white px-8 py-5 border">
       <div class="flex items-end gap-2">
         <img v-if="title === 'Яндекс'" src="/icons/ya.svg" :alt="title" class="h-10">

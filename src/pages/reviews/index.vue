@@ -7,7 +7,7 @@
             <h2 class="text-dark text-4xl font-bold mb-2">Отзывы о нас</h2>
           </div>
           <ReviewsRating title="Яндекс" />
-          <div class="col-span-6 col-start-4">
+          <div class="col-span-12 md:col-span-6 md:col-start-4">
             <div style="width:100%;height:1200px;overflow:hidden;position:relative;">
               <iframe style="width:100%;height:100%;border:1px solid #e6e6e6;border-radius:8px;box-sizing:border-box" src="https://yandex.ru/maps-reviews-widget/204587782481?comments" />
               <a href="https://yandex.ru/maps/org/chip_tyuning/204587782481/" target="_blank" style="box-sizing:border-box;text-decoration:none;color:#b3b3b3;font-size:10px;font-family:YS Text,sans-serif;padding:0 20px;position:absolute;bottom:8px;width:100%;text-align:center;left:0">reChip-tuning на карте Москвы — Яндекс.Карты</a>
@@ -17,7 +17,7 @@
               <ReviewsRating title="Авито" />
             </div>
           </div>
-          <ReviewsCard v-for="(item, i) in reviews" :key="i" class="col-span-6" :item="item" />
+          <ReviewsCard v-for="(item, i) in reviews" :key="i" class="col-span-12 md:col-span-6" :item="item" />
           <div class="col-span-12 text-center">
             <UiButton :load="load" text="Показать еще" class="w-full" blue @click="showMore" />
           </div>
