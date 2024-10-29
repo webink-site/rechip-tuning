@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-gray-2 pt-10 md:pt-20">
+  <section class="bg-gray-2 pt-10 md:pt-20" style="min-height: calc(100vh - 506px);">
     <div class="container mx-auto">
       <UiFormsCarSearch />
     </div>

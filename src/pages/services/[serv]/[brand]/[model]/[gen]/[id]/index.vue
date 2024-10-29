@@ -9,7 +9,6 @@
       </div>
     </section>
     <div class="bg-white py-16">
-      <!-- <pre>{{ data }}</pre> -->
       <!-- <SearchMods v-if="mods" :mods="mods" /> -->
       <UiCalcGuide />
       <HomeAdvant />
@@ -31,7 +30,7 @@ const carStore = useCarStore()
 const route = useRoute()
 
 const { data } = await useAsyncData('complectations', () => $fetch(`https://api.rechip-tuning.ru/api/autos?mark_id=${route.params.brand.toString().toUpperCase().replaceAll('-', '_')}&model_id=${route.params.model.toString().toUpperCase().replaceAll('-', '_')}&generation_id=${route.params.gen}&product_id=${route.params.id.toString().replaceAll('-', '_')}`))
-const { data: models } = await useAsyncData<Model[]>('modelsForTitle', () => $fetch(`https://api.rechip-tuning.ru/api/autos?mark_id=${route.params.brand.toString().toUpperCase()}`))
+const { data: models } = await useAsyncData<Model[]>('modelsForTitle', () => $fetch(`https://api.rechip-tuning.ru/api/autos?mark_id=${route.params.brand.toString().toUpperCase().replaceAll('-', '_')}`))
 const { data: generations } = await useAsyncData<any>('generations', () => $fetch(`https://api.rechip-tuning.ru/api/autos?mark_id=${route.params.brand.toString().toUpperCase().replaceAll('-', '_')}&model_id=${route.params.model.toString().toUpperCase().replaceAll('-', '_')}&generation_id=${route.params.gen}`))
 
 if (!data.value) {
