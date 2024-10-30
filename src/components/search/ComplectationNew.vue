@@ -93,9 +93,6 @@
     <div class="col-span-12">
       <div class="flex flex-wrap gap-2 mt-8">
         <Transition name="slide-up" mode="out-in">
-          <!-- <p :key="priceTotal">
-            Итого:  <span>{{ priceTotal }} </span>₽
-          </p> -->
           <UiButton
             v-if="complectation.services.stage || complectation.services.main_services.length"
             :key="priceTotal"

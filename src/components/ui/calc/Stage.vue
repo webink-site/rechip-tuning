@@ -26,8 +26,20 @@
             <tr v-for="(item, index) in stageInfo.services.stage[activeStageTab].params" :key="index">
               <td class="text-dark font-semibold px-4 py-2">{{ item.param_name ?? '' }}</td>
               <td class="text-dark font-semibold px-4 py-2">{{ item.factory_value ?? '' }}</td>
-              <td class="text-dark font-semibold px-4 py-2">{{ item.tuned_value ?? '' }}</td>
-              <td class="text-dark font-semibold px-4 py-2">{{ item.increase_value ?? '' }}</td>
+              <td class="text-dark font-semibold px-4 py-2">
+                <Transition name="slide-up" mode="out-in">
+                  <span v-if="item.tuned_value" :key="item.tuned_value">
+                    {{ item.tuned_value }}
+                  </span>
+                </Transition>
+              </td>
+              <td class="text-dark font-semibold px-4 py-2">
+                <Transition name="slide-up" mode="out-in">
+                  <span v-if="item.increase_value" :key="item.increase_value">
+                    {{ item.increase_value }}
+                  </span>
+                </Transition>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -50,5 +62,18 @@ const { stageInfo, activeStageTab } = defineProps<Props>()
 </script>
 
 <style scoped>
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0.25s ease-out;
+}
 
+.slide-up-enter-from {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.slide-up-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
 </style>
