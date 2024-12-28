@@ -18,7 +18,7 @@
             placeholder="Услуга"
             :class="{ 'outline outline-2 outline-red-500': v$.serv.$error}"
             option-value="slug"
-            option-label="service_name"
+            option-label="name"
             class="w-full md:mt-3 py-0.5 rounded-md bg-gray-2 border-none mb-2"
             @change="changeServ"
           />
@@ -29,7 +29,7 @@
             v-model="search.brand"
             :options="carStore.brands"
             placeholder="Марка"
-            option-value="id"
+            option-value="slug"
             option-label="name"
             :filter="true"
             empty-message="Нет доступных опций"
@@ -123,7 +123,7 @@ const search = reactive<SearchField>({
   mod: ''
 })
 
-useAsyncData('brands', () => carStore.LOAD_BRANDS())
+// useAsyncData('brands', () => carStore.LOAD_BRANDS())
 
 const rules = computed(() => ({
   serv: { required },
@@ -164,6 +164,7 @@ onMounted(() => {
 
 async function changeServ () {
   await carStore.SET_SERV(search.serv)
+  await carStore.LOAD_BRANDS(search.serv)
   router.push(`/services/${search.serv}`)
 }
 

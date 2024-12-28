@@ -13,25 +13,13 @@
             Прошивка всех марок авто от 2000 г.в. с гарантией в {{ uiStore.regions[getCityIndex].place }}
           </p>
         </div>
-        <!-- <div class="col-span-12 md:col-span-4 text-center md:text-left">
-          <div class="md:space-y-6">
-            <h2 class="text-white text-2xl md:text-4xl font-bold hidden sm:block">Чип-тюнинг <br> ателье ReChip</h2>
-            <p class="text-white md:text-lg hidden sm:block">Прошивка всех марок авто <br> от 2000 г.в. с гарантией в {{ uiStore.regions[getCityIndex].place }}</p>
-            <UiButton text="Связаться с нами" @click="submitModal = true" />
-          </div>
-        </div> -->
+
         <div class="col-span-12">
           <UiFormsCarSearch />
         </div>
       </div>
     </div>
   </section>
-  <!-- <transition
-    name="fade-out"
-    mode="out-in"
-  >
-    <UiModalsSubmitForm v-if="submitModal" @close="submitModal = false" @close-success="closeSuccess" />
-  </transition> -->
 </template>
 
 <script setup lang="ts">

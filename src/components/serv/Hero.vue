@@ -1,7 +1,7 @@
 <template>
   <section
     class="bg-center bg-no-repeat bg-cover py-12 px-10 md:h-[30rem] relative"
-    :style="`background-image: url('${image}');`"
+    :style="`background-image: url('https://api.rechip-tuning.ru/storage/${image}');`"
   >
     <div class="h-full top-0 left-0 w-full absolute bg-gradient-to-r from-black to-transparent opacity-80" />
 

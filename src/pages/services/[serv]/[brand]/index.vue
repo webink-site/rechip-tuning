@@ -3,24 +3,26 @@
     <div class="container mx-auto px-4 md:px-0">
       <UiFormsCarSearch />
     </div>
-    <SearchModels v-if="data" :models="data" :title="carStore.brands?.find((i) => i.id === $route.params.brand.toString().toUpperCase())?.name ?? ''" />
+    <SearchModels v-if="data" :models="data" :title="carStore.brands?.find((i) => i.slug === $route.params.brand.toString())?.name ?? ''" />
   </section>
 </template>
 
 <script setup lang="ts">
-import type { Model } from '@/src/types/car'
-import { useCarStore } from '@/src/stores/car'
-import { useServStore } from '~/src/stores/serv'
-import { useUiStore } from '~/src/stores/ui'
 import { useCity } from '~/src/helpers/useCiity'
-
-const { getCityIndex } = useCity()
-const uiStore = useUiStore()
-const servStore = useServStore()
-const carStore = useCarStore()
+import { useServStore } from '~/src/stores/serv'
+import { useCarStore } from '~/src/stores/car'
+import { useUiStore } from '~/src/stores/ui'
+import type { Model } from '~/src/types/car'
 
 const route = useRoute()
-const { data } = await useAsyncData<Model[]>('models', () => $fetch(`https://api.rechip-tuning.ru/api/autos?mark_id=${route.params.brand.toString().toUpperCase().replaceAll('-', '_')}`))
+
+const uiStore = useUiStore()
+const carStore = useCarStore()
+const servStore = useServStore()
+
+const { getCityIndex } = useCity()
+
+const { data } = await useAsyncData<Model[]>('models', () => $fetch(`http://api.rechip-tuning.ru/api/catalog?service=${route.params.serv}&brand=${route.params.brand}`))
 useAsyncData('brands', () => carStore.LOAD_BRANDS())
 
 const singleServ = computed(() => {
@@ -28,16 +30,16 @@ const singleServ = computed(() => {
 })
 
 function getMetaTags (): any {
-  const level = singleServ.value?.seo_settings.find(i => i.level === 'Марка')
+  const level = singleServ.value?.seo_settings.find(i => i.level === 'brand')
   return level
 }
 
 /* eslint-disable no-template-curly-in-string */
 useSeoMeta({
-  title: () => getMetaTags().title.replaceAll('${name}', carStore.brands?.find(i => i.id === route.params.brand.toString().toUpperCase())?.name ?? '').replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
-  ogTitle: () => getMetaTags().title.replaceAll('${name}', carStore.brands?.find(i => i.id === route.params.brand.toString().toUpperCase())?.name ?? '').replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
-  description: () => getMetaTags().description.replaceAll('${name}', carStore.brands?.find(i => i.id === route.params.brand.toString().toUpperCase())?.name ?? '').replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
-  ogDescription: () => getMetaTags().description.replaceAll('${name}', carStore.brands?.find(i => i.id === route.params.brand.toString().toUpperCase())?.name ?? '').replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  title: () => getMetaTags().title.replaceAll('${name}', carStore.brands?.find(i => i.slug === route.params.brand.toString())?.name ?? '').replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  ogTitle: () => getMetaTags().title.replaceAll('${name}', carStore.brands?.find(i => i.slug === route.params.brand.toString())?.name ?? '').replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  description: () => getMetaTags().description.replaceAll('${name}', carStore.brands?.find(i => i.slug === route.params.brand.toString())?.name ?? '').replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  ogDescription: () => getMetaTags().description.replaceAll('${name}', carStore.brands?.find(i => i.slug === route.params.brand.toString())?.name ?? '').replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
   ogType: 'website'
 })
 

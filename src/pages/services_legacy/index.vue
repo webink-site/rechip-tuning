@@ -17,8 +17,8 @@ const servStore = useServStore()
 useSeoMeta({
   title: () => `Услуги компании ReChip тюнинг в ${uiStore.regions[getCityIndex.value].place}`,
   ogTitle: () => `Услуги компании ReChip тюнинг в ${uiStore.regions[getCityIndex.value].place}`,
-  description: () => `Осуществляем следующий перечень услуг: ${servStore.services.map(i => i.name).join(', ')}`,
-  ogDescription: () => `Осуществляем следующий перечень услуг: ${servStore.services.map(i => i.name).join(', ')}`,
+  description: () => `Осуществляем следующий перечень услуг: ${servStore.services.map(i => i.service_name).join(', ')}`,
+  ogDescription: () => `Осуществляем следующий перечень услуг: ${servStore.services.map(i => i.service_name).join(', ')}`,
   ogType: 'website',
   ogImage: 'https://new.rechip-tuning.ru/img/hero.webp'
 })

@@ -12,13 +12,10 @@
           </div>
         </div>
       </div>
-      <!-- <pre>{{ brands }}</pre> -->
+      <!-- {{ brands }} -->
       <div v-if="brands.length" class="grid grid-cols-6 gap-6 mt-8">
-        <div v-for="(item, index) in brands" v-show="constrolVis(item)" :key="index" class="col-span-3 md:col-span-1">
+        <div v-for="(item, index) in brands" :key="index" class="col-span-3 md:col-span-1">
           <UiCardsBrandCard :item="item" />
-        </div>
-        <div class="col-span-6 text-center">
-          <UiButton class="w-full" blue :text="!showAll ? 'Посмотреть все марки' : 'Скрыть'" @click="showAll = !showAll" />
         </div>
       </div>
     </div>
@@ -27,7 +24,6 @@
 
 <script setup lang="ts">
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/outline/index.js'
-import type { Brand } from '@/src/types/car'
 import { useCarStore } from '@/src/stores/car'
 
 const props = defineProps({
@@ -38,9 +34,9 @@ const props = defineProps({
 })
 
 const carStore = useCarStore()
-
 const search = ref('')
-const showAll = ref(false)
+
+useAsyncData('brands', () => carStore.LOAD_BRANDS())
 
 const brands = computed(() => {
   if (!carStore.brands) {
@@ -49,26 +45,8 @@ const brands = computed(() => {
   if (search.value) {
     return carStore.brands.filter(i => i.name.toLocaleLowerCase().includes(search.value.toLocaleLowerCase()))
   }
-  return carStore.brands?.sort((a, b) => {
-    if (a.popular && !b.popular) {
-      return -1
-    } else if (!a.popular && b.popular) {
-      return 1
-    } else {
-      return 0
-    }
-  })
+  return carStore.brands
 })
-
-function constrolVis (item: Brand) {
-  if (search.value) {
-    return true
-  } else if (item.popular) {
-    return true
-  } else {
-    return !!showAll.value
-  }
-}
 
 </script>
 

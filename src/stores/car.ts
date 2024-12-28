@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { popular } from '../helpers/popular'
+// import { popular } from '../helpers/popular'
 import type { Brand } from '@/src/types/car'
 
 interface GoodsState {
@@ -58,22 +58,18 @@ export const useCarStore = defineStore('car', {
     SET_MOD (mod: string | null) {
       this.search.mod = mod
     },
-    async LOAD_BRANDS () {
-      if (this.brands.length) { return }
-      const { data } = await useFetch<Brand[]>('https://api.rechip-tuning.ru/api/autos')
+    async LOAD_BRANDS (serv: null | string = 'chip-tyuning') {
+      // if (this.brands.length) { return }
+      const { data } = await useFetch<Brand[]>(`https://api.rechip-tuning.ru/api/catalog?service=${serv}`)
       if (data.value) {
-        this.brands = data.value.map((i) => {
-          return {
-            ...i,
-            popular: popular.includes(i.id)
-          }
-        })
+        this.brands = data.value
       }
     },
     async LOAD_MODELS (brand: string | null) {
       if (!brand) { return }
       this.search.brand = brand
-      const models = await $fetch<any>(`https://api.rechip-tuning.ru/api/autos?mark_id=${this.search.brand}`)
+      const models = await $fetch<any>(`https://api.rechip-tuning.ru/api/catalog?service=${this.search.serv}&brand=${this.search.brand}`)
+
       if (models.length) {
         this.models = models
       }

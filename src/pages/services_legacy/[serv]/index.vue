@@ -1,14 +1,15 @@
 <template>
   <div v-if="servStore.services.length && singleServ">
-    <section v-if="singleServ.slug" class="bg-gray-2 pt-10 md:pt-20 pb-6">
+    <!-- <pre>{{ servStore.services }}</pre> -->
+    <section class="bg-gray-2 pt-10 md:pt-20 pb-6">
       <div class="container mx-auto px-4 md:px-0">
         <UiFormsCarSearch />
       </div>
     </section>
-    <ServHero :title="singleServ?.post_title ?? singleServ?.name" :image="singleServ.image_wide" :description="singleServ.description ?? ''" />
+    <ServHero :title="singleServ?.post_title" :image="singleServ.image_wide" :description="singleServ.description" />
     <section class="bg-gray-2 pt-10 md:pt-20">
       <SearchBrands gray />
-      <ServPrice v-if="singleServ?.minimal_prices.length" :prices="singleServ?.minimal_prices" />
+      <ServPrice :prices="singleServ?.minimal_prices" />
       <section class="md:pb-20 bg-white">
         <div class="container mx-auto px-4 md:px-0">
           <div class="grid gap-6 grid-cols-12 mb-20">
@@ -17,7 +18,7 @@
                 <h2>{{ singleServ?.post_title }}</h2>
               </div>
               <div class="nuxt-descr mb-10" v-html="singleServ.page_content" />
-              <a v-if="singleServ?.minimal_prices.length" href="#prices" @click.prevent="scrollIntoView('prices')">
+              <a href="#prices" @click.prevent="scrollIntoView('prices')">
                 <UiButton text="Посмотреть цены" red />
               </a>
             </div>

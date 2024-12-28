@@ -8,7 +8,7 @@ export interface Service {
   // high?: boolean
     id: number
     slug: string
-    service_name: string
+    name: string
     short_description: string
     description: string
     post_title: string
@@ -18,7 +18,7 @@ export interface Service {
     minimal_prices: {
       icon: string
       price: string
-      description: string
+      price_type: string
     }[]
     created_at: Date
     updated_at: Date

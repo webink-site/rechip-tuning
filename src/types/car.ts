@@ -1,6 +1,8 @@
 export interface Model {
   id: string
+  slug: string
   name: string
+  catalog_image: string
   'cyrillic-name': string
   class: string
   'year-from': number
@@ -12,12 +14,15 @@ export interface Model {
   configurations: number
 }
 export interface Brand {
-  id: string
   name: string
-  'cyrillic-name': string
-  popular: boolean
-  country: string
-  models: Model[]
+  slug: string
+  catalog_image: string
+  // id: string
+  // name: string
+  // 'cyrillic-name': string
+  // popular: boolean
+  // country: string
+  // models: Model[]
 }
 
 export interface Generation {

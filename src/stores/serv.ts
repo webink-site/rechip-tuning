@@ -19,9 +19,9 @@ export const useServStore = defineStore('serv', {
   },
   actions: {
     async LOAD_SERVICES () {
-      const services = await $fetch<any>('https://api.rechip-tuning.ru/api/page?slug=services')
+      const services = await $fetch<any>('https://api.rechip-tuning.ru/api/services')
       if (services) {
-        this.services = services
+        this.services = services.data.filter((i: any) => i.slug)
       }
     }
   }

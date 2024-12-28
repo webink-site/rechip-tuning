@@ -76,7 +76,7 @@
             </ul>
           </div>
         </div>
-        <UiCalcStage v-if="stageInfo.stage && $route.params.servName === 'chip-tuning'" :stage-info="stageInfo" :active-stage-tab="activeStageTab" @change-tab="(e) => activeStageTab = e" />
+        <UiCalcStage v-if="stageInfo.stage && $route.params.servName === 'chip-tyuning'" :stage-info="stageInfo" :active-stage-tab="activeStageTab" @change-tab="(e) => activeStageTab = e" />
         <div class="col-span-12">
           <h2 class="font-bold text-dark text-2xl mb-2">Дополнительные услуги к заказу</h2>
         </div>
@@ -159,7 +159,7 @@ onMounted(() => {
 
 const priceTotal = computed(() => {
   const addTotal = addCards.value.filter(i => i.active).map(i => Number(i.price.replaceAll(' ', ''))).reduce((a, b) => a + b, 0)
-  if (route.params.servName === 'chip-tuning') {
+  if (route.params.servName === 'chip-tyuning') {
     const priceNum = Number(stageInfo.value.stage[activeStageTab.value].price) ?? 0
     return (priceNum + addTotal).toLocaleString()
   } else {

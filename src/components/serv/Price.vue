@@ -10,7 +10,7 @@
             <img :src="item.icon" class="mb-8 h-8" alt="">
             <p class="font-bold text-dark text-lg mb-2">{{ item.price }}</p>
             <p class="text-gray-400 text-sm">
-              {{ item.description }}
+              {{ item.price_type }}
             </p>
           </div>
         </div>
@@ -27,7 +27,7 @@
 interface Props{
   prices: {
     price: string
-    description: string
+    price_type: string
     icon: string
   }[]
 }
