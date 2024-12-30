@@ -20,7 +20,7 @@ useSeoMeta({
   description: () => `Осуществляем следующий перечень услуг: ${servStore.services.map(i => i.name).join(', ')}`,
   ogDescription: () => `Осуществляем следующий перечень услуг: ${servStore.services.map(i => i.name).join(', ')}`,
   ogType: 'website',
-  ogImage: 'https://new.rechip-tuning.ru/img/hero.webp'
+  ogImage: '/img/hero.webp'
 })
 </script>
 

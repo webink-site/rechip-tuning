@@ -45,12 +45,16 @@
 </template>
 
 <script setup lang="ts">
+import { useCity } from '~/src/helpers/useCiity'
 import { useCarStore } from '~/src/stores/car'
 import { useServStore } from '~/src/stores/serv'
+import { useUiStore } from '~/src/stores/ui'
 
 const route = useRoute()
 const servStore = useServStore()
 const carStore = useCarStore()
+const { getCityIndex } = useCity()
+const uiStore = useUiStore()
 
 useAsyncData('brands', () => carStore.LOAD_BRANDS())
 
@@ -63,6 +67,20 @@ const singleServ = computed(() => {
   return servStore.services.find((i: any) => i.slug === route.params.serv)
 })
 
+function getMetaTags (): any {
+  const level = singleServ.value?.seo_settings.find(i => i.level === 'service')
+  return level
+}
+
+/* eslint-disable no-template-curly-in-string */
+useSeoMeta({
+  title: () => getMetaTags().title.replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  ogTitle: () => getMetaTags().title.replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  description: () => getMetaTags().description.replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  ogDescription: () => getMetaTags().description.replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  ogType: 'website',
+  ogImage: `https://api.rechip-tuning.ru/storage/${singleServ.value?.image_wide}`
+})
 </script>
 
 <style scoped>

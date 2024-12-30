@@ -44,7 +44,7 @@
             v-model="search.model"
             :options="carStore.models"
             placeholder="Модель"
-            option-value="id"
+            option-value="slug"
             option-label="name"
             class="w-full md:mt-3 py-0.5 rounded-md bg-gray-2 border-none mb-2"
             :filter="carStore.models.length ? true : false"
@@ -59,7 +59,7 @@
             v-model="search.gen"
             :options="carStore.getGens"
             placeholder="Поколение"
-            option-value="id"
+            option-value="slug"
             option-label="name"
             :filter="carStore.models.length ? true : false"
             empty-message="Нет доступных опций"
@@ -80,7 +80,7 @@
             v-model="search.mod"
             :options="carStore.getBodies"
             placeholder="Модификация"
-            option-value="id"
+            option-value="slug"
             option-label="search"
             empty-message="Нет доступных опций"
             class="w-full md:mt-3 py-0.5 rounded-md bg-gray-2 border-none mb-2"
@@ -145,7 +145,7 @@ const props = defineProps({
 const searchCar = () => {
   v$.value.$validate()
   if (!v$.value.$error) {
-    const newPath = `/services/${search.serv}/${search.brand?.replaceAll('_', '-')}/${search.model?.replaceAll('_', '-')}/${search.gen?.toString()}/${search.mod?.toString().replaceAll('_', '-')}`.toLocaleLowerCase()
+    const newPath = `/services/${search.serv}/${search.brand}/${search.model}/${search.gen}/${search.mod}`
     router.replace(newPath)
   }
 }
@@ -170,20 +170,20 @@ async function changeServ () {
 
 async function changeBrand () {
   await carStore.LOAD_MODELS(search.brand)
-  router.push(`/services/${search.serv}/${search.brand?.toLocaleLowerCase().replaceAll('_', '-')}`)
+  router.push(`/services/${search.serv}/${search.brand}`)
 }
 async function changeModel () {
   await carStore.LOAD_GENS(search.model)
-  router.push(`/services/${search.serv}/${search.brand?.toLocaleLowerCase().replaceAll('_', '-')}/${search.model?.toLocaleLowerCase().replaceAll('_', '-')}`)
+  router.push(`/services/${search.serv}/${search.brand}/${search.model}`)
 }
 
 async function changeGen () {
   await carStore.LOAD_BODY(search.gen)
-  router.push(`/services/${search.serv}/${search.brand?.toLocaleLowerCase().replaceAll('_', '-')}/${search.model?.toLocaleLowerCase().replaceAll('_', '-')}/${search.gen}`)
+  router.push(`/services/${search.serv}/${search.brand}/${search.model}/${search.gen}`)
 }
 async function changeMod () {
   await carStore.SET_MOD(search.mod)
-  router.push(`/services/${search.serv}/${search.brand?.toLocaleLowerCase().replaceAll('_', '-')}/${search.model?.toLocaleLowerCase().replaceAll('_', '-')}/${search.gen}/${search.mod?.replaceAll('_', '-')}`)
+  router.push(`/services/${search.serv}/${search.brand}/${search.model}/${search.gen}/${search.mod}`)
 }
 
 </script>

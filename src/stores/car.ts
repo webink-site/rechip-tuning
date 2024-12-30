@@ -46,9 +46,10 @@ export const useCarStore = defineStore('car', {
       })
     },
     getBodies (state) {
-      return Object.entries(state.bodies).flatMap(([bodyType, cars]) =>
-        (cars as Array<{ [key: string]: any }>).map(car => ({ bodyType, ...car, search: `${car.name} (${bodyType})` }))
-      )
+      return state.bodies.map((i: any) => ({
+        ...i,
+        search: `${i.volume}, ${i.power} л.с.`
+      }))
     }
   },
   actions: {
@@ -77,7 +78,7 @@ export const useCarStore = defineStore('car', {
     async LOAD_GENS (model: string | null) {
       if (!model) { return }
       this.search.model = model
-      const gens = await $fetch<any>(`https://api.rechip-tuning.ru/api/autos?mark_id=${this.search.brand}&model_id=${this.search.model}`)
+      const gens = await $fetch<any>(`https://api.rechip-tuning.ru/api/catalog?service=${this.search.serv}&brand=${this.search.brand}&model=${this.search.model}`)
       if (gens.length) {
         this.gens = gens
       }
@@ -85,7 +86,7 @@ export const useCarStore = defineStore('car', {
     async LOAD_BODY (gen: string | null) {
       if (!gen) { return }
       this.search.gen = gen
-      const bodies = await $fetch<any>(`https://api.rechip-tuning.ru/api/autos?mark_id=${this.search.brand}&model_id=${this.search.model}&generation_id=${this.search.gen}`)
+      const bodies = await $fetch<any>(`https://api.rechip-tuning.ru/api/catalog?service=${this.search.serv}&brand=${this.search.brand}&model=${this.search.model}&configuration=${this.search.gen}`)
       if (bodies) {
         this.bodies = bodies
       }
