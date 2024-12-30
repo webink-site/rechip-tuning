@@ -10,7 +10,7 @@
 <script setup lang="ts">
 
 const route = useRoute()
-const { data } = await useAsyncData<any>('gens', () => $fetch(`http://api.rechip-tuning.ru/api/catalog?service=${route.params.serv}&brand=${route.params.brand}&model=${route.params.model}&configuration=${route.params.gen}`))
+const { data } = await useAsyncData<any>('gens', () => $fetch(`https://api.rechip-tuning.ru/api/catalog?service=${route.params.serv}&brand=${route.params.brand}&model=${route.params.model}&configuration=${route.params.gen}`))
 
 </script>
 

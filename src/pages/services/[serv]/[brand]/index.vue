@@ -22,7 +22,7 @@ const servStore = useServStore()
 
 const { getCityIndex } = useCity()
 
-const { data } = await useAsyncData<Model[]>('models', () => $fetch(`http://api.rechip-tuning.ru/api/catalog?service=${route.params.serv}&brand=${route.params.brand}`))
+const { data } = await useAsyncData<Model[]>('models', () => $fetch(`https://api.rechip-tuning.ru/api/catalog?service=${route.params.serv}&brand=${route.params.brand}`))
 useAsyncData('brands', () => carStore.LOAD_BRANDS())
 
 const singleServ = computed(() => {

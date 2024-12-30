@@ -26,7 +26,7 @@ const servStore = useServStore()
 const uiStore = useUiStore()
 
 const route = useRoute()
-const { data } = await useAsyncData<any>('engine', () => $fetch(`http://api.rechip-tuning.ru/api/catalog?service=${route.params.serv}&brand=${route.params.brand}&model=${route.params.model}&configuration=${route.params.gen}&engine=${route.params.id}`))
+const { data } = await useAsyncData<any>('engine', () => $fetch(`https://api.rechip-tuning.ru/api/catalog?service=${route.params.serv}&brand=${route.params.brand}&model=${route.params.model}&configuration=${route.params.gen}&engine=${route.params.id}`))
 
 const title = computed(() => {
   if (data.value) {
