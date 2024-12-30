@@ -11,10 +11,10 @@
         <div v-else class="h-52  mx-auto mb-4 aspect-square object-cover rounded-xl bg-gray-200 flex justify-center items-center">
           <i class="pi pi-car text-gray-400 text-2xl" />
         </div>
-        <h1 class="font-bold text-dark text-2xl">
+        <h1 v-if="engine.chip_tuning_param" class="font-bold text-dark text-2xl">
           {{ title }}
         </h1>
-        <p class="mt-1 text-gray-400">
+        <p v-if="engine.chip_tuning_param" class="mt-1 text-gray-400">
           {{ title }}
           с гарантией и тест-драйвом
         </p>
@@ -23,7 +23,7 @@
 
     <div class="col-span-12 md:col-span-8">
       <div class="p-6 bg-white rounded-xl h-full border-2 border-gray-3">
-        <div class="flex justify-between items-center">
+        <div v-if="engine.chip_tuning_param" class="flex justify-between items-center">
           <div class="flex">
             <button
               v-for="(item, i) in stages"
@@ -36,7 +36,7 @@
             </button>
           </div>
         </div>
-        <div class="overflow-x-auto pb-3 md:pb-0">
+        <div v-if="engine.chip_tuning_param" class="overflow-x-auto pb-3 md:pb-0">
           <table v-if="activeStageTab === 0" class="w-full mt-2 whitespace-nowrap">
             <tbody class="divide-y">
               <tr>
@@ -95,18 +95,46 @@
           </table>
         </div>
 
-        <div class="flex flex-wrap gap-2 mt-8">
+        <div v-else>
+          <h1 class="font-bold text-dark text-2xl">
+            {{ title }}
+          </h1>
+          <p class="mt-1 text-gray-400">
+            {{ title }}
+            с гарантией и тест-драйвом
+          </p>
+          <p class="text-dark font-semibold my-2">Мотор: {{ engine.engine.volume }}</p>
+          <p class="text-dark font-semibold mb-2">Мощность: {{ engine.engine.power }} л.с.</p>
+        </div>
+
+        <div v-if="engine.chip_tuning_param" class="flex flex-wrap gap-2 mt-8">
           <Transition name="slide-up" mode="out-in">
-            <!-- <UiButton
-              v-if="complectation.services.stage || complectation.services.main_services.length"
-              :key="priceTotal"
-              green
-              :text="`Итого: ${priceTotal} ₽`"
-            /> -->
             <UiButton
               :key="activeStageTab"
               green
-              :text="`Итого: ${activeStageTab === 0 ? Number(engine.chip_tuning_param.stage1_price) : Number(engine.chip_tuning_param.stage2_price)} ₽`"
+              :text="`Итого: ${activeStageTab === 0 ? Number(engine.chip_tuning_param.stage1_price).toLocaleString() : Number(engine.chip_tuning_param.stage2_price).toLocaleString()} ₽`"
+            />
+          </Transition>
+
+          <UiButton red text="Оставить заявку" @click="submitModal = true" />
+          <transition
+            name="fade-out"
+            mode="out-in"
+          >
+            <UiModalsSubmitForm
+              v-if="submitModal"
+              :title="`${title}, ${engine.engine.volume}, ${engine.engine.power} л.с.`"
+              @close="submitModal = false"
+              @close-success="closeSuccess"
+            />
+          </transition>
+        </div>
+        <div v-else class="flex flex-wrap gap-2 mt-8">
+          <Transition name="slide-up" mode="out-in">
+            <UiButton
+              :key="activeStageTab"
+              green
+              :text="`Итого: ${Number(engine.service_main_price).toLocaleString()} ₽`"
             />
           </Transition>
 
@@ -125,7 +153,15 @@
         </div>
       </div>
     </div>
-    <!-- <pre>{{ engine }}</pre> -->
+    <div v-if="engine.optional_services.length" class="col-span-12">
+      <h2 class="font-bold text-dark text-2xl mb-2">Дополнительные услуги к заказу</h2>
+    </div>
+    <UiCalcAdditionalCard
+      v-for="(card, index) in engine.optional_services"
+      :key="index"
+      :card="card.service"
+    />
+    <!-- <pre>{{ engine.optional_services }}</pre> -->
   </div>
 </template>
 
