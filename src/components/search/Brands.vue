@@ -12,7 +12,6 @@
           </div>
         </div>
       </div>
-      <!-- {{ brands }} -->
       <div v-if="brands.length" class="grid grid-cols-6 gap-6 mt-8">
         <div v-for="(item, index) in brands" :key="index" class="col-span-3 md:col-span-1">
           <UiCardsBrandCard :item="item" />

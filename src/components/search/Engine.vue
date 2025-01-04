@@ -110,9 +110,9 @@
         <div v-if="engine.chip_tuning_param" class="flex flex-wrap gap-2 mt-8">
           <Transition name="slide-up" mode="out-in">
             <UiButton
-              :key="activeStageTab"
+              :key="priceTotal"
               green
-              :text="`Итого: ${activeStageTab === 0 ? Number(engine.chip_tuning_param.stage1_price).toLocaleString() : Number(engine.chip_tuning_param.stage2_price).toLocaleString()} ₽`"
+              :text="`Итого: ${priceTotal} ₽`"
             />
           </Transition>
 
@@ -132,9 +132,9 @@
         <div v-else class="flex flex-wrap gap-2 mt-8">
           <Transition name="slide-up" mode="out-in">
             <UiButton
-              :key="activeStageTab"
+              :key="priceTotal"
               green
-              :text="`Итого: ${Number(engine.service_main_price).toLocaleString()} ₽`"
+              :text="`Итого: ${priceTotal} ₽`"
             />
           </Transition>
 
@@ -153,22 +153,20 @@
         </div>
       </div>
     </div>
-    <div v-if="engine.optional_services.length" class="col-span-12">
+    <div v-if="addCards.length" class="col-span-12">
       <h2 class="font-bold text-dark text-2xl mb-2">Дополнительные услуги к заказу</h2>
     </div>
     <UiCalcAdditionalCard
-      v-for="(card, index) in engine.optional_services"
+      v-for="(card, index) in addCards"
       :key="index"
-      :card="card.service"
+      v-model:active="card.active"
+      :card="card"
     />
-    <!-- <pre>{{ engine.optional_services }}</pre> -->
   </div>
 </template>
 
 <script setup lang="ts">
 import { toast } from 'vue3-toastify'
-
-// const route = useRoute()
 
 const stages = ['Stage 1', 'Stage 2']
 const activeStageTab = ref(0)
@@ -179,6 +177,27 @@ type Props = {
 }
 
 const { engine, title } = defineProps<Props>()
+
+const addCards = ref<any>([])
+
+if (engine && engine.optional_services.length) {
+  addCards.value = engine.optional_services.map((i: any) => {
+    return {
+      ...i,
+      active: false
+    }
+  })
+}
+
+const priceTotal = computed(() => {
+  const addTotal = addCards.value.filter((i: any) => i.active).map((i: any) => Number(i.main_price)).reduce((a: any, b: any) => a + b, 0)
+  if (engine.chip_tuning_param) {
+    const priceNum = activeStageTab.value === 0 ? Number(engine.chip_tuning_param.stage1_price) : Number(engine.chip_tuning_param.stage2_price)
+    return (priceNum + addTotal).toLocaleString()
+  } else {
+    return (Number(engine.service_main_price) + addTotal).toLocaleString()
+  }
+})
 
 const imgUrl = ref<string | null>(null)
 const submitModal = ref(false)

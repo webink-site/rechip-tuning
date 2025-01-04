@@ -60,10 +60,9 @@ export const useCarStore = defineStore('car', {
       this.search.mod = mod
     },
     async LOAD_BRANDS (serv: null | string = 'chip-tyuning') {
-      // if (this.brands.length) { return }
       const { data } = await useFetch<Brand[]>(`https://api.rechip-tuning.ru/api/catalog?service=${serv}`)
       if (data.value) {
-        this.brands = data.value
+        this.brands = data.value.sort((a, b) => a.name.localeCompare(b.name))
       }
     },
     async LOAD_MODELS (brand: string | null) {

@@ -5,7 +5,7 @@
         v-if="imgUrl !== null"
         :src="imgUrl"
         :alt="item.name"
-        class="h-16 mx-auto object-contain "
+        class="h-16 mx-auto object-contain mix-blend-multiply"
         @error="imgUrl = null"
       >
       <div v-else class="h-20 mx-auto flex justify-center items-center">

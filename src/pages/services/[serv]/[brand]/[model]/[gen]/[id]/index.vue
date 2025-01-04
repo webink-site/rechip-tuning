@@ -44,7 +44,7 @@ const title = computed(() => {
 
 // function getMetaTags (): any {
 //   const level = singleServ.value?.seo_settings.find(i => i.level === 'engine')
-//   return level
+//   return level ?? { title: '', description: '' }
 // }
 
 // /* eslint-disable no-template-curly-in-string */
