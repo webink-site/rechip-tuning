@@ -8,7 +8,7 @@
           </div>
           <div class="col-span-12">
             <div class="relative h-[500px] w-full rounded-lg overflow-hidden">
-              <div class="p-4 md:p-8 rounded-lg bg-white z-10 absolute bottom-0 md:bottom-1/2 w-full md:w-auto md:translate-y-1/2 md:left-16">
+              <!-- <div class="p-4 md:p-8 rounded-lg bg-white z-10 absolute bottom-0 md:bottom-1/2 w-full md:w-auto md:translate-y-1/2 md:left-16">
                 <div class="text-dark font-semibold flex gap-4 items-center hover:opacity-50">
                   <div class="h-12 w-12 rounded bg-red-500 !bg-opacity-10 flex justify-center items-center">
                     <img src="/icons/telred.svg" alt="Компас" class="h-6">
@@ -18,7 +18,6 @@
                     <span class="text-gray-400">{{ uiStore.getCurrentRegion?.work_time }}</span>
                   </p>
                 </div>
-                <!--  -->
                 <hr class="my-6">
                 <div class="text-dark font-semibold flex gap-4 items-center hover:opacity-50">
                   <div class="h-12 w-12 rounded bg-red-500 !bg-opacity-10 flex justify-center items-center">
@@ -29,9 +28,10 @@
                     <span class="text-gray-400">{{ uiStore.getCurrentRegion?.address }}</span>
                   </p>
                 </div>
-              </div>
+              </div> -->
               <client-only>
-                <yandex-map
+                <iframe src="https://yandex.ru/map-widget/v1/?z=12&ol=biz&oid=80385511895" class="w-full h-full" frameborder="0" />
+                <!-- <yandex-map
                   :settings="{
                     location: LOCATION,
                     showScaleInCopyrights: true,
@@ -44,7 +44,7 @@
                     :key="markersGeoJsonSource.title"
                     :settings="markersGeoJsonSource"
                   />
-                </yandex-map>
+                </yandex-map> -->
               </client-only>
             </div>
           </div>
@@ -104,26 +104,26 @@
 
 <script setup lang="ts">
 import { toast } from 'vue3-toastify'
-import {
-  YandexMap,
-  YandexMapDefaultFeaturesLayer,
-  YandexMapDefaultMarker,
-  YandexMapDefaultSchemeLayer
-} from 'vue-yandex-maps'
-import type { LngLat } from '@yandex/ymaps3-types'
-import type { YMapLocationRequest } from '@yandex/ymaps3-types/imperative/YMap'
+// import {
+//   YandexMap,
+//   YandexMapDefaultFeaturesLayer,
+//   YandexMapDefaultMarker,
+//   YandexMapDefaultSchemeLayer
+// } from 'vue-yandex-maps'
+// import type { LngLat } from '@yandex/ymaps3-types'
+// import type { YMapLocationRequest } from '@yandex/ymaps3-types/imperative/YMap'
 import { useUiStore } from '@/src/stores/ui'
 
 const uiStore = useUiStore()
 
-const coordinates = computed(() => {
-  return uiStore.getCurrentRegion?.coordinates.split(', ').reverse().map(i => Number(i)) ?? [30.459933, 59.960621]
-})
+// const coordinates = computed(() => {
+//   return uiStore.getCurrentRegion?.coordinates.split(', ').reverse().map(i => Number(i)) ?? [30.459933, 59.960621]
+// })
 
-const LOCATION: YMapLocationRequest = {
-  center: coordinates.value as LngLat,
-  zoom: 16 // starting zoom
-}
+// const LOCATION: YMapLocationRequest = {
+//   center: coordinates.value as LngLat,
+//   zoom: 16 // starting zoom
+// }
 
 function closeSuccess () {
   toast('Заявка отправлена', {
@@ -132,12 +132,12 @@ function closeSuccess () {
 }
 
 // Array containing GeoJSON data for markers
-const markersGeoJsonSource = {
-  coordinates: coordinates.value as LngLat,
-  title: 'ReChip',
-  subtitle: 'Чип-тюнинг ателье',
-  color: '#F03C3D'
-}
+// const markersGeoJsonSource = {
+//   coordinates: coordinates.value as LngLat,
+//   title: 'ReChip',
+//   subtitle: 'Чип-тюнинг ателье',
+//   color: '#F03C3D'
+// }
 </script>
 
 <style scoped>

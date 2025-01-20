@@ -6,7 +6,17 @@ export default defineNuxtConfig({
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
       title: 'ReChip',
-      link: [{ rel: 'icon', type: 'image/ico', href: '/favicon.ico' }],
+      link: [{ rel: 'icon', sizes: 'any', type: 'image/svg+xml', href: '/favicon.svg' }],
+      meta: [
+        {
+          name: 'yandex-verification',
+          content: '1b1183457f6a32d2'
+        },
+        {
+          name: 'google-site-verification',
+          content: 'bfd6rp12t8yjo3Vp1jW3xl_2zQI2c7KemAkrzXCsIUU'
+        }
+      ],
       htmlAttrs: {
         lang: 'ru'
       }
@@ -40,7 +50,18 @@ export default defineNuxtConfig({
     '@nuxt/image',
     'nuxt-swiper',
     '@nuxt/content',
-    'vue-yandex-maps/nuxt'
+    'vue-yandex-maps/nuxt',
+    '@zadigetvoltaire/nuxt-gtm',
+    [
+      '@artmizu/yandex-metrika-nuxt',
+      {
+        id: '99593017',
+        webvisor: true,
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true
+      }
+    ]
   ],
   image: {
     format: ['webp', 'png', 'jpeg', 'jpg']
@@ -52,8 +73,11 @@ export default defineNuxtConfig({
       inputStyle: 'filled'
     }
   },
-  // @ts-ignore
   yandexMaps: {
     apikey: '8c4059db-3b8d-4535-a15e-569ee80fc827'
+  },
+  // @ts-ignore
+  gtm: {
+    id: 'GTM-VW4EWTMR2M'
   }
 })

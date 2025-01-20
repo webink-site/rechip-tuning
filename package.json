@@ -12,6 +12,7 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "@artmizu/yandex-metrika-nuxt": "^1.1.0",
     "@heroicons/vue": "^2.1.3",
     "@nuxt/content": "^2.12.1",
     "@nuxt/image": "^1.5.0",
@@ -36,6 +37,7 @@
     "@nuxt/eslint-config": "^0.2.0",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/eslint-module": "^4.1.0",
+    "@zadigetvoltaire/nuxt-gtm": "^0.0.13",
     "autoprefixer": "^10.4.19",
     "eslint": "^8.57.0",
     "nuxt-primevue": "^0.3.1",

@@ -51,6 +51,7 @@
         </div>
         <div class="col-span-12 md:col-span-3">
           <div class="flex md:justify-end gap-4">
+            <iframe src="https://yandex.ru/sprav/widget/rating-badge/80385511895?type=rating" width="150" height="50" frameborder="0" />
             <a :href="`${uiStore.getCurrentRegion?.social_links.whatsapp ?? '#'}`" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
               <img src="/public/icons/whats.svg" alt="">
             </a>
