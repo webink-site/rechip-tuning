@@ -9,12 +9,13 @@ export default defineNuxtConfig({
       link: [{ rel: 'icon', sizes: 'any', type: 'image/svg+xml', href: '/favicon.svg' }],
       meta: [
         {
-          name: 'yandex-verification',
-          content: '1b1183457f6a32d2'
-        },
-        {
           name: 'google-site-verification',
           content: 'bfd6rp12t8yjo3Vp1jW3xl_2zQI2c7KemAkrzXCsIUU'
+        },
+
+        {
+          name: 'yandex-verification',
+          content: '1b1183457f6a32d2'
         }
       ],
       htmlAttrs: {
