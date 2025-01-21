@@ -31,6 +31,7 @@
           <input
             v-model="data.phone"
             placeholder="+7"
+             v-mask="'+7 (###) ###-##-##'"
             type="text"
             class="w-full p-3 rounded-md bg-gray-2 border-none outline-blue-500"
             :class="{ error: v$.phone.$error }"

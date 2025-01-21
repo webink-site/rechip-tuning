@@ -22,6 +22,7 @@
               <InputText
                 v-model="data.phone"
                 placeholder="+7"
+                 v-mask="'+7 (###) ###-##-##'"
                 :class="{ error: v$.phone.$error }"
                 class="w-full mt-3 py-2.5 px-3 rounded-md bg-gray-2 border-none mb-2"
               />
