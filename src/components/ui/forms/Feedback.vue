@@ -21,8 +21,8 @@
               <label class="text-white font-semibold">Телефон для связи</label>
               <InputText
                 v-model="data.phone"
+                v-mask="'+7 (###) ###-##-##'"
                 placeholder="+7"
-                 v-mask="'+7 (###) ###-##-##'"
                 :class="{ error: v$.phone.$error }"
                 class="w-full mt-3 py-2.5 px-3 rounded-md bg-gray-2 border-none mb-2"
               />
@@ -48,7 +48,9 @@ import { useVuelidate } from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
 import { toast } from 'vue3-toastify'
 import { useUiStore } from '@/src/stores/ui'
+import { useCity } from '~/src/helpers/useCiity'
 
+const { getCityIndex } = useCity()
 const uiStore = useUiStore()
 
 const data = reactive({
@@ -74,7 +76,7 @@ const submitForm = async () => {
   if (!v$.value.$error) {
     load.value = true
     const payload = {
-      region_code: 'spb',
+      region_code: uiStore.regions[getCityIndex.value].code,
       contact: `${data.name} - ${data.phone}`,
       product: 'Форма связи',
       request_data: 'Связаться с клиентом'
