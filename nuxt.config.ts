@@ -53,6 +53,7 @@ export default defineNuxtConfig({
     '@nuxt/content',
     'vue-yandex-maps/nuxt',
     '@zadigetvoltaire/nuxt-gtm',
+    '@nuxtjs/robots',
     [
       '@artmizu/yandex-metrika-nuxt',
       {
