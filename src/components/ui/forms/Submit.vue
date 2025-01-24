@@ -52,6 +52,11 @@
 import { useVuelidate } from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
 import { toast } from 'vue3-toastify'
+import { useCity } from '~/src/helpers/useCiity'
+import { useUiStore } from '~/src/stores/ui'
+
+const { getCityIndex } = useCity()
+const uiStore = useUiStore()
 
 type Props ={
   title?: string
@@ -90,13 +95,13 @@ const submitForm = async () => {
   if (!v$.value.$error) {
     load.value = true
     const payload = {
-      region_code: 'spb',
+      region_code: uiStore.regions[getCityIndex.value].code,
       contact: `${data.name} - ${data.phone}`,
       product: data.product,
       request_data: 'Чип-тюнинг'
     }
     try {
-      await $fetch<any>('https://api.rechip-tuning.ru/wp-json/telegram-requests/v1/submit', {
+      await $fetch<any>('https://api.rechip-tuning.ru/api/telegram-requests/submit', {
         method: 'POST',
         body: payload
       })
