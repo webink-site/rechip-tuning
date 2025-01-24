@@ -1,6 +1,6 @@
 import { SitemapStream, streamToPromise } from 'sitemap'
 import axios from 'axios'
-import { serverQueryContent } from '#content/server'
+// import { serverQueryContent } from '#content/server'
 
 export default defineEventHandler(async (event: any) => {
   const protocol = event.node.req.headers['x-forwarded-proto'] || 'https'
@@ -8,20 +8,20 @@ export default defineEventHandler(async (event: any) => {
   const hostname = `${protocol}://${host}`
 
   // Fetch all documents
-  const docs = await serverQueryContent(event).find()
+  // const docs = await serverQueryContent(event).find()
   const sitemap = new SitemapStream({ hostname })
-  sitemap.write({
-    url: sitemap.hostname,
-    changefreq: 'daily'
-  })
-  for (const doc of docs) {
-    if (doc._path) {
-      sitemap.write({
-        url: doc._path,
-        changefreq: 'daily'
-      })
-    }
-  }
+  // sitemap.write({
+  //   url: sitemap.hostname,
+  //   changefreq: 'daily'
+  // })
+  // for (const doc of docs) {
+  //   if (doc._path) {
+  //     sitemap.write({
+  //       url: doc._path,
+  //       changefreq: 'daily'
+  //     })
+  //   }
+  // }
 
   // fetch pages
   const { data } = await axios.get('https://api.rechip-tuning.ru/sitemap.txt')
