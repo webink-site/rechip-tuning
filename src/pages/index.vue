@@ -19,6 +19,12 @@ definePageMeta({
   layout: 'custom'
 })
 
+// const { data } = useFetch<any>('https://api.rechip-tuning.ru/sitemap.txt', {
+//   server: false
+// })
+
+// console.log(data.value.split('\n'))
+
 useSeoMeta({
   title: () => `Чип-тюнинг Stage 1/Stage 2 в ${uiStore.regions[getCityIndex.value].place}`,
   ogTitle: () => `Чип-тюнинг Stage 1/Stage 2 в ${uiStore.regions[getCityIndex.value].place}`,
