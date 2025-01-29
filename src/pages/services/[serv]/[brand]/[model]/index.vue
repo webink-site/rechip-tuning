@@ -2,8 +2,18 @@
   <section class="bg-gray-2 pt-10 md:pt-20" style="min-height: calc(100vh - 506px);">
     <div class="container mx-auto px-4 md:px-0">
       <UiFormsCarSearch />
+      <p class="text-sm text-gray-400 mt-6">
+        <nuxt-link to="/">Главная</nuxt-link> •
+        <nuxt-link to="/services">Услуги</nuxt-link> •
+        <nuxt-link :to="`/services/${$route.params.serv}`">{{ servStore.services.find((i) => i.slug === $route.params.serv)?.name }}</nuxt-link> •
+        <nuxt-link :to="`/services/${$route.params.serv}/${$route.params.brand}`">{{ brand }}</nuxt-link> •
+        <span class="text-black">{{ model }}</span>
+      </p>
     </div>
-    <SearchGenerations v-if="data" :gens="data" :model="model" :brand="brand" />
+    <SearchGenerations v-if="data && data[0].hasOwnProperty('name')" :gens="data" :model="model" :brand="brand" />
+    <div v-else>
+      <SearchModsNew :mods="data" :brand="brand" :model="model" :gen="''" />
+    </div>
   </section>
 </template>
 

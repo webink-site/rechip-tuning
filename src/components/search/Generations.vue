@@ -3,13 +3,6 @@
     <div class="container mx-auto px-4 md:px-0">
       <div class="grid gap-6 grid-cols-12">
         <div class="col-span-9">
-          <p class="text-sm text-gray-400 mb-2">
-            <nuxt-link to="/">Главная</nuxt-link> •
-            <nuxt-link to="/services">Услуги</nuxt-link> •
-            <nuxt-link :to="`/services/${$route.params.serv}`">{{ servStore.services.find((i) => i.slug === $route.params.serv)?.name }}</nuxt-link> •
-            <nuxt-link :to="`/services/${$route.params.serv}/${$route.params.brand}`">{{ brand }}</nuxt-link> •
-            <span class="text-black">{{ model }}</span>
-          </p>
           <h2 class="text-dark text-2xl font-bold">
             Выберите поколение {{ brand }} {{ model }}
           </h2>
@@ -37,7 +30,6 @@
 
 <script setup lang="ts">
 import type { Model } from '@/src/types/car'
-import { useServStore } from '~/src/stores/serv'
 
 interface Props{
   gens: Model[]
@@ -45,7 +37,6 @@ interface Props{
   model: string
 }
 const { gens, brand, model } = defineProps<Props>()
-const servStore = useServStore()
 
 // const countConfigTitle = (count: number):string => {
 //   const countString = count.toString()

@@ -5,14 +5,6 @@
         <div
           class="col-span-12"
         >
-          <p class="text-sm text-gray-400 mb-2">
-            <nuxt-link to="/">Главная</nuxt-link> •
-            <nuxt-link to="/services">Услуги</nuxt-link> •
-            <nuxt-link :to="`/services/${$route.params.serv}`">{{ servStore.services.find((i) => i.slug === $route.params.serv)?.name }}</nuxt-link> •
-            <nuxt-link :to="`/services/${$route.params.serv}/${$route.params.brand}`">{{ brand }}</nuxt-link> •
-            <nuxt-link :to="`/services/${$route.params.serv}/${$route.params.brand}/${$route.params.model}`">{{ model }}</nuxt-link> •
-            <span class="text-black">{{ gen }}</span>
-          </p>
           <h2 class="text-dark text-2xl font-bold mb-6">
             Выберите модификацию {{ brand }} {{ model }} {{ gen }}
           </h2>
@@ -33,9 +25,6 @@
 </template>
 
 <script setup lang="ts">
-import { useServStore } from '~/src/stores/serv'
-
-const servStore = useServStore()
 const route = useRoute()
 interface Props{
   mods: any
