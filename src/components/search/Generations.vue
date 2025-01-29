@@ -3,12 +3,16 @@
     <div class="container mx-auto px-4 md:px-0">
       <div class="grid gap-6 grid-cols-12">
         <div class="col-span-9">
-          <h2 class="text-dark text-2xl font-bold">
-            {{ servStore.services.find((i) => i.slug === $route.params.servName)?.name }} {{ title }}
-          </h2>
-          <p class="text-lg font-semibold mt-1 text-gray-400">
-            Выберите поколение {{ title }}:
+          <p class="text-sm text-gray-400 mb-2">
+            <nuxt-link to="/">Главная</nuxt-link> •
+            <nuxt-link to="/services">Услуги</nuxt-link> •
+            <nuxt-link :to="`/services/${$route.params.serv}`">{{ servStore.services.find((i) => i.slug === $route.params.serv)?.name }}</nuxt-link> •
+            <nuxt-link :to="`/services/${$route.params.serv}/${$route.params.brand}`">{{ brand }}</nuxt-link> •
+            <span class="text-black">{{ model }}</span>
           </p>
+          <h2 class="text-dark text-2xl font-bold">
+            Выберите поколение {{ brand }} {{ model }}
+          </h2>
         </div>
       </div>
       <!-- <pre>{{ gens }}</pre> -->
@@ -37,9 +41,10 @@ import { useServStore } from '~/src/stores/serv'
 
 interface Props{
   gens: Model[]
-  title: string
+  brand: string
+  model: string
 }
-const { gens, title } = defineProps<Props>()
+const { gens, brand, model } = defineProps<Props>()
 const servStore = useServStore()
 
 // const countConfigTitle = (count: number):string => {

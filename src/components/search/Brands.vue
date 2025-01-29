@@ -3,6 +3,11 @@
     <div class="container mx-auto px-4 md:px-0">
       <div class="grid gap-6 grid-cols-12">
         <div class="col-span-12 md:col-span-9">
+          <p class="text-sm text-gray-400">
+            <nuxt-link to="/">Главная</nuxt-link> •
+            <nuxt-link to="/services">Услуги</nuxt-link> •
+            <span class="text-black">{{ servStore.services.find((i) => i.slug === $route.params.serv)?.name }}</span>
+          </p>
           <h2 class="text-dark text-4xl font-bold">Выберите марку</h2>
         </div>
         <div class="col-span-12 md:col-span-3">
@@ -24,7 +29,9 @@
 <script setup lang="ts">
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/outline/index.js'
 import { useCarStore } from '@/src/stores/car'
+import { useServStore } from '~/src/stores/serv'
 
+const servStore = useServStore()
 const props = defineProps({
   gray: {
     type: Boolean,

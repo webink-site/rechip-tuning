@@ -3,8 +3,15 @@
     <div class="container mx-auto px-4 md:px-0">
       <div class="grid gap-6 grid-cols-12">
         <div class="col-span-9">
-          <h2 class="text-dark text-2xl font-bold">{{ servStore.services.find((i) => i.slug === $route.params.servName)?.name }} {{ title }} </h2>
-          <p class="text-lg font-semibold mt-1 text-gray-400">Выберите модель {{ title }}:</p>
+          <p class="text-sm text-gray-400 mb-2">
+            <nuxt-link to="/">Главная</nuxt-link> •
+            <nuxt-link to="/services">Услуги</nuxt-link> •
+            <nuxt-link :to="`/services/${$route.params.serv}`">{{ servStore.services.find((i) => i.slug === $route.params.serv)?.name }}</nuxt-link> •
+            <span class="text-black">{{ title }}</span>
+          </p>
+          <h2 class="text-dark text-2xl font-bold">
+            Выберите модель {{ title }}
+          </h2>
         </div>
       </div>
       <div v-if="models.length" class="grid-cols-6 gap-6 grid mt-8">

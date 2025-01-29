@@ -3,7 +3,7 @@
     <div class="container mx-auto px-4 md:px-0">
       <UiFormsCarSearch />
     </div>
-    <SearchGenerations v-if="data" :gens="data" :title="title" />
+    <SearchGenerations v-if="data" :gens="data" :model="model" :brand="brand" />
   </section>
 </template>
 
@@ -25,15 +25,21 @@ const { data } = await useAsyncData<any>('generations', () => $fetch(`https://ap
 useAsyncData('brands', () => carStore.LOAD_BRANDS())
 const { data: models } = await useAsyncData<Model[]>('models', () => $fetch(`https://api.rechip-tuning.ru/api/catalog?service=${route.params.serv}&brand=${route.params.brand}`))
 
-const title = computed(() => {
+const brand = computed(() => {
   const brand = carStore.brands?.find(i => i.slug === route.params.brand.toString())
-
-  // return brand
   if (brand) {
-    const model = models.value?.find(i => i.slug === route.params.model.toString())
-    return `${brand.name} ${model?.name ?? ''}`
+    return brand.name
   } else {
-    return 's'
+    return ''
+  }
+})
+
+const model = computed(() => {
+  const model = models.value?.find(i => i.slug === route.params.model.toString())
+  if (model) {
+    return model?.name
+  } else {
+    return ''
   }
 })
 
@@ -48,10 +54,10 @@ function getMetaTags (): any {
 
 /* eslint-disable no-template-curly-in-string */
 useSeoMeta({
-  title: () => getMetaTags().title.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
-  ogTitle: () => getMetaTags().title.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
-  description: () => getMetaTags().description.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
-  ogDescription: () => getMetaTags().description.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  title: () => getMetaTags().title.replaceAll('${name}', `${brand.value} ${model.value}`).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  ogTitle: () => getMetaTags().title.replaceAll('${name}', `${brand.value} ${model.value}`).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  description: () => getMetaTags().description.replaceAll('${name}', `${brand.value} ${model.value}`).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  ogDescription: () => getMetaTags().description.replaceAll('${name}', `${brand.value} ${model.value}`).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
   ogType: 'website'
 })
 </script>

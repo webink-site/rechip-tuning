@@ -7,7 +7,14 @@
       <div v-if="data" class="container mx-auto px-4 md:px-0">
         <!-- <pre>{{ title }}</pre>
         <pre>{{ data }}</pre> -->
-        <SearchEngine :engine="data" :title="`${data.service.name} ${title}`" />
+        <SearchEngine
+          :engine="data"
+          :serv="data.service.name"
+          :brand="data.brand.name"
+          :model="data.model.name"
+          :config="data.configuration.name"
+          :title="`${title}`"
+        />
       </div>
     </section>
 
