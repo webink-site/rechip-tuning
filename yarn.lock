@@ -25,15 +25,6 @@
   resolved "https://registry.npmjs.org/@antfu/utils/-/utils-0.7.7.tgz"
   integrity sha512-gFPqTG7otEJ8uP6wrhDv6mqwGWYZKNvAcCq6u9hOj0c+IKCEsY4L1oC9trPq2SaWIzAfHvqfBDxF591JkMf+kg==
 
-"@artmizu/yandex-metrika-nuxt@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@artmizu/yandex-metrika-nuxt/-/yandex-metrika-nuxt-1.1.0.tgz#89db9ccc540f455d1d3fd9821accfec05d7e50fd"
-  integrity sha512-M4Ii0nDe/xEXBw2My3KqRcdGaZ+GwLQ/O0jyfYx67MWMEtVsrtaC/ZI04rNSxXJ8PLFyXRizZxsepgX55GA2JQ==
-  dependencies:
-    "@nuxt/kit" "^3.14.1592"
-    consola "^3.2.3"
-    defu "^6.1.4"
-
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.23.5", "@babel/code-frame@^7.24.7":
   version "7.24.7"
   resolved "https://registry.npmjs.org/@babel/code-frame/-/code-frame-7.24.7.tgz"
@@ -1092,7 +1083,33 @@
     unimport "^3.7.1"
     untyped "^1.4.2"
 
-"@nuxt/kit@^3.14.1592", "@nuxt/kit@^3.5.1":
+"@nuxt/kit@^3.12.3":
+  version "3.15.4"
+  resolved "https://registry.yarnpkg.com/@nuxt/kit/-/kit-3.15.4.tgz#122f511e518573320a035b5e24adf0118d51485d"
+  integrity sha512-dr7I7eZOoRLl4uxdxeL2dQsH0OrbEiVPIyBHnBpA4co24CBnoJoF+JINuP9l3PAM3IhUzc5JIVq3/YY3lEc3Hw==
+  dependencies:
+    c12 "^2.0.1"
+    consola "^3.4.0"
+    defu "^6.1.4"
+    destr "^2.0.3"
+    globby "^14.0.2"
+    ignore "^7.0.3"
+    jiti "^2.4.2"
+    klona "^2.0.6"
+    knitwork "^1.2.0"
+    mlly "^1.7.4"
+    ohash "^1.1.4"
+    pathe "^2.0.2"
+    pkg-types "^1.3.1"
+    scule "^1.3.0"
+    semver "^7.6.3"
+    std-env "^3.8.0"
+    ufo "^1.5.4"
+    unctx "^2.4.1"
+    unimport "^4.0.0"
+    untyped "^1.5.2"
+
+"@nuxt/kit@^3.5.1":
   version "3.15.2"
   resolved "https://registry.yarnpkg.com/@nuxt/kit/-/kit-3.15.2.tgz#edb0b66f08989458329cafac4cbe2960c2d92ebf"
   integrity sha512-nxiPJVz2fICcyBKlN5pL1IgZVejyArulREsS5HvAk07hijlYuZ5toRM8soLt51VQNpFd/PedL+Z1AlYu/bQCYQ==
@@ -6817,6 +6834,15 @@ nuxt-swiper@^1.2.2:
     "@nuxt/kit" "^3.7.0"
     swiper "^10.2.0"
 
+nuxt-yandex-metrika@^1.2.9:
+  version "1.2.9"
+  resolved "https://registry.yarnpkg.com/nuxt-yandex-metrika/-/nuxt-yandex-metrika-1.2.9.tgz#721c1560d563ab085f382621a1449d81cb3e6ba9"
+  integrity sha512-yS7uyKrAHySejT8NPMa8hO86x1puEu+ob5bhLt6Do+8BHNMBcW/t9ZoUi+DLwKbZ+eLjLxQRMDiLw7TzTxbkrA==
+  dependencies:
+    "@nuxt/kit" "^3.12.3"
+    chalk "^5.3.0"
+    defu "^6.1.4"
+
 nuxt@^3.11.1:
   version "3.11.1"
   resolved "https://registry.npmjs.org/nuxt/-/nuxt-3.11.1.tgz"
@@ -7208,7 +7234,7 @@ pathe@^1.1.0, pathe@^1.1.1, pathe@^1.1.2:
   resolved "https://registry.npmjs.org/pathe/-/pathe-1.1.2.tgz"
   integrity sha512-whLdWMYL2TwI08hn8/ZqAbrVemu0LNaNNJZX73O6qaIdCTfXutsLhMkjdENX0qhsQ9uIimo4/aQOmXkoon2nDQ==
 
-pathe@^2.0.1:
+pathe@^2.0.1, pathe@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/pathe/-/pathe-2.0.2.tgz#5ed86644376915b3c7ee4d00ac8c348d671da3a5"
   integrity sha512-15Ztpk+nov8DR524R4BF7uEuzESgzUEAV4Ah7CUMNGXdE5ELuvxElxGXndBl32vMSsWa1jpNf22Z+Er3sKwq+w==
@@ -8647,6 +8673,13 @@ strip-literal@^2.1.1:
   dependencies:
     js-tokens "^9.0.1"
 
+strip-literal@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/strip-literal/-/strip-literal-3.0.0.tgz#ce9c452a91a0af2876ed1ae4e583539a353df3fc"
+  integrity sha512-TcccoMhJOM3OebGhSBEmp3UZ2SfDMZUEBdRA/9ynfLi8yYajyWX3JiXArcJt4Umh4vISpspkQIY8ZZoCqjbviA==
+  dependencies:
+    js-tokens "^9.0.1"
+
 stylehacks@^6.1.1:
   version "6.1.1"
   resolved "https://registry.npmjs.org/stylehacks/-/stylehacks-6.1.1.tgz"
@@ -9161,6 +9194,26 @@ unimport@^3.7.1:
     strip-literal "^1.3.0"
     unplugin "^1.5.1"
 
+unimport@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/unimport/-/unimport-4.0.0.tgz#1a2fcd01defd01be0df4c8bb20490369fe7a043b"
+  integrity sha512-FH+yZ36YaVlh0ZjHesP20Q4uL+wL0EqTNxDZcUupsIn6WRYXZAbIYEMDLTaLBpkNVzFpqZXS+am51/HR3ANUNw==
+  dependencies:
+    "@rollup/pluginutils" "^5.1.4"
+    acorn "^8.14.0"
+    escape-string-regexp "^5.0.0"
+    estree-walker "^3.0.3"
+    fast-glob "^3.3.3"
+    local-pkg "^1.0.0"
+    magic-string "^0.30.17"
+    mlly "^1.7.4"
+    pathe "^2.0.2"
+    picomatch "^4.0.2"
+    pkg-types "^1.3.1"
+    scule "^1.3.0"
+    strip-literal "^3.0.0"
+    unplugin "^2.1.2"
+
 unique-filename@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/unique-filename/-/unique-filename-3.0.0.tgz"
@@ -9262,7 +9315,7 @@ unplugin@^1.16.1:
     acorn "^8.14.0"
     webpack-virtual-modules "^0.6.2"
 
-unplugin@^2.1.0:
+unplugin@^2.1.0, unplugin@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/unplugin/-/unplugin-2.1.2.tgz#3a0939061c0076f1a8178e5d4223df63ee62c741"
   integrity sha512-Q3LU0e4zxKfRko1wMV2HmP8lB9KWislY7hxXpxd+lGx0PRInE4vhMBVEZwpdVYHvtqzhSrzuIfErsob6bQfCzw==

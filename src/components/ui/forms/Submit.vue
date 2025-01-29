@@ -52,9 +52,11 @@
 import { useVuelidate } from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
 import { toast } from 'vue3-toastify'
+import { useYandexMetrika } from '#imports'
 import { useCity } from '~/src/helpers/useCiity'
 import { useUiStore } from '~/src/stores/ui'
 
+const { reachGoal } = useYandexMetrika()
 const { getCityIndex } = useCity()
 const uiStore = useUiStore()
 
@@ -109,6 +111,7 @@ const submitForm = async () => {
       data.phone = ''
       data.product = ''
       v$.value.$reset()
+      reachGoal('ostzav')
       emit('closeSuccess')
     } catch {
       toast('Ошибка отправки формы', {

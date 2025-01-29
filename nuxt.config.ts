@@ -53,16 +53,7 @@ export default defineNuxtConfig({
     '@nuxt/content',
     'vue-yandex-maps/nuxt',
     '@zadigetvoltaire/nuxt-gtm',
-    [
-      '@artmizu/yandex-metrika-nuxt',
-      {
-        id: '99593017',
-        webvisor: true,
-        clickmap: true,
-        trackLinks: true,
-        accurateTrackBounce: true
-      }
-    ]
+    'nuxt-yandex-metrika'
   ],
   image: {
     format: ['webp', 'png', 'jpeg', 'jpg']
@@ -76,6 +67,12 @@ export default defineNuxtConfig({
   },
   yandexMaps: {
     apikey: '8c4059db-3b8d-4535-a15e-569ee80fc827'
+  },
+  yandexMetrika: {
+    id: '99593017',
+    options: {
+      webvisor: true
+    }
   },
   // @ts-ignore
   gtm: {
