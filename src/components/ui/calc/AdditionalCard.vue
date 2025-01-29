@@ -5,7 +5,7 @@
     <div class="text-gray-400 mb-3" v-html="card.service.short_description" />
     <div class="flex gap-2">
       <InputSwitch v-model="active" />
-      <p class="font-bold text-dark">{{ Number(card.main_price).toLocaleString() }} ₽</p>
+      <p class="font-bold text-dark">{{ Number(card.main_price ?? card.sale_price).toLocaleString() }} ₽</p>
     </div>
   </div>
 </template>

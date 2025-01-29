@@ -190,7 +190,7 @@ if (engine && engine.optional_services.length) {
 }
 
 const priceTotal = computed(() => {
-  const addTotal = addCards.value.filter((i: any) => i.active).map((i: any) => Number(i.main_price)).reduce((a: any, b: any) => a + b, 0)
+  const addTotal = addCards.value.filter((i: any) => i.active).map((i: any) => Number(i.main_price ?? i.sale_price)).reduce((a: any, b: any) => a + b, 0)
   if (engine.chip_tuning_param) {
     const priceNum = activeStageTab.value === 0 ? Number(engine.chip_tuning_param.stage1_price) : Number(engine.chip_tuning_param.stage2_price)
     return (priceNum + addTotal).toLocaleString()
