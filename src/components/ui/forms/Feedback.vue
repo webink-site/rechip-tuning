@@ -45,7 +45,7 @@
 
 <script setup lang="ts">
 import { useVuelidate } from '@vuelidate/core'
-import { required } from '@vuelidate/validators'
+import { required, minLength } from '@vuelidate/validators'
 import { toast } from 'vue3-toastify'
 import { useUiStore } from '@/src/stores/ui'
 import { useCity } from '~/src/helpers/useCiity'
@@ -65,7 +65,8 @@ const rules = computed(() => ({
     required
   },
   phone: {
-    required
+    required,
+    minLength: minLength(18)
   }
 }))
 
