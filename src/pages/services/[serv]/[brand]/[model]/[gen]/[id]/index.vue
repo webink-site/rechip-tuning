@@ -1,6 +1,6 @@
 <template>
   <section class="bg-gray-2 pt-10 md:pt-20">
-    <div class="container mx-auto">
+    <div class="container mx-auto px-4 md:px-0">
       <UiFormsCarSearch full />
       <p class="text-sm text-gray-400 mt-6">
         <nuxt-link to="/">Главная</nuxt-link> •
@@ -14,8 +14,6 @@
     </div>
     <section class="py-6 pb-20">
       <div v-if="data" class="container mx-auto px-4 md:px-0">
-        <!-- <pre>{{ title }}</pre>
-        <pre>{{ data }}</pre> -->
         <SearchEngine
           :engine="data"
           :serv="data.service.name"

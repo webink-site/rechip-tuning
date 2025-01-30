@@ -55,10 +55,13 @@ import { toast } from 'vue3-toastify'
 import { useYandexMetrika } from '#imports'
 import { useCity } from '~/src/helpers/useCiity'
 import { useUiStore } from '~/src/stores/ui'
+import { useServStore } from '~/src/stores/serv'
 
 const { reachGoal } = useYandexMetrika()
 const { getCityIndex } = useCity()
+const servStore = useServStore()
 const uiStore = useUiStore()
+const route = useRoute()
 
 type Props ={
   title?: string
@@ -101,7 +104,7 @@ const submitForm = async () => {
       region_code: uiStore.regions[getCityIndex.value].code,
       contact: `${data.name} - ${data.phone}`,
       product: data.product,
-      request_data: 'Чип-тюнинг'
+      request_data: servStore.services.find(i => i.slug === route.params.serv)?.name ?? 'Чип-тюнинг'
     }
     try {
       await $fetch<any>('https://api.rechip-tuning.ru/api/telegram-requests/submit', {
@@ -112,7 +115,22 @@ const submitForm = async () => {
       data.phone = ''
       data.product = ''
       v$.value.$reset()
-      reachGoal('ostzav')
+      switch (servStore.services.find(i => i.slug === route.params.serv)?.name) {
+        case 'Отключение мочевины AdBlue':
+          reachGoal('ostzavmoch')
+          break
+        case 'Отключение клапана ЕГР':
+          reachGoal('ostzavklapegr')
+          break
+        case 'Прошивка Евро-2':
+          reachGoal('ostzamproshivka')
+          break
+        case 'Отключение сажевого фильтра':
+          reachGoal('ostzavzazf')
+          break
+        default:
+          reachGoal('ostzav')
+      }
       emit('closeSuccess')
     } catch {
       toast('Ошибка отправки формы', {

@@ -44,12 +44,14 @@
 </template>
 
 <script setup lang="ts">
+import { toast } from 'vue3-toastify'
 import { useVuelidate } from '@vuelidate/core'
 import { required, minLength } from '@vuelidate/validators'
-import { toast } from 'vue3-toastify'
+import { useYandexMetrika } from '#imports'
 import { useUiStore } from '@/src/stores/ui'
 import { useCity } from '~/src/helpers/useCiity'
 
+const { reachGoal } = useYandexMetrika()
 const { getCityIndex } = useCity()
 const uiStore = useUiStore()
 
@@ -90,6 +92,7 @@ const submitForm = async () => {
       data.name = ''
       data.phone = ''
       v$.value.$reset()
+      reachGoal('ostzavglav')
       toast('Заявка отправлена', {
         type: 'success'
       })
