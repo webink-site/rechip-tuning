@@ -2,6 +2,15 @@
   <section class="bg-gray-2 pt-10 md:pt-20">
     <div class="container mx-auto">
       <UiFormsCarSearch full />
+      <p class="text-sm text-gray-400 mt-6">
+        <nuxt-link to="/">Главная</nuxt-link> •
+        <nuxt-link to="/services">Услуги</nuxt-link> •
+        <nuxt-link :to="`/services/${$route.params.serv}`">{{ data.service.name }}</nuxt-link> •
+        <nuxt-link :to="`/services/${$route.params.serv}/${$route.params.brand}`">{{ data.brand.name }}</nuxt-link> •
+        <nuxt-link :to="`/services/${$route.params.serv}/${$route.params.brand}/${$route.params.model}`">{{ data.model.name }}</nuxt-link> •
+        <nuxt-link :to="`/services/${$route.params.serv}/${$route.params.brand}/${$route.params.model}/${$route.params.gen}`">{{ data.configuration.name }}</nuxt-link> •
+        <span class="text-black">{{ data.engine.volume }}, {{ Number(data.engine.power) }} л.с.</span>
+      </p>
     </div>
     <section class="py-6 pb-20">
       <div v-if="data" class="container mx-auto px-4 md:px-0">
@@ -10,10 +19,7 @@
         <SearchEngine
           :engine="data"
           :serv="data.service.name"
-          :brand="data.brand.name"
-          :model="data.model.name"
-          :config="data.configuration.name"
-          :title="`${title}`"
+          :title="title"
         />
       </div>
     </section>

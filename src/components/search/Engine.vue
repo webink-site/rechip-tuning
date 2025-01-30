@@ -1,16 +1,5 @@
 <template>
   <div class="grid gap-6 grid-cols-12">
-    <div class="col-span-12">
-      <p class="text-sm text-gray-400">
-        <nuxt-link to="/">Главная</nuxt-link> •
-        <nuxt-link to="/services">Услуги</nuxt-link> •
-        <nuxt-link :to="`/services/${$route.params.serv}`">{{ serv }}</nuxt-link> •
-        <nuxt-link :to="`/services/${$route.params.serv}/${$route.params.brand}`">{{ brand }}</nuxt-link> •
-        <nuxt-link :to="`/services/${$route.params.serv}/${$route.params.brand}/${$route.params.model}`">{{ model }}</nuxt-link> •
-        <nuxt-link :to="`/services/${$route.params.serv}/${$route.params.brand}/${$route.params.model}/${$route.params.gen}`">{{ config }}</nuxt-link> •
-        <span class="text-black">{{ engine.engine.volume }}, {{ Number(engine.engine.power) }} л.с.</span>
-      </p>
-    </div>
     <div class="col-span-12 md:col-span-4">
       <div class="p-6 bg-white rounded-xl border-2 border-gray-3">
         <img
@@ -185,13 +174,10 @@ const activeStageTab = ref(0)
 type Props = {
   engine: any
   serv: string
-  brand: string
-  model: string
-  config: string
   title: string
 }
 
-const { engine, serv, title, brand, model, config } = defineProps<Props>()
+const { engine, serv, title } = defineProps<Props>()
 
 const addCards = ref<any>([])
 
