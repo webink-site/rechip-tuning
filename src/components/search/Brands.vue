@@ -3,7 +3,7 @@
     <div class="container mx-auto px-4 md:px-0">
       <div class="grid gap-6 grid-cols-12">
         <div class="col-span-12 md:col-span-9">
-          <p class="text-sm text-gray-400">
+          <p v-if="props.gray" class="text-sm text-gray-400 mb-6">
             <nuxt-link to="/">Главная</nuxt-link> •
             <nuxt-link to="/services">Услуги</nuxt-link> •
             <span class="text-black">{{ servStore.services.find((i) => i.slug === $route.params.serv)?.name }}</span>

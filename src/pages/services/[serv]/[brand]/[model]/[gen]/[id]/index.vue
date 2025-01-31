@@ -30,13 +30,13 @@
 </template>
 
 <script setup lang="ts">
-// import { useCity } from '~/src/helpers/useCiity'
-// import { useServStore } from '~/src/stores/serv'
-// import { useUiStore } from '~/src/stores/ui'
+import { useCity } from '~/src/helpers/useCiity'
+import { useServStore } from '~/src/stores/serv'
+import { useUiStore } from '~/src/stores/ui'
 
-// const { getCityIndex } = useCity()
-// const servStore = useServStore()
-// const uiStore = useUiStore()
+const { getCityIndex } = useCity()
+const servStore = useServStore()
+const uiStore = useUiStore()
 
 const route = useRoute()
 const { data } = await useAsyncData<any>('engine', () => $fetch(`https://api.rechip-tuning.ru/api/catalog?service=${route.params.serv}&brand=${route.params.brand}&model=${route.params.model}&configuration=${route.params.gen}&engine=${route.params.id}`))
@@ -49,25 +49,25 @@ const title = computed(() => {
   }
 })
 
-// const singleServ = computed(() => {
-//   return servStore.services.find((i: any) => i.slug === route.params.serv)
-// })
+const singleServ = computed(() => {
+  return servStore.services.find((i: any) => i.slug === route.params.serv)
+})
 
-// function getMetaTags (): any {
-//   const level = singleServ.value?.seo_settings.find(i => i.level === 'engine')
-//   return level ?? { title: '', description: '' }
-// }
+function getMetaTags (): any {
+  const level = singleServ.value?.seo_settings.find(i => i.level === 'engine')
+  return level ?? { title: '', description: '' }
+}
 
-// /* eslint-disable no-template-curly-in-string */
-// useSeoMeta({
-//   title: () => getMetaTags().title.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
-//   ogTitle: () => getMetaTags().title.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
-//   description: () => getMetaTags().description.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
-//   ogDescription: () => getMetaTags().description.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
-//   ogType: 'website',
-//   // @ts-ignore
-//   ogImage: () => `https://api.rechip-tuning.ru/storage/${data.value.model.catalog_image}`
-// })
+/* eslint-disable no-template-curly-in-string */
+useSeoMeta({
+  title: () => getMetaTags().title.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  ogTitle: () => getMetaTags().title.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  description: () => getMetaTags().description.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  ogDescription: () => getMetaTags().description.replaceAll('${name}', title.value).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  ogType: 'website',
+  // @ts-ignore
+  ogImage: () => `https://api.rechip-tuning.ru/storage/${data.value.model.catalog_image}`
+})
 </script>
 
 <style scoped>
