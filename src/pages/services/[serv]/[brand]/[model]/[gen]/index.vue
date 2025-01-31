@@ -35,13 +35,19 @@ const route = useRoute()
 const carStore = useCarStore()
 
 const cnfg = ref('configuration')
+const errorsCount = ref(0)
 
 useAsyncData('brands', () => carStore.LOAD_BRANDS())
 const { data, error, refresh } = await useAsyncData<any>('gens', () => $fetch(`https://api.rechip-tuning.ru/api/catalog?service=${route.params.serv}&brand=${route.params.brand}&model=${route.params.model}&${cnfg.value}=${route.params.gen}`))
 
 if (error.value) {
   cnfg.value = 'engine'
+  errorsCount.value += 1
   refresh()
+}
+
+if (error.value && errorsCount.value === 2) {
+  throw showError({ statusCode: 404, statusMessage: 'Страница не найдена' })
 }
 
 const { data: models } = await useAsyncData<Model[]>('models', () => $fetch(`https://api.rechip-tuning.ru/api/catalog?service=${route.params.serv}&brand=${route.params.brand}`))

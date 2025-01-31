@@ -22,8 +22,12 @@ const servStore = useServStore()
 
 const { getCityIndex } = useCity()
 
-const { data } = await useAsyncData<Model[]>('models', () => $fetch(`https://api.rechip-tuning.ru/api/catalog?service=${route.params.serv}&brand=${route.params.brand}`))
+const { data, error } = await useAsyncData<Model[]>('models', () => $fetch(`https://api.rechip-tuning.ru/api/catalog?service=${route.params.serv}&brand=${route.params.brand}`))
 useAsyncData('brands', () => carStore.LOAD_BRANDS())
+
+if (error?.value) {
+  throw showError({ statusCode: 404, statusMessage: 'Страница не найдена' })
+}
 
 const singleServ = computed(() => {
   return servStore.services.find((i: any) => i.slug === route.params.serv)

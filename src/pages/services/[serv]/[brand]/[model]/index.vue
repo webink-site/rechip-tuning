@@ -31,9 +31,13 @@ const servStore = useServStore()
 const uiStore = useUiStore()
 const { getCityIndex } = useCity()
 
-const { data } = await useAsyncData<any>('generations', () => $fetch(`https://api.rechip-tuning.ru/api/catalog?service=${route.params.serv}&brand=${route.params.brand}&model=${route.params.model}`))
+const { data, error } = await useAsyncData<any>('generations', () => $fetch(`https://api.rechip-tuning.ru/api/catalog?service=${route.params.serv}&brand=${route.params.brand}&model=${route.params.model}`))
 useAsyncData('brands', () => carStore.LOAD_BRANDS())
 const { data: models } = await useAsyncData<Model[]>('models', () => $fetch(`https://api.rechip-tuning.ru/api/catalog?service=${route.params.serv}&brand=${route.params.brand}`))
+
+if (error?.value) {
+  throw showError({ statusCode: 404, statusMessage: 'Страница не найдена' })
+}
 
 const brand = computed(() => {
   const brand = carStore.brands?.find(i => i.slug === route.params.brand.toString())

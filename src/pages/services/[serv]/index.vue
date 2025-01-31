@@ -67,6 +67,12 @@ const singleServ = computed(() => {
   return servStore.services.find((i: any) => i.slug === route.params.serv)
 })
 
+watchEffect(() => {
+  if (servStore.services.length > 0 && !singleServ.value) {
+    navigateTo('/404', { replace: true })
+  }
+})
+
 function getMetaTags (): any {
   const level = singleServ.value?.seo_settings.find(i => i.level === 'service')
   return level ?? { title: '', description: '' }
