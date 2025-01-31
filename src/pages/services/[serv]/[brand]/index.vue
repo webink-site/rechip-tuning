@@ -44,7 +44,8 @@ useSeoMeta({
   ogTitle: () => getMetaTags().title.replaceAll('${name}', carStore.brands?.find(i => i.slug === route.params.brand.toString())?.name ?? '').replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
   description: () => getMetaTags().description.replaceAll('${name}', carStore.brands?.find(i => i.slug === route.params.brand.toString())?.name ?? '').replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
   ogDescription: () => getMetaTags().description.replaceAll('${name}', carStore.brands?.find(i => i.slug === route.params.brand.toString())?.name ?? '').replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
-  ogType: 'website'
+  ogType: 'website',
+  ogImage: '/img/hero.webp'
 })
 
 </script>

@@ -15,9 +15,9 @@ import { useCity } from '~/src/helpers/useCiity'
 
 const { getCityIndex } = useCity()
 const uiStore = useUiStore()
-definePageMeta({
-  layout: 'custom'
-})
+// definePageMeta({
+//   layout: 'custom'
+// })
 
 useSeoMeta({
   title: () => `Чип-тюнинг Stage 1/Stage 2 в ${uiStore.regions[getCityIndex.value].place}`,
@@ -25,7 +25,7 @@ useSeoMeta({
   description: 'Чип-тюнинг ателье ReChip Прошивка всех марок авто от 2000 г.в. с гарантией',
   ogDescription: 'Чип-тюнинг ателье ReChip Прошивка всех марок авто от 2000 г.в. с гарантией',
   ogType: 'website',
-  ogImage: 'https://new.rechip-tuning.ru/img/hero.webp'
+  ogImage: '/img/hero.webp'
 })
 </script>
 

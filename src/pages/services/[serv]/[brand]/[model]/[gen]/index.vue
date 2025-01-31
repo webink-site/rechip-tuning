@@ -29,10 +29,14 @@
 import { useCarStore } from '~/src/stores/car'
 import type { Model } from '~/src/types/car'
 import { useServStore } from '~/src/stores/serv'
+import { useUiStore } from '~/src/stores/ui'
+import { useCity } from '~/src/helpers/useCiity'
 
 const servStore = useServStore()
 const route = useRoute()
 const carStore = useCarStore()
+const uiStore = useUiStore()
+const { getCityIndex } = useCity()
 
 const cnfg = ref('configuration')
 const errorsCount = ref(0)
@@ -75,6 +79,23 @@ const gen = computed(() => {
   return generations.value?.find((i: any) => i.slug === route.params.gen.toString()).name ?? ''
 })
 
+const singleServ = computed(() => {
+  return servStore.services.find((i: any) => i.slug === route.params.serv)
+})
+
+function getMetaTags (): any {
+  const level = singleServ.value?.seo_settings.find(i => i.level === 'configuration')
+  return level ?? { title: '', description: '' }
+}
+
+/* eslint-disable no-template-curly-in-string */
+useSeoMeta({
+  title: () => getMetaTags().title.replaceAll('${name}', `${brand.value} ${model.value}`).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  ogTitle: () => getMetaTags().title.replaceAll('${name}', `${brand.value} ${model.value}`).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  description: () => getMetaTags().description.replaceAll('${name}', `${brand.value} ${model.value}`).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  ogDescription: () => getMetaTags().description.replaceAll('${name}', `${brand.value} ${model.value}`).replaceAll('${region}', uiStore.regions[getCityIndex.value].place),
+  ogType: 'website'
+})
 </script>
 
 <style scoped>
