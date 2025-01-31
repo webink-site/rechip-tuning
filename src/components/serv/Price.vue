@@ -1,5 +1,5 @@
 <template>
-  <section id="prices" class="py-20 bg-white">
+  <section id="prices" class="pt-20 pb-0 bg-white">
     <div class="container mx-auto px-4 md:px-0">
       <div class="grid grid-cols-12 gap-6">
         <div class="col-span-12">

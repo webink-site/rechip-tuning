@@ -84,11 +84,11 @@ const links = [
   { name: 'Сотрудничество', link: '/cooperation' },
   { name: 'Галерея', link: '/gallery' },
   { name: 'Контакты', link: '/contacts' },
-  { name: 'Чип-тюнинг', link: '/services/chip' },
-  { name: 'Отключение сажевого фильтра', link: '/services/soot-filter' },
-  { name: 'Отключение клапана ЕГР', link: '/services/egr' },
-  { name: 'Отключение системы AdBlue', link: '/services/ad-blue' },
-  { name: 'Прошивка Евро-2', link: '/services/euro-2' }
+  { name: 'Чип-тюнинг', link: '/services/chip-tyuning' },
+  { name: 'Отключение сажевого фильтра', link: '/services/otklyuchenie-sazhevogo-filtra' },
+  { name: 'Отключение клапана ЕГР', link: '/services/otklyuchenie-klapana-egr' },
+  { name: 'Отключение системы AdBlue', link: '/services/otklyuchenie-mocheviny-adblue' },
+  { name: 'Прошивка Евро-2', link: '/services/proshivka-evro-2' }
 ]
 
 </script>

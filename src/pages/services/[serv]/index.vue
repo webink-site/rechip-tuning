@@ -9,7 +9,7 @@
     <section class="bg-gray-2 pt-10 md:pt-20">
       <SearchBrands gray />
       <ServPrice v-if="singleServ?.minimal_prices.length" :prices="singleServ?.minimal_prices" />
-      <section class="md:pb-20 bg-white">
+      <section class="pt-20 md:pb-20 bg-white">
         <div class="container mx-auto px-4 md:px-0">
           <div class="grid gap-6 grid-cols-12 mb-20">
             <div class="col-span-12 md:col-span-9">
