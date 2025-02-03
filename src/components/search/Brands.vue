@@ -22,6 +22,11 @@
           <UiCardsBrandCard :item="item" />
         </div>
       </div>
+      <div v-else class="grid grid-cols-6 gap-6 mt-8">
+        <div class="col-span-6">
+          <p class="text-gray-400 text-xl">Доступных брендов по данной услуге нет!</p>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -42,7 +47,7 @@ const props = defineProps({
 const carStore = useCarStore()
 const search = ref('')
 
-useAsyncData('brands', () => carStore.LOAD_BRANDS())
+// useAsyncData('brands', () => carStore.LOAD_BRANDS())
 
 const brands = computed(() => {
   if (!carStore.brands) {

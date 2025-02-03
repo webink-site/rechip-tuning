@@ -123,8 +123,6 @@ const search = reactive<SearchField>({
   mod: ''
 })
 
-// useAsyncData('brands', () => carStore.LOAD_BRANDS())
-
 const rules = computed(() => ({
   serv: { required },
   brand: { required },

@@ -56,7 +56,7 @@ const carStore = useCarStore()
 const { getCityIndex } = useCity()
 const uiStore = useUiStore()
 
-useAsyncData('brands', () => carStore.LOAD_BRANDS())
+useAsyncData('brands', () => carStore.LOAD_BRANDS(route.params.serv.toString()))
 
 const scrollIntoView = (binding: string) => {
   const target = document.getElementById(binding)

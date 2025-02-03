@@ -10,11 +10,15 @@
 </template>
 
 <script setup lang="ts">
+import { useCarStore } from '../stores/car'
 import { useUiStore } from '@/src/stores/ui'
 import { useCity } from '~/src/helpers/useCiity'
 
 const { getCityIndex } = useCity()
+const carStore = useCarStore()
 const uiStore = useUiStore()
+
+useAsyncData('brands', () => carStore.LOAD_BRANDS('chip-tyuning'))
 // definePageMeta({
 //   layout: 'custom'
 // })
