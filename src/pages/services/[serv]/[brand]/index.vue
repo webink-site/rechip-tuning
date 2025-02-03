@@ -25,6 +25,12 @@ const { getCityIndex } = useCity()
 const { data, error } = await useAsyncData<Model[]>('models', () => $fetch(`https://api.rechip-tuning.ru/api/catalog?service=${route.params.serv}&brand=${route.params.brand}`))
 useAsyncData('brands', () => carStore.LOAD_BRANDS())
 
+if (data.value) {
+  if (data.value.length === 0) {
+    throw showError({ statusCode: 404, statusMessage: 'Страница не найдена' })
+  }
+}
+
 if (error?.value) {
   throw showError({ statusCode: 404, statusMessage: 'Страница не найдена' })
 }
