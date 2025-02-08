@@ -41,9 +41,6 @@
 <script setup lang="ts">
 import { useCity } from '~/src/helpers/useCiity'
 
-// import { useUiStore } from '@/src/stores/ui'
-
-// const uiStore = useUiStore()
 const emit = defineEmits(['close'])
 const { getCityContact } = useCity()
 
