@@ -2354,10 +2354,10 @@
   dependencies:
     vue-demi ">=0.14.7"
 
-"@yandex/ymaps3-types@>=0.0.27":
-  version "0.0.27"
-  resolved "https://registry.npmjs.org/@yandex/ymaps3-types/-/ymaps3-types-0.0.27.tgz"
-  integrity sha512-aQ2FNLXekN810mwfY7vfP8jh9pNu2AZA7N/W0T2ziSdaooWPvUFY+QWE7+PhXbJU5L8E4LKk5jW61m56rs9AJg==
+"@yandex/ymaps3-types@>=1.0.15542062":
+  version "1.0.15731128"
+  resolved "https://registry.yarnpkg.com/@yandex/ymaps3-types/-/ymaps3-types-1.0.15731128.tgz#dd8498cf2147432782ec0309ee9b26047e64079d"
+  integrity sha512-MMfxh4IM7wPTkmRxoZhIOY91yoRvFNO3Fk1urTqwH2pqF7Fhli2tb5Gdv1YoOPlacHyxl2BYxKHGOMzNrDZqQg==
 
 "@zadigetvoltaire/nuxt-gtm@^0.0.13":
   version "0.0.13"
@@ -9674,12 +9674,12 @@ vue-virtual-scroller@2.0.0-beta.8:
     vue-observe-visibility "^2.0.0-alpha.1"
     vue-resize "^2.0.0-alpha.1"
 
-vue-yandex-maps@^2.1.3:
-  version "2.1.3"
-  resolved "https://registry.npmjs.org/vue-yandex-maps/-/vue-yandex-maps-2.1.3.tgz"
-  integrity sha512-CKKjPHbgiRFJpgRedPoK8JXtNu/Q+kSNgv3+ZhC1LyU05Km+hLerDjpfBtvjzupsk/wVX72BUfZywxtX1Ifz/w==
+vue-yandex-maps@^2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/vue-yandex-maps/-/vue-yandex-maps-2.1.6.tgz#59beee9b00742cc2ad0619e97da60a738aa20b85"
+  integrity sha512-8JHGeki7fvH4r3MYA8nMPWHgRqEBJef3HXzwH9lJjB4R6DKgjTI9CNhwGr1Z6Udvn/XRwo0a7ekEXqdafrzaow==
   dependencies:
-    "@yandex/ymaps3-types" ">=0.0.27"
+    "@yandex/ymaps3-types" ">=1.0.15542062"
 
 vue3-toastify@^0.2.2:
   version "0.2.2"

@@ -105,3 +105,8 @@ a, button {
 .fade-out-leave {
   opacity: 1;
 }
+
+
+.ymaps3x0--default-marker__view{
+  cursor: pointer!important;
+  }
