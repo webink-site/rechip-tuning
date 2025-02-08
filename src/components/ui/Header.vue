@@ -21,25 +21,31 @@
           </ul>
         </div>
         <div class="flex items-center gap-8">
-          <div class="hidden sm:flex gap-4">
-            <a :href="`${uiStore.getCurrentRegion?.social_links.whatsapp ?? '#'}`" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
-              <img src="/public/icons/whats.svg" alt="">
+          <div class="hidden sm:flex gap-6">
+            <a :href="`${uiStore.getCurrentRegion?.social_links.whatsapp ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
+              <img src="/public/icons/whats.svg" alt="" class="h-5">
             </a>
-            <a :href="`${uiStore.getCurrentRegion?.social_links.telegram ?? '#'}`" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
-              <img src="/public/icons/tg.svg" alt="">
+            <a :href="`${uiStore.getCurrentRegion?.social_links.telegram ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
+              <img src="/public/icons/tg.svg" alt="" class="h-6">
             </a>
-            <a v-if="uiStore.getCurrentRegion?.social_links.youtube" :href="`${uiStore.getCurrentRegion?.social_links.youtube ?? '#'}`" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
+            <a v-if="uiStore.getCurrentRegion?.social_links.youtube" :href="`${uiStore.getCurrentRegion?.social_links.youtube ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
               <img src="/public/icons/ytb.svg" alt="" class="h-6">
             </a>
-            <a v-if="uiStore.getCurrentRegion?.social_links.drive2" :href="`${uiStore.getCurrentRegion?.social_links.drive2 ?? '#'}`" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
+            <a v-if="uiStore.getCurrentRegion?.social_links.drive2" :href="`${uiStore.getCurrentRegion?.social_links.drive2 ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
               <img src="/public/icons/d2ru.svg" alt="" class="h-5">
+            </a>
+            <a v-if="uiStore.getCurrentRegion?.social_links.avito" :href="`${uiStore.getCurrentRegion?.social_links.avito ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
+              <img src="/public/icons/avito.svg" alt="" class="h-5">
+            </a>
+            <a v-if="uiStore.getCurrentRegion?.social_links.vk" :href="`${uiStore.getCurrentRegion?.social_links.vk ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
+              <img src="/public/icons/vk.svg" alt="" class="h-5">
             </a>
           </div>
 
-          <a :href="`tel:${uiStore.getCurrentRegion?.phone_number}`" class="font-semibold hidden sm:flex gap-1 items-center hover:opacity-50" :class="{'text-white' : homepage}">
+          <a :href="`tel:${uiStore.getCurrentRegion?.addresses[0].phone_number}`" class="font-semibold hidden sm:flex gap-1 items-center hover:opacity-50" :class="{'text-white' : homepage}">
             <img v-if="homepage" src="/public/icons/telwh.svg" alt="телефон">
-            <img v-else src="/public/icons/tel.svg" alt="телефон">
-            {{ uiStore.getCurrentRegion?.phone_number }}
+            <img v-else src="/public/icons/telgreen.svg" alt="телефон">
+            {{ uiStore.getCurrentRegion?.addresses[0].phone_number }}
           </a>
           <a href="#" class="text-primary font-semibold flex gap-1 items-center hover:opacity-80" @click.prevent="regionModal = true">
             <img src="/public/icons/marker.svg" alt="маркер">

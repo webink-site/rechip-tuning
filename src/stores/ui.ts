@@ -17,11 +17,15 @@ export const useUiStore = defineStore('ui', {
   state: (): GoodsState => ({
     lang: 'ru',
     regions: [
+      { name: 'Ейск', place: 'Ейске', code: 'yeysk', web: 'https://yeysk.rechip-tuning.ru' },
+      { name: 'Нефтекамск', place: 'Нефтекамске', code: 'nevtekamsk', web: 'https://nevtekamsk.rechip-tuning.ru' },
+      { name: 'Крым', place: 'Крыму', code: 'simferopol', web: 'https://simferopol.rechip-tuning.ru' },
       { name: 'Санкт-Петербург', place: 'Санкт-Петербурге', code: 'spb', web: 'https://spb.rechip-tuning.ru' },
-      { name: 'Москва', place: 'Москве', code: 'msk', web: 'https://msk.rechip-tuning.ru/' }
-      // { name: 'Гатчина', place: 'Гатчине', code: 'gtn', web: 'https://spb.rechip-tuning.ru' },
-      // { name: 'Нижний Новгород', place: 'Нижнем Новгороде', code: 'nng', web: 'https://spb.rechip-tuning.ru' },
-      // { name: 'Ейск', place: 'Ейске', code: 'ysk', web: 'https://spb.rechip-tuning.ru' }
+      { name: 'Москва', place: 'Москве', code: 'msk', web: 'https://msk.rechip-tuning.ru' },
+      { name: 'Северодвинск', place: 'Северодвинскe', code: 'severodvinsk', web: 'https://severodvinsk.rechip-tuning.ru' },
+      { name: 'Орск', place: 'Орске', code: 'orsk', web: 'https://orsk.rechip-tuning.ru' },
+      { name: 'Краснодар', place: 'Краснодаре', code: 'krasnodar', web: 'https://krasnodar.rechip-tuning.ru' },
+      { name: 'Новотроицк', place: 'Новотроицке', code: 'novotroitsk', web: 'https://novotroitsk.rechip-tuning.ru' }
     ],
     activeRegion: 0,
     // activeRegion: Number(useRuntimeConfig().public.activeCity),

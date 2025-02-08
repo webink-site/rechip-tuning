@@ -34,29 +34,39 @@ export interface Service {
 }
 
 export interface Contact {
+  id: 3,
   region_code: string
   region_name: string
-  address: string
-  phone_number: string
-  work_time: string
-  coordinates: string
   social_links: {
-    telegram: string | null
-    whatsapp: string | null
-    telegram_channel: string | null
-    youtube: string | null
-    drive2: string | null
-    avito: string | null
+    telegram: string
+    whatsapp: string
+    telegram_channel: string
+    youtube: string
+    drive2: string
+    avito: string
+    vk: string
   },
-  legal_info: {
-    inn: string | null
-    kpp: string | null
-    ogrn: string | null
-    legal_address: string | null
-    phisical_address: string | null
-    general_director: string | null
-    footer_tiny_text: string | null
-  }[]
+  url: string
+  created_at: Date
+  updated_at: Date
+  organization_name: string
+  inn: string
+  ogrnip: string
+  legal_address: string
+  addresses: [
+    {
+      id: number
+      contact_id: number
+      city: string,
+      address: string,
+      coordinates: string
+      yandex_map_link: string
+      phone_number: string
+      work_time: string
+      created_at: Date
+      updated_at: Date
+    },
+  ]
 }
 
 export interface Homepage {

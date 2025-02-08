@@ -11,22 +11,28 @@
         </nuxt-link>
       </li>
     </ul>
-    <a :href="`tel:${uiStore.getCurrentRegion?.phone_number}`" class="font-semibold flex gap-1 items-center hover:opacity-50 text-2xl">
+    <a :href="`tel:${uiStore.getCurrentRegion?.addresses[0].phone_number}`" class="font-semibold flex gap-1 items-center hover:opacity-50 text-2xl">
       <img src="/public/icons/tel.svg" alt="телефон">
-      {{ uiStore.getCurrentRegion?.phone_number }}
+      {{ uiStore.getCurrentRegion?.addresses[0].phone_number }}
     </a>
-    <div class="flex gap-4 mt-6">
-      <a :href="`${uiStore.getCurrentRegion?.social_links.whatsapp ?? '#'}`" class="h-12 w-12 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
-        <img src="/public/icons/whats.svg" alt="" class="h-8">
+    <div class="flex gap-6 mt-6">
+      <a :href="`${uiStore.getCurrentRegion?.social_links.whatsapp ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
+        <img src="/public/icons/whats.svg" alt="" class="h-5">
       </a>
-      <a :href="`${uiStore.getCurrentRegion?.social_links.telegram ?? '#'}`" class="h-12 w-12 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
-        <img src="/public/icons/tg.svg" alt="" class="h-8">
+      <a :href="`${uiStore.getCurrentRegion?.social_links.telegram ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
+        <img src="/public/icons/tg.svg" alt="" class="h-6">
       </a>
-      <a :href="`${uiStore.getCurrentRegion?.social_links.youtube ?? '#'}`" class="h-12 w-12 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
-        <img src="/public/icons/ytb.svg" alt="" class="h-10">
+      <a v-if="uiStore.getCurrentRegion?.social_links.youtube" :href="`${uiStore.getCurrentRegion?.social_links.youtube ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
+        <img src="/public/icons/ytb.svg" alt="" class="h-6">
       </a>
-      <a v-if="uiStore.getCurrentRegion?.social_links.drive2" :href="`${uiStore.getCurrentRegion?.social_links.drive2 ?? '#'}`" class="h-12 w-12 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
-        <img src="/public/icons/d2ru.svg" alt="" class="h-8">
+      <a v-if="uiStore.getCurrentRegion?.social_links.drive2" :href="`${uiStore.getCurrentRegion?.social_links.drive2 ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
+        <img src="/public/icons/d2ru.svg" alt="" class="h-5">
+      </a>
+      <a v-if="uiStore.getCurrentRegion?.social_links.avito" :href="`${uiStore.getCurrentRegion?.social_links.avito ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
+        <img src="/public/icons/avito.svg" alt="" class="h-5">
+      </a>
+      <a v-if="uiStore.getCurrentRegion?.social_links.vk" :href="`${uiStore.getCurrentRegion?.social_links.vk ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
+        <img src="/public/icons/vk.svg" alt="" class="h-5">
       </a>
     </div>
   </div>
