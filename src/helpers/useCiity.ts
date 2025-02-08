@@ -7,7 +7,7 @@ export function useCity () {
     const host = window?.location?.hostname ?? 'msk'
 
     const index = uiStore.regions.findIndex(i => host.includes(i.code))
-    return index !== -1 ? index : 1
+    return index !== -1 ? index : 4
   })
 
   const getCityContact = computed(() => {
