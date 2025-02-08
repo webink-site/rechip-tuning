@@ -13,7 +13,7 @@ export function useCity () {
   const getCityContact = computed(() => {
     const host = window?.location?.hostname ?? 'msk'
 
-    const city = uiStore.contacts.find(i => host === i.region_code)
+    const city = uiStore.contacts.find(i => host.includes(i.region_code))
     return city ?? uiStore.contacts.find(i => i.region_code === 'msk')
   })
 
