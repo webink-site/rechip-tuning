@@ -27,7 +27,7 @@ export const useUiStore = defineStore('ui', {
       { name: 'Краснодар', place: 'Краснодаре', code: 'krasnodar', web: 'https://krasnodar.rechip-tuning.ru' },
       { name: 'Новотроицк', place: 'Новотроицке', code: 'novotroitsk', web: 'https://novotroitsk.rechip-tuning.ru' }
     ],
-    activeRegion: 3,
+    activeRegion: 4,
     // activeRegion: Number(useRuntimeConfig().public.activeCity),
     contacts: [],
     homepage: null

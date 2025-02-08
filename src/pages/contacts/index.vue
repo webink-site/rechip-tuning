@@ -7,9 +7,9 @@
             <h2 class="text-dark text-4xl font-bold mb-2">Контакты</h2>
           </div>
           <div class="col-span-12">
-            <div class="flex gap-2 mb-4 overflow-x-auto">
+            <div class="flex flex-nowrap md:flex-wrap gap-2 mb-4 overflow-x-auto md:overflow-visible ">
               <UiButton
-                v-for="(item, idx) in uiStore.getCurrentRegion?.addresses"
+                v-for="(item, idx) in getCityContact?.addresses"
                 :key="idx"
                 :red="selectedAddress !== idx"
                 :text="`${item.address}`"
@@ -24,10 +24,10 @@
                     <img src="/icons/telred.svg" alt="Компас" class="h-6">
                   </div>
                   <p>
-                    <a :href="`tel:${uiStore.getCurrentRegion?.addresses[selectedAddress].phone_number}`">
-                      {{ uiStore.getCurrentRegion?.addresses[selectedAddress].phone_number }}
+                    <a :href="`tel:${getCityContact?.addresses[selectedAddress].phone_number}`">
+                      {{ getCityContact?.addresses[selectedAddress].phone_number }}
                     </a> <br>
-                    <span class="text-gray-400 font-medium text-sm">{{ uiStore.getCurrentRegion?.addresses[selectedAddress].work_time }}</span>
+                    <span class="text-gray-400 font-medium text-sm">{{ getCityContact?.addresses[selectedAddress].work_time }}</span>
                   </p>
                 </div>
                 <hr class="my-4">
@@ -36,11 +36,11 @@
                     <img src="/icons/compas.svg" alt="Компас" class="h-6">
                   </div>
                   <p>
-                    {{ uiStore.getCurrentRegion?.addresses[selectedAddress].city }} <br>
-                    <span class="text-gray-400 font-medium text-sm">{{ uiStore.getCurrentRegion?.addresses[selectedAddress].address }}</span>
+                    {{ getCityContact?.addresses[selectedAddress].city }} <br>
+                    <span class="text-gray-400 font-medium text-sm">{{ getCityContact?.addresses[selectedAddress].address }}</span>
                   </p>
                 </div>
-                <a :href="uiStore.getCurrentRegion?.addresses[selectedAddress].yandex_map_link" target="_blank">
+                <a :href="getCityContact?.addresses[selectedAddress].yandex_map_link" target="_blank">
                   <UiButton blue text="Как добраться" class="w-full mt-4" />
                 </a>
               </div>
@@ -58,7 +58,7 @@
                   <yandex-map-default-scheme-layer />
                   <yandex-map-default-features-layer />
                   <yandex-map-default-marker
-                    v-for="(item, idx) in uiStore.getCurrentRegion?.addresses"
+                    v-for="(item, idx) in getCityContact?.addresses"
                     :key="idx"
                     class="!cursor-pointer "
                     :settings="{
@@ -78,25 +78,25 @@
                 <li>
                   <div class="grid grid-cols-3">
                     <div class="col-span-1 text-gray-400">ИНН:</div>
-                    <div class="col-span-2">{{ uiStore.getCurrentRegion?.inn }}</div>
+                    <div class="col-span-2">{{ getCityContact?.inn }}</div>
                   </div>
                 </li>
                 <li>
                   <div class="grid grid-cols-3">
                     <div class="col-span-1 text-gray-400">ОГРН:</div>
-                    <div class="col-span-2">{{ uiStore.getCurrentRegion?.ogrnip }}</div>
+                    <div class="col-span-2">{{ getCityContact?.ogrnip }}</div>
                   </div>
                 </li>
                 <li>
                   <div class="grid grid-cols-3">
                     <div class="col-span-1 text-gray-400">Юр. адрес:</div>
-                    <div class="col-span-2">{{ uiStore.getCurrentRegion?.legal_address }}</div>
+                    <div class="col-span-2">{{ getCityContact?.legal_address }}</div>
                   </div>
                 </li>
                 <li>
                   <div class="grid grid-cols-3">
                     <div class="col-span-1 text-gray-400">Организация:</div>
-                    <div class="col-span-2">{{ uiStore.getCurrentRegion?.organization_name }}</div>
+                    <div class="col-span-2">{{ getCityContact?.organization_name }}</div>
                   </div>
                 </li>
               </ul>
@@ -123,14 +123,13 @@ import {
 } from 'vue-yandex-maps'
 // import type { LngLat } from '@yandex/ymaps3-types'
 // import type { YMapLocationRequest } from '@yandex/ymaps3-types/imperative/YMap'
-import { useUiStore } from '@/src/stores/ui'
+// import { useUiStore } from '@/src/stores/ui'
+import { useCity } from '~/src/helpers/useCiity'
 
-const uiStore = useUiStore()
+// const uiStore = useUiStore()
 const selectedAddress = ref(0)
 
-// const coordinates = computed(() => {
-//   return uiStore.getCurrentRegion?.addresses[0].coordinates.split(', ').reverse().map(i => Number(i)) ?? [30.459933, 59.960621]
-// })
+const { getCityContact } = useCity()
 
 const LOCATION = ref({
   center: [37.623082, 55.75254],
@@ -139,14 +138,14 @@ const LOCATION = ref({
 
 onMounted(() => {
   LOCATION.value = {
-    center: uiStore.getCurrentRegion?.addresses[0].coordinates.split(', ').reverse().map(i => Number(i)) ?? [30.459933, 59.960621],
+    center: getCityContact.value?.addresses[0].coordinates.split(', ').reverse().map(i => Number(i)) ?? [30.459933, 59.960621],
     zoom: 12
   }
 })
 
 watch(selectedAddress, () => {
   LOCATION.value = {
-    center: uiStore.getCurrentRegion?.addresses[selectedAddress.value].coordinates.split(', ').reverse().map(i => Number(i)) ?? [30.459933, 59.960621],
+    center: getCityContact.value?.addresses[selectedAddress.value].coordinates.split(', ').reverse().map(i => Number(i)) ?? [30.459933, 59.960621],
     zoom: 12
   }
 })
