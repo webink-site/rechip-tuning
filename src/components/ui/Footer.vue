@@ -2,30 +2,34 @@
   <footer v-if="uiStore.contacts.length" class="py-12  bg-gray-2">
     <div class="container mx-auto px-4 md:px-0">
       <div class="grid gap-6 grid-cols-12 items-center border-b pb-8">
-        <div class="col-span-3 md:col-span-1 ">
+        <div class="col-span-12 md:col-span-3 ">
           <img src="/img/logofooter.svg" alt="ReChip">
-        </div>
-        <div class="col-span-9 md:col-span-2">
           <p class="text-sm text-gray-400">
-            Чип-тюнинг ателье <br>
+            Чип-тюнинг ателье
             в {{ uiStore.regions[getCityIndex].place }}
           </p>
         </div>
-        <div class="col-span-12 md:col-span-6 md:col-start-7">
-          <div class="flex items-center md:justify-end gap-6 flex-wrap">
-            <a :href="`tel:${getCityContact?.addresses[0].phone_number}`" class="text-dark font-semibold flex gap-1 items-center hover:opacity-50">
-              <img src="/icons/telgreen.svg" alt="телефон">
-              {{ getCityContact?.addresses[0].phone_number }}
-            </a>
-            <!-- <nuxt-link to="/contacts" class="text-dark font-semibold flex gap-4 items-center hover:opacity-50">
-              <div class="h-12 w-12 rounded bg-red-500 !bg-opacity-10 flex justify-center items-center">
-                <img src="/icons/compas.svg" alt="Компас" class="h-6">
-              </div>
-              <p>
-                {{ uiStore.contacts[getCityIndex]?.region_name }} <br>
-                <span class="text-gray-400">{{ uiStore.contacts[getCityIndex]?.address }}</span>
-              </p>
-            </nuxt-link> -->
+        <div class="col-span-12 md:col-span-9">
+          <div class="flex flex-wrap md:flex-nowrap gap-4">
+            <div class="flex items-center md:justify-end gap-2 flex-wrap">
+              <a
+                v-for="(address, idx) in getCityContact?.addresses"
+                :key="idx"
+                :href="`tel:${address.phone_number}`"
+                class="text-xs bg-black bg-opacity-10 text-black hover:bg-opacity-20 rounded p-1"
+              >
+                {{ address.address }}
+              </a>
+            </div>
+            <div class="flex-shrink-0 ">
+              <a :href="`tel:${getCityContact?.addresses[0].phone_number}`" class="text-dark font-semibold flex gap-1 items-center hover:opacity-50">
+                <!-- <img src="/icons/telgreen.svg" alt="телефон"> -->
+                <div class="h-12 w-12 rounded bg-green-500 !bg-opacity-10 flex justify-center items-center">
+                  <img src="/icons/telgreen.svg" alt="Компас" class="h-6">
+                </div>
+                {{ getCityContact?.addresses[0].phone_number }}
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -41,10 +45,10 @@
 
       <div class="grid gap-6 grid-cols-12 items-center">
         <div class="col-span-12 md:col-span-4">
-          <p class="text-xs text-gray-400 mb-2">
-            <!-- <pre>{{ uiStore.contacts }}</pre> -->
-            <!-- {{ uiStore.contacts[getCityIndex]?.legal_info[0].footer_tiny_text }} -->
-          </p>
+          <!-- <p class="text-xs text-gray-400 mb-2">
+            <pre>{{ getCityContact }}</pre>
+            {{ getCityContact }}
+          </p> -->
           <div class="flex gap-6">
             <nuxt-link to="/" class="text-xs text-gray-400 underline hover:no-underline">Пользовательское соглашение</nuxt-link>
             <nuxt-link to="/" class="text-xs text-gray-400 underline hover:no-underline">Публичная оферта</nuxt-link>
