@@ -11,27 +11,27 @@
         </nuxt-link>
       </li>
     </ul>
-    <a :href="`tel:${uiStore.getCurrentRegion?.addresses[0].phone_number}`" class="font-semibold flex gap-1 items-center hover:opacity-50 text-2xl">
+    <a :href="`tel:${getCityContact?.addresses[0].phone_number}`" class="font-semibold flex gap-1 items-center hover:opacity-50 text-2xl">
       <img src="/public/icons/tel.svg" alt="телефон">
-      {{ uiStore.getCurrentRegion?.addresses[0].phone_number }}
+      {{ getCityContact?.addresses[0].phone_number }}
     </a>
     <div class="flex gap-6 mt-6">
-      <a :href="`${uiStore.getCurrentRegion?.social_links.whatsapp ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
+      <a :href="`${getCityContact?.social_links.whatsapp ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
         <img src="/public/icons/whats.svg" alt="" class="h-5">
       </a>
-      <a :href="`${uiStore.getCurrentRegion?.social_links.telegram ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
+      <a :href="`${getCityContact?.social_links.telegram ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
         <img src="/public/icons/tg.svg" alt="" class="h-6">
       </a>
-      <a v-if="uiStore.getCurrentRegion?.social_links.youtube" :href="`${uiStore.getCurrentRegion?.social_links.youtube ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
+      <a v-if="getCityContact?.social_links.youtube" :href="`${getCityContact?.social_links.youtube ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
         <img src="/public/icons/ytb.svg" alt="" class="h-6">
       </a>
-      <a v-if="uiStore.getCurrentRegion?.social_links.drive2" :href="`${uiStore.getCurrentRegion?.social_links.drive2 ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
+      <a v-if="getCityContact?.social_links.drive2" :href="`${getCityContact?.social_links.drive2 ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
         <img src="/public/icons/d2ru.svg" alt="" class="h-5">
       </a>
-      <a v-if="uiStore.getCurrentRegion?.social_links.avito" :href="`${uiStore.getCurrentRegion?.social_links.avito ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
+      <a v-if="getCityContact?.social_links.avito" :href="`${getCityContact?.social_links.avito ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
         <img src="/public/icons/avito.svg" alt="" class="h-5">
       </a>
-      <a v-if="uiStore.getCurrentRegion?.social_links.vk" :href="`${uiStore.getCurrentRegion?.social_links.vk ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
+      <a v-if="getCityContact?.social_links.vk" :href="`${getCityContact?.social_links.vk ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
         <img src="/public/icons/vk.svg" alt="" class="h-5">
       </a>
     </div>
@@ -39,10 +39,13 @@
 </template>
 
 <script setup lang="ts">
-import { useUiStore } from '@/src/stores/ui'
+import { useCity } from '~/src/helpers/useCiity'
 
-const uiStore = useUiStore()
+// import { useUiStore } from '@/src/stores/ui'
+
+// const uiStore = useUiStore()
 const emit = defineEmits(['close'])
+const { getCityContact } = useCity()
 
 type Props = {
   links: any

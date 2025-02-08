@@ -13,9 +13,9 @@
         </div>
         <div class="col-span-12 md:col-span-6 md:col-start-7">
           <div class="flex items-center md:justify-end gap-6 flex-wrap">
-            <a :href="`tel:${uiStore.getCurrentRegion?.addresses[0].phone_number}`" class="text-dark font-semibold flex gap-1 items-center hover:opacity-50">
+            <a :href="`tel:${getCityContact?.addresses[0].phone_number}`" class="text-dark font-semibold flex gap-1 items-center hover:opacity-50">
               <img src="/icons/telgreen.svg" alt="телефон">
-              {{ uiStore.getCurrentRegion?.addresses[0].phone_number }}
+              {{ getCityContact?.addresses[0].phone_number }}
             </a>
             <!-- <nuxt-link to="/contacts" class="text-dark font-semibold flex gap-4 items-center hover:opacity-50">
               <div class="h-12 w-12 rounded bg-red-500 !bg-opacity-10 flex justify-center items-center">
@@ -53,22 +53,22 @@
         <div class="col-span-12 md:col-span-8">
           <div class="flex md:justify-end items-center gap-4 flex-wrap">
             <iframe src="https://yandex.ru/sprav/widget/rating-badge/80385511895?type=rating" width="150" height="50" frameborder="0" />
-            <a :href="`${uiStore.getCurrentRegion?.social_links.whatsapp ?? '#'}`" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
+            <a :href="`${getCityContact?.social_links.whatsapp ?? '#'}`" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
               <img src="/public/icons/whats.svg" alt="">
             </a>
-            <a :href="`${uiStore.getCurrentRegion?.social_links.telegram ?? '#'}`" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
+            <a :href="`${getCityContact?.social_links.telegram ?? '#'}`" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
               <img src="/public/icons/tg.svg" alt="">
             </a>
-            <a v-if="uiStore.getCurrentRegion?.social_links.youtube" :href="`${uiStore.getCurrentRegion?.social_links.youtube ?? '#'}`" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
+            <a v-if="getCityContact?.social_links.youtube" :href="`${getCityContact?.social_links.youtube ?? '#'}`" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
               <img src="/public/icons/ytb.svg" alt="" class="h-6">
             </a>
-            <a v-if="uiStore.getCurrentRegion?.social_links.drive2" :href="`${uiStore.getCurrentRegion?.social_links.drive2 ?? '#'}`" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
+            <a v-if="getCityContact?.social_links.drive2" :href="`${getCityContact?.social_links.drive2 ?? '#'}`" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
               <img src="/public/icons/d2ru.svg" alt="" class="h-5">
             </a>
-            <a v-if="uiStore.getCurrentRegion?.social_links.avito" :href="`${uiStore.getCurrentRegion?.social_links.avito ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
+            <a v-if="getCityContact?.social_links.avito" :href="`${getCityContact?.social_links.avito ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
               <img src="/public/icons/avito.svg" alt="" class="h-5">
             </a>
-            <a v-if="uiStore.getCurrentRegion?.social_links.vk" :href="`${uiStore.getCurrentRegion?.social_links.vk ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
+            <a v-if="getCityContact?.social_links.vk" :href="`${getCityContact?.social_links.vk ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
               <img src="/public/icons/vk.svg" alt="" class="h-5">
             </a>
           </div>
@@ -82,7 +82,7 @@
 import { useUiStore } from '@/src/stores/ui'
 import { useCity } from '~/src/helpers/useCiity'
 
-const { getCityIndex } = useCity()
+const { getCityIndex, getCityContact } = useCity()
 
 const uiStore = useUiStore()
 const links = [
