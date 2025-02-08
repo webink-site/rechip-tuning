@@ -20,7 +20,7 @@
             </li>
           </ul>
         </div>
-        <!-- {{ getCityContact }} -->
+        {{ getCityContact }}
         <div class="flex items-center gap-8">
           <div class="hidden sm:flex gap-6">
             <a :href="`${getCityContact?.social_links.whatsapp ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
