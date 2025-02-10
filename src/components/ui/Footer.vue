@@ -13,7 +13,7 @@
           <div class="flex flex-wrap md:flex-nowrap md:justify-end gap-4">
             <div class="flex items-center md:justify-end gap-2 flex-wrap">
               <a
-                v-for="(address, idx) in getCityContact?.addresses.slice(0,1)"
+                v-for="(address, idx) in getCityContact?.addresses"
                 :key="idx"
                 :href="`tel:${address.phone_number}`"
                 class="text-xs bg-black bg-opacity-10 text-black hover:bg-opacity-20 rounded p-1"
