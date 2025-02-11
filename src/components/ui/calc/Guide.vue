@@ -35,15 +35,17 @@
 
 <script setup lang="ts">
 // import { BoltIcon } from '@heroicons/vue/24/outline/index.js'
-
 import guide1 from '@/public/icons/guide1.svg'
 import guide2 from '@/public/icons/guide2.svg'
 import guide3 from '@/public/icons/guide3.svg'
+import { useCity } from '~/src/helpers/useCiity'
+
+const { getCityContact } = useCity()
 
 const icons = [
   {
     name: '1. Звонок',
-    sub: 'Позвоните нам +7 499 113-46-91 и получите профессиональную консультацию.',
+    sub: `Позвоните нам ${getCityContact.value?.addresses[0].phone_number ?? '+7 (905) 216-98-98'} и получите профессиональную консультацию.`,
     img: guide1
   },
   {
