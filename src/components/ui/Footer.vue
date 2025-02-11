@@ -50,8 +50,8 @@
             {{ getCityContact }}
           </p> -->
           <div class="flex gap-6">
-            <nuxt-link to="/" class="text-xs text-gray-400 underline hover:no-underline">Пользовательское соглашение</nuxt-link>
-            <nuxt-link to="/" class="text-xs text-gray-400 underline hover:no-underline">Публичная оферта</nuxt-link>
+            <nuxt-link to="/user-agreement" class="text-xs text-gray-400 underline hover:no-underline">Пользовательское соглашение</nuxt-link>
+            <nuxt-link to="/public-offer" class="text-xs text-gray-400 underline hover:no-underline">Публичная оферта</nuxt-link>
           </div>
         </div>
         <div class="col-span-12 md:col-span-8">

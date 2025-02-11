@@ -72,7 +72,7 @@ export const useCarStore = defineStore('car', {
       const models = await $fetch<any>(`https://api.rechip-tuning.ru/api/catalog?service=${this.search.serv}&brand=${this.search.brand}`)
 
       if (models.length) {
-        this.models = models
+        this.models = models.sort((a: any, b: any) => a.name.localeCompare(b.name, 'ru', { sensitivity: 'base' }))
       }
     },
     async LOAD_GENS (model: string | null) {
