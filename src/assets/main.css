@@ -109,4 +109,29 @@ a, button {
 
 .ymaps3x0--default-marker__view{
   cursor: pointer!important;
-  }
+}
+
+
+.custom-table::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+/* Track */
+.custom-table::-webkit-scrollbar-track {
+  background: rgb(229, 231, 235);
+  border-radius: 10px;
+}
+
+/* Handle */
+.custom-table::-webkit-scrollbar-thumb {
+  background: #F03C3D;
+  border-radius: 10px;
+  cursor:grab;
+}
+
+/* Handle on hover */
+.custom-table::-webkit-scrollbar-thumb:hover {
+  background: #F03C3D;
+  cursor:grab;
+}

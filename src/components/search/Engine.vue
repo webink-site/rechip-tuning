@@ -36,7 +36,7 @@
             </button>
           </div>
         </div>
-        <div v-if="engine.chip_tuning_param" class="overflow-x-auto pb-3 md:pb-0">
+        <div v-if="engine.chip_tuning_param" class="overflow-x-auto custom-table pb-3 md:pb-0">
           <table v-if="activeStageTab === 0" class="w-full mt-2 whitespace-nowrap">
             <tbody class="divide-y">
               <tr>
