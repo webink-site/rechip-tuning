@@ -123,13 +123,13 @@ const submitForm = async () => {
           reachGoal('ostzavklapegr')
           break
         case 'Прошивка Евро-2':
-          reachGoal('ostzamproshivka')
+          reachGoal('ostzaveuro')
           break
         case 'Отключение сажевого фильтра':
-          reachGoal('ostzavzazf')
+          reachGoal('ostzavfiltr')
           break
         default:
-          reachGoal('ostzav')
+          reachGoal('ostzavchiptune')
       }
       emit('closeSuccess')
     } catch {

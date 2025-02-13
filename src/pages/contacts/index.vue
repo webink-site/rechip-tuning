@@ -24,7 +24,7 @@
                     <img src="/icons/telred.svg" alt="Компас" class="h-6">
                   </div>
                   <p>
-                    <a :href="`tel:${getCityContact?.addresses[selectedAddress].phone_number}`">
+                    <a :href="`tel:${getCityContact?.addresses[selectedAddress].phone_number}`" @click="watchTelClick">
                       {{ getCityContact?.addresses[selectedAddress].phone_number }}
                     </a> <br>
                     <span class="text-gray-400 font-medium text-sm">{{ getCityContact?.addresses[selectedAddress].work_time }}</span>
@@ -125,6 +125,9 @@ import {
 // import type { YMapLocationRequest } from '@yandex/ymaps3-types/imperative/YMap'
 // import { useUiStore } from '@/src/stores/ui'
 import { useCity } from '~/src/helpers/useCiity'
+import { useYandexMetrika } from '#imports'
+
+const { reachGoal } = useYandexMetrika()
 
 // const uiStore = useUiStore()
 const selectedAddress = ref(0)
@@ -154,6 +157,12 @@ function closeSuccess () {
   toast('Заявка отправлена', {
     type: 'success'
   })
+}
+
+function watchTelClick () {
+  if (getCityContact.value?.region_code === 'msk') {
+    reachGoal('klickmskphone')
+  }
 }
 
 </script>

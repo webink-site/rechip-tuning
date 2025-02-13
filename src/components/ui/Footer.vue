@@ -17,12 +17,13 @@
                 :key="idx"
                 :href="`tel:${address.phone_number}`"
                 class="text-xs bg-black bg-opacity-10 text-black hover:bg-opacity-20 rounded p-1"
+                @click="watchTelClick"
               >
                 {{ address.address }}
               </a>
             </div>
             <div class="flex-shrink-0 ">
-              <a :href="`tel:${getCityContact?.addresses[0].phone_number}`" class="text-dark font-semibold flex gap-1 items-center hover:opacity-50">
+              <a :href="`tel:${getCityContact?.addresses[0].phone_number}`" class="text-dark font-semibold flex gap-1 items-center hover:opacity-50" @click="watchTelClick">
                 <!-- <img src="/icons/telgreen.svg" alt="телефон"> -->
                 <div class="h-12 w-12 rounded bg-green-500 !bg-opacity-10 flex justify-center items-center">
                   <img src="/icons/telgreen.svg" alt="Компас" class="h-6">
@@ -57,22 +58,22 @@
         <div class="col-span-12 md:col-span-8">
           <div class="flex md:justify-end items-center gap-4 flex-wrap">
             <iframe src="https://yandex.ru/sprav/widget/rating-badge/80385511895?type=rating" width="150" height="50" frameborder="0" />
-            <a :href="`${getCityContact?.social_links.whatsapp ?? '#'}`" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
+            <a :href="`${getCityContact?.social_links.whatsapp ?? '#'}`" target="_blank" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80" @click="watchWhClick">
               <img src="/public/icons/whats.svg" alt="">
             </a>
-            <a :href="`${getCityContact?.social_links.telegram ?? '#'}`" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
+            <a :href="`${getCityContact?.social_links.telegram ?? '#'}`" target="_blank" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80" @click="watchTgClick">
               <img src="/public/icons/tg.svg" alt="">
             </a>
-            <a v-if="getCityContact?.social_links.youtube" :href="`${getCityContact?.social_links.youtube ?? '#'}`" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
+            <a v-if="getCityContact?.social_links.youtube" :href="`${getCityContact?.social_links.youtube ?? '#'}`" target="_blank" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
               <img src="/public/icons/ytb.svg" alt="" class="h-6">
             </a>
-            <a v-if="getCityContact?.social_links.drive2" :href="`${getCityContact?.social_links.drive2 ?? '#'}`" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
+            <a v-if="getCityContact?.social_links.drive2" :href="`${getCityContact?.social_links.drive2 ?? '#'}`" target="_blank" class="h-8 w-8 rounded-full bg-gray-1 flex justify-center items-center hover:opacity-80">
               <img src="/public/icons/d2ru.svg" alt="" class="h-5">
             </a>
-            <a v-if="getCityContact?.social_links.avito" :href="`${getCityContact?.social_links.avito ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
+            <a v-if="getCityContact?.social_links.avito" :href="`${getCityContact?.social_links.avito ?? '#'}`" target="_blank" class="flex justify-center items-center hover:opacity-80">
               <img src="/public/icons/avito.svg" alt="" class="h-5">
             </a>
-            <a v-if="getCityContact?.social_links.vk" :href="`${getCityContact?.social_links.vk ?? '#'}`" class="flex justify-center items-center hover:opacity-80">
+            <a v-if="getCityContact?.social_links.vk" :href="`${getCityContact?.social_links.vk ?? '#'}`" target="_blank" class="flex justify-center items-center hover:opacity-80">
               <img src="/public/icons/vk.svg" alt="" class="h-5">
             </a>
           </div>
@@ -85,7 +86,9 @@
 <script setup lang="ts">
 import { useUiStore } from '@/src/stores/ui'
 import { useCity } from '~/src/helpers/useCiity'
+import { useYandexMetrika } from '#imports'
 
+const { reachGoal } = useYandexMetrika()
 const { getCityIndex, getCityContact } = useCity()
 
 const uiStore = useUiStore()
@@ -101,6 +104,24 @@ const links = [
   { name: 'Отключение системы AdBlue', link: '/services/otklyuchenie-mocheviny-adblue' },
   { name: 'Прошивка Евро-2', link: '/services/proshivka-evro-2' }
 ]
+
+function watchTelClick () {
+  if (getCityContact.value?.region_code === 'msk') {
+    reachGoal('klickmskphone')
+  }
+}
+
+function watchTgClick () {
+  if (getCityContact.value?.region_code === 'msk') {
+    reachGoal('klickmsktg')
+  }
+}
+
+function watchWhClick () {
+  if (getCityContact.value?.region_code === 'msk') {
+    reachGoal('klickmskwa')
+  }
+}
 
 </script>
 
