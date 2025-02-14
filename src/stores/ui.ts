@@ -21,7 +21,7 @@ export const useUiStore = defineStore('ui', {
       { name: 'Нефтекамск', place: 'Нефтекамске', code: 'nevtekamsk', web: 'https://nevtekamsk.rechip-tuning.ru' },
       { name: 'Крым', place: 'Крыму', code: 'simferopol', web: 'https://simferopol.rechip-tuning.ru' },
       { name: 'Санкт-Петербург', place: 'Санкт-Петербурге', code: 'spb', web: 'https://spb.rechip-tuning.ru' },
-      { name: 'Москва', place: 'Москве', code: 'msk', web: 'https://msk.rechip-tuning.ru' },
+      { name: 'Москва', place: 'Москве', code: 'msk', web: 'https://rechip-tuning.ru' },
       { name: 'Северодвинск', place: 'Северодвинскe', code: 'severodvinsk', web: 'https://severodvinsk.rechip-tuning.ru' },
       { name: 'Орск', place: 'Орске', code: 'orsk', web: 'https://orsk.rechip-tuning.ru' },
       { name: 'Краснодар', place: 'Краснодаре', code: 'krasnodar', web: 'https://krasnodar.rechip-tuning.ru' },
