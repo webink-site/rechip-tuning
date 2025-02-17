@@ -4,7 +4,7 @@ import axios from 'axios'
 
 export default defineEventHandler(async (event: any) => {
   const protocol = event.node.req.headers['x-forwarded-proto'] || 'https'
-  const host = event.node.req.headers.host || 'msk.rechip-tuning.ru'
+  const host = event.node.req.headers.host || 'rechip-tuning.ru'
   const hostname = `${protocol}://${host}`
 
   // Fetch all documents
