@@ -15,7 +15,7 @@
               :to="`${route.fullPath}/${item.slug}`"
               class="px-2 py-1.5 text-sm h-full transition-all bg-gray-3 rounded cursor-pointer text-center hover:bg-[#DADADA] hover:text-black "
             >
-              {{ item.volume }}, {{ item.power }} л.с.
+              {{ item.name }}, {{ item.power }} л.с.
             </nuxt-link>
           </div>
         </div>

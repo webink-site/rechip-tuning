@@ -48,7 +48,7 @@ export const useCarStore = defineStore('car', {
     getBodies (state) {
       return state.bodies.map((i: any) => ({
         ...i,
-        search: `${i.volume}, ${i.power} л.с.`
+        search: `${i.name}, ${i.power} л.с.`
       }))
     }
   },
