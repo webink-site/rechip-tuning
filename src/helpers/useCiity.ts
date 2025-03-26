@@ -9,14 +9,13 @@ export function useCity () {
   const getCityIndex = computed(() => {
     const host = window?.location?.hostname ?? 'msk'
 
-    const index = uiStore.regions.findIndex(i => host.includes(i.code))
+    const index = uiStore.regions.findIndex(i => host.startsWith(i.code))
     return index !== -1 ? index : 4
   })
 
   const getCityContact = computed(() => {
     const host = window?.location?.hostname ?? 'msk'
-
-    const city = uiStore.contacts.find(i => host.includes(i.region_code))
+    const city = uiStore.contacts.find(i => host.startsWith(i.region_code))
     return city ?? uiStore.contacts.find(i => i.region_code === 'msk')
   })
 
